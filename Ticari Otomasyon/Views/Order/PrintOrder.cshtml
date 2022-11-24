@@ -1,0 +1,106 @@
+﻿@model Ticari_Otomasyon.Models.Classes.GetOrderView
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PrintOrder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <button class='btn btn-primary' onclick="javascript:CallPrint('IcerikAlani')" style="width:950px;vertical-align:middle"> Yazdır</button>
+    <div class="container" id="IcerikAlani">
+        <div class="card" style="margin-top:15px">
+            <div class="card-body">
+                <h6><b>Fiş Tarih-Saat :</b> @Model.GetOrderTop_.Date </h6>
+                <h6><b>Fiş No :</b> @Model.GetOrderTop_.FicheNo </h6>
+                <br />
+                <h6><b>Cari Kod :</b> @Model.GetOrderTop_.CustomerCode </h6>
+                <h6><b>Cari Ünvan :</b> @Model.GetOrderTop_.CustomerDefinition </h6>
+            </div>
+           
+        </div>
+
+
+        <hr />
+        <div>
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+
+                        <th>Malzeme Kodu</th>
+                        <th>Malzeme Ack</th>
+                        <th>Miktar</th>
+                        <th>Birim</th>
+                        <th>Birim Fiyat</th>
+                        <th>KDV</th>
+                        <th>IND1</th>
+                        <th>IND2</th>
+                        <th>IND3</th>
+                        @*<th>IND4</th>
+                            <th>IND5</th>*@
+                        <th>Tutar</th>
+                        <th>Net Tutar</th>
+                    </tr>
+
+
+                </thead>
+                <tbody>
+                    @foreach (var param in @Model.GetOrderEnd_)
+                    {
+                        <tr>
+                            <td>@param.itemCode</td>
+                            <td>@param.itemName</td>
+                            <td>@param.amount</td>
+                            <td>@param.mainUnit</td>
+                            <td>@param.price</td>
+                            <td>@param.vat</td>
+                            <td>@param.Ind1</td>
+                            <td>@param.Ind2</td>
+                            <td>@param.Ind3</td>
+                            @*<td>@param.Ind4</td>
+                                <td>@param.Ind5</td>*@
+                            <td>@param.total</td>
+                            <td>@param.netTotal</td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        </div>
+        <div class="card" style="margin-top:15px;text-align:right">
+            <div class="card-body">
+                <h6><b>Toplam :</b> @Model.GetOrderTop_.Total </h6>
+                <h6><b>Toplam İndirim :</b> @Model.GetOrderTop_.TotalDiscount </h6>
+
+                <h6><b>Toplam Kdv :</b> @Model.GetOrderTop_.TotalVat </h6>
+                <h6><b>Net Tutar :</b> @Model.GetOrderTop_.NetTotal </h6>
+            </div>
+            
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script language="javascript">
+function CallPrint(strid)
+{
+var prtContent = document.getElementById(strid);
+//var WinPrint = window.open(”);
+    var WinPrint = window.open(",",'left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status=0');
+WinPrint.document.write(prtContent.innerHTML);
+WinPrint.document.close();
+WinPrint.focus();
+WinPrint.print();
+WinPrint.close();
+// prtContent.innerHTML = strOldOne;
+    }
+    </script>

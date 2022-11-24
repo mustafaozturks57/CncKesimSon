@@ -1,0 +1,1119 @@
+﻿
+
+@model  Ticari_Otomasyon.Models.Classes.GetOrderView
+
+
+@{
+    ViewBag.Title = "AddOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <style>
+        /* h1 {
+            color: green;
+        }*/
+        .amountClass {
+        }
+
+        .buttonIn {
+            width: 92;
+            position: relative;
+        }
+
+        #itemCode {
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            outline: none;
+            height: 30px;
+            border-radius: 5px;
+        }
+
+        #itemName {
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            outline: none;
+            height: 30px;
+            border-radius: 5px;
+        }
+
+        #button1 {
+            position: absolute;
+            top: 0;
+            border-radius: 5px;
+            right: 0px;
+            /*z-index: 2;*/
+            border: none;
+            /*top: 2px;*/
+            height: 30px;
+            cursor: pointer;
+            color: white;
+            background-color: #1e90ff;
+            transform: translateX(2px);
+        }
+
+        #button2 {
+            position: absolute;
+            top: 0;
+            border-radius: 5px;
+            right: 0px;
+            /*z-index: 2;*/
+            border: none;
+            /*top: 2px;*/
+            height: 30px;
+            cursor: pointer;
+            color: white;
+            background-color: #1e90ff;
+            transform: translateX(2px);
+        }
+
+        #button3 {
+            position: absolute;
+            top: 0;
+            border-radius: 5px;
+            right: 0px;
+            /*z-index: 2;*/
+            border: none;
+            /*top: 2px;*/
+            height: 30px;
+            cursor: pointer;
+            color: white;
+            background-color: #1e90ff;
+            transform: translateX(2px);
+        }
+
+        .itemCode {
+        }
+    </style>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script src="~/Scripts/notify.min.js"></script>
+</head>
+
+<div class="container-fluid">
+    <div class="row" style="margin-top:10px">
+        <div class="col-sm-3">
+            <h6 style="color:#ff6347">Satış Sipariş-@Model.GetOrderTop_.FicheNo</h6>
+        </div>
+        <div class="col-sm-6">
+
+        </div>
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-danger btn-sm" onclick="PreviusRoute()">Geri</button>
+            <button type="submit" id="saveOrder" class="btn btn-dark btn-sm">Kaydet</button>
+        </div>
+    </div>
+
+    <hr />
+
+    @*<div class="container">*@
+
+    <div class="row">
+
+        <div class="col-sm-2">
+            <div class="form-group-sm">
+                <label class="form-label">Fiş No</label><br />
+                <input type="text" name="GetOrderTop_.FicheNo" value="@ViewBag.ficheNo" class="small" id="FicheNo" disabled /><br />
+
+
+                <label class="form-label">Tarih</label><br />
+                <input type="date" name="GetOrderTop_.Date" value="@ViewBag.date_" class="small" />
+                <br />
+
+                <label class="form-label">Belge No </label><br />
+                <input type="text" name="GetOrderTop_.Docode" class="small" value="@Model.GetOrderTop_.Docode" id="Docode" />
+
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-2 " style="margin-left:15px">
+
+            <div class="form-group-sm">
+                <label class="label">Cari Kod</label><br />
+                @Html.DropDownListFor(m => m.GetOrderTop_.CustomerCode, (List<SelectListItem>)ViewBag.customerCode, new { @class = "form-control", id = "dropDown1", @required = "required", value = "@Model.GetOrderTop_.CustomerCode" })
+
+                <br />
+
+
+                <label class="label">Cari Ünvan</label><br />
+                @Html.DropDownListFor(m => m.GetOrderTop_.CustomerDefinition, (List<SelectListItem>)ViewBag.customerDefs, new { @class = "form-control", id = "dropDown2", @required = "required" })
+
+                <br />
+
+                <label class="label">Yetki Kodu</label><br />
+                <input type="text" name="GetOrderTop_.CyphCode" class="small" value="@Model.GetOrderTop_.CyphCode" id="CyphCode" />
+
+            </div>
+
+
+
+
+
+
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group-sm">
+                <label class="label">Özel Kod</label><br />
+                <input type="text" name="GetOrderTop_.SpecialCode" class="small" id="SpecialCode" value="@Model.GetOrderTop_.SpecialCode" />
+                <br />
+                <label class="label">Tic Grup</label><br />
+                @Html.DropDownListFor(m => m.GetOrderTop_.TradingGrp, (List<SelectListItem>)ViewBag.tradingGrp, new { @class = "small", @id = "TradingGrp" })
+                <br />
+                <label class="label">Satış Elemanı</label><br />
+                @Html.DropDownListFor(m => m.GetOrderTop_.SalesMan, (List<SelectListItem>)ViewBag.salesMan, new { @class = "small", @id = "SalesMan", })
+            </div>
+        </div>
+        <div class="col-sm-2 ">
+
+            <div class="form-group-sm">
+                <label class="label">İşyeri</label><br />
+                @Html.DropDownListFor(m => m.GetOrderTop_.CapiDiv, (List<SelectListItem>)ViewBag.capiDiv, new { @class = "small", @id = "CapiDiv" })
+                <br />
+
+
+                <label class="label">Bölüm</label><br />
+                @Html.DropDownListFor(m => m.GetOrderTop_.Department, (List<SelectListItem>)ViewBag.capiDept, new { @class = "small", @id = "Department" })
+
+                <br />
+
+                <label class="label">Ambar</label><br />
+                @Html.DropDownListFor(m => m.GetOrderTop_.Whouse, (List<SelectListItem>)ViewBag.capiWhouse, new { @class = "small", @id = "Whouse" })
+            </div>
+
+        </div>
+
+
+        <div class="col">
+            <div class="form-group-sm">
+
+                <label class="label">Toplam</label>
+                <input type="number" class="small" name="total" width="30" id="totalGenel" value="@Model.GetOrderTop_.Total" disabled />
+                <br />
+
+
+
+
+                <label class="label">Toplam İndirim</label>
+                <input type="number" class="small" name="totalDiscountGenel" step="0.01" value="@Model.GetOrderTop_.TotalDiscount" width="30" id="totalDiscountGenel" disabled />
+
+                <br />
+
+
+
+                <label class="label">Toplam Kdv</label>
+                <input type="number" class="small" name="totalVatGenel" width="30" id="totalVatGenel" value="@Model.GetOrderTop_.TotalVat" disabled />
+                <br />
+                <label class="label">Net Tutar</label>
+                <input type="number" class="small" name="totalNetGenel" width="30" id="totalNetGenel" value="@Model.GetOrderTop_.NetTotal" disabled />
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+    @*Fatura Kalemleri*@
+
+    <hr />
+    <div class="row">
+
+        <div class="col-md-4 form-group-sm">
+            <label class="form-label">Barkod No</label><br />
+            <input type="text" class="small" id="inputBarcode" /><br />
+
+
+            @*<label class="form-label">Miktar</label><br />
+                <input type="number" id="inputAmount" class="small" />*@
+
+        </div>
+        <div class="col-md-4">
+
+            <button class="button" id="addToRow">Satır Ekle</button>
+        </div>
+    </div>
+    <div style="margin-top:10px">
+        <input type="hidden" id="id" />
+
+
+        <table id="detailsTable" class="table table-responsive-sm">
+            <thead>
+                <tr>
+                    <th>Barkod</th>
+                    <th>Malzeme Kodu</th>
+                    <th>Malzeme Ack</th>
+                    <th>Miktar</th>
+                    <th>Birim</th>
+                    <th>Birim Fiyat</th>
+                    <th>KDV</th>
+                    <th>IND1</th>
+                    <th>IND2</th>
+                    <th>IND3</th>
+                    <th>IND4</th>
+                    <th>IND5</th>
+                    <th>Tutar</th>
+                    <th>Net Tutar</th>
+                </tr>
+            </thead>
+            @{
+                var oldCount = 9000;
+            }
+            <tbody>
+                @foreach (var param in @Model.GetOrderEnd_)
+                {
+                    oldCount = oldCount + 1;
+                    var oldCodeId = "";
+                    oldCodeId = "itemCode" + oldCount;
+                    var oldNameId = "";
+                    oldNameId = "itemName" + oldCount;
+                    var oldAmountId = "";
+                    oldAmountId = "amount" + oldCount;
+                    var oldMainUnitId = "";
+                    oldMainUnitId = "mainUnit" + oldCount;
+                    var oldPriceId = "";
+                    oldPriceId = "price" + oldCount;
+                    var oldVatId = "";
+                    oldVatId = "vat" + oldCount;
+                    var oldInd1Id = "";
+                    oldInd1Id = "Ind1" + oldCount;
+                    var oldInd2Id = "";
+                    oldInd2Id = "Ind2" + oldCount;
+                    var oldInd3Id = "";
+                    oldInd3Id = "Ind3" + oldCount;
+                    var oldInd4Id = "";
+                    oldInd4Id = "Ind4" + oldCount;
+                    var oldInd5Id = "";
+                    oldInd5Id = "Ind5" + oldCount;
+                    var oldTotalId = "";
+                    oldTotalId = "total" + oldCount;
+                    var oldNetTotalId = "";
+                    oldNetTotalId = "netTotal" + oldCount;
+                    <tr id="@oldCount">
+
+                        <td><input type="text" class="small" style="width:70px" disabled id="barcode" value="@param.barcode" /></td>
+                        <td><div class="buttonIn"><input type="text" name="itemCode" class="small" id='@oldCodeId' style="width:100px" value="@param.itemCode" /><button class="small" id="button1" onclick="InspectorForm(@oldCount)">:</button></div></td>
+                        <td><div class="buttonIn"><input type="text" name="itemName" class="small" id='@oldNameId' style="width:100px" value="@param.itemName" /><button class="small" id="button2" onclick="InspectorForm(@oldCount)">:</button></div></td>
+                        <td><input type="number" class="small" style="width:50px" value="@param.amount" id='@oldAmountId' onkeydown="CalcutingMethod(event,@oldCount)" /></td>
+                        <td><div class="buttonIn"><input type="text" name="" id="@oldMainUnitId" class="small" style="width:55px" value="@param.mainUnit" /><button class="small" id="button3" onclick="MainUnitForm(@oldCount)">:</button></div></td>
+                        <td><input type="number" class="small" style="width:65px" step="any" id="@oldPriceId" value="@param.price" onkeydown="CalcutingMethod(event,@oldCount)" /></td>
+                        <td><input type="number" class="small" style="width:35px" id="@oldVatId" value="@param.vat" onkeydown="CalcutingMethod(event,@oldCount)" /></td>
+                        <td><input type="number" class="small" style="width:35px" id="@oldInd1Id" value="@param.Ind1" onkeydown="CalcutingMethod(event,@oldCount)" /></td>
+                        <td><input type="number" class="small" style="width:35px " id="@oldInd2Id" value="@param.Ind2" onkeydown="CalcutingMethod(event,@oldCount)" /></td>
+                        <td><input type="number" class="small" style="width:35px " id="@oldInd3Id" value="@param.Ind3" onkeydown="CalcutingMethod(event,@oldCount)" /></td>
+                        <td><input type="number" class="small" style="width:35px " id="@oldInd4Id" value="@param.Ind4" onkeydown="CalcutingMethod(event,@oldCount)" /></td>
+                        <td><input type="number" class="small" style="width:35px " id="@oldInd5Id" value="@param.Ind5" onkeydown="CalcutingMethod(event,@oldCount)" /></td>
+                        <td><input type="number" class="small" style="width:65px" id="@oldTotalId" value="@param.total" disabled /></td>
+                        <td><input type="number" class="small" style="width:65px" id="@oldNetTotalId" value="@param.netTotal" disabled /></td>
+                        <td><a data-itemId="0" href="#" class="deleteItem">x</a></td>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+    @*</div>*@
+@*ItemList Modal*@
+<div class="container">
+
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="btnModal" hidden>Open</button>
+
+
+    <div class="modal fade " id="myModal" role="dialog">
+        <div class="modal-dialog modal-xl">
+
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="modal-title">Malzemeler</h4>
+                </div>
+                <div class="modal-body">
+
+
+
+                    <table id="dataTable" class="table display nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Tür</th>
+                                <th>Malzeme Kod</th>
+                                <th>Malzeme Adı</th>
+                                <th>Birim</th>
+                                <th>Özel Kod</th>
+                                <th>Fiili Stok</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+
+                    </table>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+@*MainUnit Modal*@
+<div class="container">
+
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#mainUnitModal" id="btnMainUnitModal" hidden>Open</button>
+
+
+    <div class="modal fade " id="mainUnitModal" role="dialog">
+        <div class="modal-dialog">
+
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="modal-title">Birimler</h4>
+                </div>
+                <div class="modal-body">
+
+
+
+                    <table id="MainUnit" class="table display nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+
+                                <th>Code</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+
+
+                    </table>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="btnMainUnitClose">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+@*ItemList Datatable*@
+<script>
+    var table;
+    table = $('#dataTable').DataTable({
+        processing: true,
+        serverSide: true,
+
+        ajax: {
+            url: "/Order/ItemList",
+            type: "POST",
+            datatype: "json",
+
+        },
+        columns: [
+            { data: "Type", "name": "Type" },
+            { data: "Code", "name": "Code" },
+            { data: "ItemName", "name": "ItemName" },
+            { data: "MainUnit", "name": "MainUnit" },
+            { data: "SpecialCode", "name": "SpecialCode" },
+            { data: "Amount", "name": "Amount" },
+
+
+        ],
+
+        language: {
+            info: "_TOTAL_ kayıttan _START_ - _END_ kayıt gösteriliyor.",
+            infoEmpty: "Gösterilecek hiç kayıt yok.",
+            loadingRecords: "Kayıtlar yükleniyor.",
+            zeroRecords: "Tablo boş",
+            search: "Arama:",
+            infoFiltered: "(toplam _MAX_ kayıttan filtrelenenler)",
+            buttons: {
+
+                copyTitle: "Panoya kopyalandı.",
+                copySuccess: "Panoya %d satır kopyalandı",
+                copy: "Kopyala",
+                print: "Yazdır",
+
+            },
+
+
+            paginate: {
+                first: "İlk",
+                previous: "Önceki",
+                next: "Sonraki",
+                last: "Son"
+            }
+        },
+
+
+        dom: 'Bfrtip',
+        //scrollX: true,
+        //scrollCollapse: true,
+        //responsive: {
+        //    details: false
+        //}
+    });
+    var codeDatatable = '';
+    var definitionDatatable = '';
+    var unitsetDatatable = '';
+    var countDatatable = 0;
+    $('#dataTable tbody').on('click', 'tr', function () {
+
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+
+            codeDatatable = '';
+            definitionDatatable = '';
+            unitsetDatatable = '';
+
+            codeDatatable = $(this).find("td:eq(1)").text();
+            definitionDatatable = $(this).find("td:eq(2)").text();
+            unitsetDatatable = $(this).find("td:eq(3)").text();
+
+            $("#itemCode" + countDatatable).val(codeDatatable);
+            $("#itemName" + countDatatable).val(definitionDatatable);
+            $("#mainUnit" + countDatatable).val(unitsetDatatable);
+
+            $("#btnClose").trigger("click");
+        } else {
+
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
+    function InspectorForm(count) {
+        $("#btnModal").trigger("click");
+        countDatatable = count;
+        console.log($("#amount" + countDatatable).val());
+
+
+    }
+
+</script>
+@*MainUnit Datatable*@
+<script>
+
+    var unitNameDatatable = '';
+    var unitItemCodeDatatable = '';
+    var countUnitSetDatatable = 0;
+    var url = '';
+    var unitSetTable;
+
+    function MainUnitForm(count) {
+        $("#btnMainUnitModal").trigger("click");
+
+        countUnitSetDatatable = 0;
+        countUnitSetDatatable = count;
+
+        unitItemCodeDatatable = '';
+        unitItemCodeDatatable = $('#itemCode' + countUnitSetDatatable).val();
+
+
+
+        url = '@Url.Action("UnitsetList", "Order")?code=' + unitItemCodeDatatable;
+        //console.log(url);
+        unitSetTable = $('#MainUnit').DataTable({
+            processing: true,
+            serverSide: true,
+
+            ajax: {
+                url:  url,
+                type: "POST",
+                datatype: "json",
+
+            },
+            columns: [
+
+                { data: "Code", "name": "Code" },
+                { data: "Name", "name": "Name" }
+            ],
+
+            language: {
+                info: "_TOTAL_ kayıttan _START_ - _END_ kayıt gösteriliyor.",
+                infoEmpty: "Gösterilecek hiç kayıt yok.",
+                loadingRecords: "Kayıtlar yükleniyor.",
+                zeroRecords: "Tablo boş",
+                search: "Arama:",
+                infoFiltered: "(toplam _MAX_ kayıttan filtrelenenler)",
+                buttons: {
+
+                    copyTitle: "Panoya kopyalandı.",
+                    copySuccess: "Panoya %d satır kopyalandı",
+                    copy: "Kopyala",
+                    print: "Yazdır",
+
+                },
+
+
+                paginate: {
+                    first: "İlk",
+                    previous: "Önceki",
+                    next: "Sonraki",
+                    last: "Son"
+                }
+            },
+
+
+            dom: 'Bfrtip',
+            destroy: true
+      /*      searching:false*/
+            //scrollX: true,
+            //scrollCollapse: true,
+            //responsive: {
+            //    details: false
+            //}
+        });
+
+
+
+    }
+
+    $('#MainUnit').on('click', 'tr', function() {
+        //alert("4454");
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+
+
+            unitNameDatatable = '';
+
+            unitNameDatatable = $(this).find("td:eq(1)").text();
+
+            //console.log(unitNameDatatable);
+            $("#mainUnit" + countUnitSetDatatable).val(unitNameDatatable);
+
+
+            $("#btnMainUnitClose").trigger("click");
+        } else {
+
+            unitSetTable.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
+
+
+
+</script>
+
+@*Dropdown*@
+<script type="text/javascript">
+
+
+    // Initialize Select2
+    $('#dropDown1').select2();
+    $('#dropDown2').select2();
+
+
+    // Set option selected onchange
+    $('#dropDown1').on("change", function () {
+        var value = $(this).val();
+        //alert(value);
+        // Set selected
+        $('#dropDown2').val(value).attr("selected", true);
+        $('#dropDown2').select2().trigger('select2:select');
+
+    });
+
+    $('#dropDown2').on("change", function () {
+        var value = $(this).val();
+        //alert(value);
+        // Set selected
+        $('#dropDown1').val(value).attr("selected", true);
+        $('#dropDown1').select2().trigger('select2:select');
+
+    });
+</script>
+@*Row Insert*@
+<script type="text/javascript">
+    var count = 0;
+    $("#addToRow").click(function (e) {
+
+        e.preventDefault();
+        count = count + 1;
+        var barcode = '<input type="text" name="barcode" class="small"  id="barcode"  style="width:70px" disabled/>'
+        var itemCode = '<div class="buttonIn"><input type="text" name="itemCode" class="small" id="itemCode' + count + '"  style="width:100px"/><button class="small" id="button1" onclick="InspectorForm(' + count + ')">:</button></div>'
+        var itemName = '<div class="buttonIn"><input type="text" name="itemName" class="small" id="itemName' + count + '"   style="width:100px"/><button class="small" id="button2" onclick="InspectorForm(' + count + ')">:</button></div>'
+
+        //var itemName = '<input type="text" name="itemName" class="small" id="itemName"  style="width:100px"/>'
+        var amount = '<input type="number" name="amount' + count + '" class="small"  id="amount' + count + '" onkeydown="CalcutingMethod(event,' + count + ')" style="width:50px"/>'
+        var mainUnit = '<div class="buttonIn"><input type="text" name="" class="small" id="mainUnit' + count + '"  style="width:55px"/><button class="small" id="button3" onclick="MainUnitForm(' + count + ')">:</button></div>'
+        var price = '<input type="number" name="" class="small" id="price' + count + '" onkeydown="CalcutingMethod(event,' + count + ')" style="width:65px"/>'
+        var vat = '<input type="number" name="" class="small" id="vat' + count + '" value="18" onkeydown="CalcutingMethod(event,' + count + ')" style="width:35px"/>'
+        var Ind1 = '<input type="number" name="" class="small" id="Ind1' + count + '" onkeydown="CalcutingMethod(event,' + count + ')" style="width:35px"/>'
+        var Ind2 = '<input type="number" name="" class="small" id="Ind2' + count + '" onkeydown="CalcutingMethod(event,' + count + ')" style="width:35px"/>'
+        var Ind3 = '<input type="number" name="" class="small" id="Ind3' + count + '" onkeydown="CalcutingMethod(event,' + count + ')" style="width:35px"/>'
+        var Ind4 = '<input type="number" name="" class="small" id="Ind4' + count + '" onkeydown="CalcutingMethod(event,' + count + ')" style="width:35px"/>'
+        var Ind5 = '<input type="number" name="" class="small" id="Ind5' + count + '" onkeydown="CalcutingMethod(event,' + count + ')" style="width:35px"/>'
+        var total = '<input type="number" name="" class="small" id="total' + count + '"  style="width:65px" disabled />'
+        var netTotal = '<input type="number" name="" class="small" id="netTotal' + count + '" style="width:65px" disabled />'
+        var detailsTableBody = $("#detailsTable tbody");
+
+        var degerler = '<tr id=' + count + '><td>' + barcode + '</td><td>' + itemCode + '</td><td>' + itemName + '</td><td>' + amount + '</td><td>' + mainUnit + '</td><td>' + price + '</td><td>' + vat + '</td><td>' + Ind1 + '</td><td>' + Ind2 + '</td><td>' + Ind3 + '</td><td>' + Ind4 + '</td><td>' + Ind5 + '</td><td>' + total + '</td><td>' + netTotal + '</td><td><a data-itemId="0" href="#"  class="deleteItem">x</a></td></tr>';
+        detailsTableBody.append(degerler);
+
+    });
+
+    function saveOrder(data) {
+        return $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: "/Order/UpdateOrder",
+            data: data,
+            success: function (result) {
+                //alert(result);
+               /* location.reload();*/
+            },
+            error: function () {
+                //alert("Error!")
+            }
+        });
+    }
+    //Collect Multiple Order List For Pass To Controller
+    $("#saveOrder").click(function (e) {
+        //e.preventDefault();
+        var bForm = formValidate();
+        //console.log(bForm)
+        if (bForm) {
+            var orderArr = [];
+            orderArr.length = 0;
+            var trValue = 0;
+
+            $.each($("#detailsTable tbody tr"), function () {
+
+                trValue = $(this).attr("id");
+
+                //alert(trValue);
+                //alert($("#itemCode" + trValue.toString()).val());
+
+
+                orderArr.push({
+                    itemCode: $("#itemCode" + trValue.toString()).val(),
+                    itemName: $("#itemName" + trValue.toString()).val(),
+                    amount: parseFloat($("#amount" + trValue.toString()).val()),
+                    mainUnit: $("#mainUnit" + trValue.toString()).val(),
+                    price: parseFloat($("#price" + trValue.toString()).val()),
+                    vat: parseFloat($("#vat" + trValue.toString()).val()),
+                    Ind1: parseFloat($("#Ind1" + trValue.toString()).val()),
+                    Ind2: parseFloat($("#Ind2" + trValue.toString()).val()),
+                    Ind3: parseFloat($("#Ind3" + trValue.toString()).val()),
+                    Ind4: parseFloat($("#Ind4" + trValue.toString()).val()),
+                    Ind5: parseFloat($("#Ind5" + trValue.toString()).val()),
+                    total: parseFloat($("#total" + trValue.toString()).val()),
+                    netTotal: parseFloat($("#netTotal" + trValue.toString()).val())
+
+                });
+
+            });
+
+
+            var data = JSON.stringify({
+
+                FicheNo: $("#FicheNo").val(),
+                Date: $("#theDate").val(),
+                Docode: $("#Docode").val(),
+                CustomerCode: $("#dropDown1").val(),
+                CustomerDefinition: $("#dropDown2").val(),
+                CyphCode: $("#CyphCode").val(),
+                CapiDiv: $("#CapiDiv").val(),
+                Department: $("#Department").val(),
+                Whouse: $("#Whouse").val(),
+                SalesMan: $("#SalesMan").val(),
+                SpecialCode: $("#SpecialCode").val(),
+                TradingGrp: $("#TradingGrp").val(),
+
+                TotalDiscount: parseFloat($("#totalDiscountGenel").val()),
+                TotalVat: parseFloat($("#totalVatGenel").val()),
+                Total: parseFloat($("#totalGenel").val()),
+                NetTotal: parseFloat($("#totalNetGenel").val()),
+
+                kalemler: orderArr
+            });
+
+            $.when(saveOrder(data)).then(function (response) {
+                console.log(response);
+                $(window).attr('location', '@Url.Action("Index","Order")');
+
+            }).fail(function (err) {
+                console.log(err);
+            });
+        }
+
+
+    });
+
+
+    function formValidate() {
+        var ficheNoValidate = $("#FicheNo").val();
+        var customerCodeValidate = $("#dropDown1").val();
+        //alert(customerCodeValidate);
+
+        if (ficheNoValidate.length < 1) {
+
+
+            MessageBox("Fiş No Dolu Olmalıdır.", "top center", "error");
+            return false;
+        }
+        if (customerCodeValidate == 0 ) {
+
+            MessageBox("Cari Kod Dolu Olmalıdır.", "top center", "error");
+            return false;
+        }
+
+
+        if ($("#detailsTable tbody tr").length == 0 ) {
+            MessageBox("Satır Girilmeden kaydetme işlemi yapılamaz.", "top center", "error");
+            return false;
+        }
+
+        $.each($("#detailsTable tbody tr"), function () {
+
+            lineValidate = $(this).attr("id");
+
+
+            if ($("#itemCode" + lineValidate.toString()).val().length < 1) {
+                MessageBox("Malzeme Dolu Olmayan Satırlar Var.", "top center", "error");
+                return false;
+            }
+            if ($("#amount" + lineValidate.toString()).val().length < 1) {
+                MessageBox("Miktar Dolu Olmayan Satırlar Var.", "top center", "error");
+                return false;
+            }
+            if ($("#mainUnit" + lineValidate.toString()).val().length < 1) {
+                MessageBox("Birim Seti Dolu Olmayan Satırlar Var.", "top center", "error");
+                return false;
+            }
+            if ($("#price" + lineValidate.toString()).val().length < 1) {
+                MessageBox("Birim Fiyat Dolu Olmayan Satırlar Var.", "top center", "error");
+                return false;
+            }
+            if ($("#vat" + lineValidate.toString()).val().length < 1) {
+                MessageBox("Kdv Oranı Dolu Olmayan Satırlar Var.", "top center", "error");
+                return false;
+            }
+
+
+        });
+
+        return true;
+    }
+    function MessageBox(message, position, status) {
+        $.notify(message, {
+            globalPosition: position,
+            className: status
+        })
+    }
+</script>
+@*Barcode Reader*@
+<script>
+   function PreviusRoute() {
+        $(window).attr('location', '@Url.Action("Index","Order")');
+
+    }
+    function CalcutingTotal() {
+
+        var lineValue = 0;
+
+        var totalArr = [];
+        var totalNetArr = [];
+        var totalDiscountArr = [];
+
+        var totalGenel = 0;
+        totalArr.length = 0;
+
+        var totalNetGenel = 0;
+        totalNetArr.length = 0;
+
+        var totalDiscountGenel = 0;
+        totalDiscountArr.length = 0;
+
+        $("#detailsTable tbody tr").each(function () {
+            lineValue = $(this).attr("id");
+
+            totalArr.push({
+
+                total5: $("#total" + lineValue.toString()).val()
+            });
+            totalNetArr.push({
+
+                netTotal5: $("#netTotal" + lineValue.toString()).val()
+            });
+            totalDiscountArr.push({
+
+                netDiscount5: ($("#amount" + lineValue.toString()).val() * $("#price" + lineValue.toString()).val()) - $("#total" + lineValue.toString()).val()
+            });
+
+        });
+
+        totalArr.forEach(function (a) {
+            if (isNaN($("#amount" + lineValue.toString()).val()) == false || $("#amount" + lineValue.toString()).val() != "") {
+                totalGenel += parseFloat(a.total5);
+                console.log(totalGenel);
+            }
+
+
+        });
+        totalNetArr.forEach(function (a) {
+            if (isNaN($("#amount" + lineValue.toString()).val()) == false || $("#amount" + lineValue.toString()).val() != "") {
+                totalNetGenel += parseFloat(a.netTotal5);
+
+            }
+
+
+        });
+        totalDiscountArr.forEach(function (a) {
+            if (isNaN($("#amount" + lineValue.toString()).val()) == false || $("#amount" + lineValue.toString()).val() != "") {
+                totalDiscountGenel += parseFloat(a.netDiscount5);
+
+            }
+
+
+        });
+
+        $("#totalGenel").val(parseFloat(totalGenel).toFixed(2));
+        $("#totalNetGenel").val(parseFloat(totalNetGenel).toFixed(2));
+
+        $("#totalVatGenel").val(parseFloat($("#totalNetGenel").val() - $("#totalGenel").val()).toFixed(2));
+        //console.log(parseFloat(totalDiscountGenel).toFixed(2));
+        $("#totalDiscountGenel").val(parseFloat(totalDiscountGenel).toFixed(2));
+        //console.log(totalGenel);
+    }
+    function CalcutingOrfiche(event, count) {
+
+        var code = event.keyCode || event.which;
+
+        var totalValue = 0
+        var nettotalValue = 0
+        var Ind1TotalValue = 0
+        var Ind2TotalValue = 0
+        var Ind3TotalValue = 0
+        var Ind4TotalValue = 0
+        var Ind5TotalValue = 0
+        var vatValue = 0
+        var ind1Value = 0
+        var ind2Value = 0
+
+
+        if (code == 9) {
+
+            //event.preventDefault();
+
+            totalValue = parseFloat($("#price" + count.toString()).val()) * parseFloat($("#amount" + count.toString()).val()).toFixed(2);
+            $("#total" + count.toString()).val(parseFloat(totalValue).toFixed(2));
+
+            //Vat Calcuting
+            vatValue = parseFloat($("#vat" + count.toString()).val())
+            if (vatValue !== 0 || vatValue !== null) {
+                nettotalValue = totalValue + (totalValue * (vatValue / 100))
+                $("#netTotal" + count.toString()).val(parseFloat(nettotalValue).toFixed(2));
+            }
+
+
+            //IND1 Calcuting
+            ind1Value = parseFloat($("#Ind1" + count.toString()).val())
+
+            if (isNaN(ind1Value) !== true) {
+                if (ind1Value === 0) {
+                    return;
+                }
+                else {
+
+                    Ind1TotalValue = totalValue - (totalValue * (ind1Value / 100))
+
+                    $("#total" + count.toString()).val(parseFloat(Ind1TotalValue).toFixed(2));
+                    //console.log($("#total" + count.toString()).val());
+                    nettotalValue = Ind1TotalValue + (Ind1TotalValue * (vatValue / 100))
+                    $("#netTotal" + count.toString()).val(parseFloat(nettotalValue).toFixed(2));
+                    //console.log($("#netTotal" + count.toString()).val());
+                    //IND2 Calcuting
+                    ind2Value = parseFloat($("#Ind2" + count.toString()).val())
+                    if (isNaN(ind2Value) !== true) {
+
+                        if (ind2Value === 0) {
+                            return;
+                        }
+                        else {
+                            Ind2TotalValue = Ind1TotalValue - (Ind1TotalValue * (ind2Value / 100))
+
+                            $("#total" + count.toString()).val(parseFloat(Ind2TotalValue).toFixed(2));
+
+                            nettotalValue = Ind2TotalValue + (Ind2TotalValue * (vatValue / 100))
+                            $("#netTotal" + count.toString()).val(parseFloat(nettotalValue).toFixed(2));
+
+                            //IND3 Calcuting
+                            ind3Value = parseFloat($("#Ind3" + count.toString()).val())
+                            if (isNaN(ind3Value) !== true) {
+
+                                if (ind3Value === 0) {
+                                    return;
+                                }
+                                else {
+                                    Ind3TotalValue = Ind2TotalValue - (Ind2TotalValue * (ind3Value / 100))
+
+                                    $("#total" + count.toString()).val(parseFloat(Ind3TotalValue).toFixed(2));
+
+                                    nettotalValue = Ind3TotalValue + (Ind3TotalValue * (vatValue / 100))
+                                    $("#netTotal" + count.toString()).val(parseFloat(nettotalValue).toFixed(2));
+
+                                    //IND4 Calcuting
+                                    ind4Value = parseFloat($("#Ind4" + count.toString()).val())
+                                    if (isNaN(ind4Value) !== true) {
+
+                                        if (ind4Value === 0) {
+                                            return;
+                                        }
+                                        else {
+                                            Ind4TotalValue = Ind3TotalValue - (Ind3TotalValue * (ind4Value / 100))
+
+                                            $("#total" + count.toString()).val(parseFloat(Ind4TotalValue).toFixed(2));
+
+                                            nettotalValue = Ind4TotalValue + (Ind4TotalValue * (vatValue / 100))
+                                            $("#netTotal" + count.toString()).val(parseFloat(nettotalValue).toFixed(2));
+
+                                            //IND5 Calcuting
+                                            ind5Value = parseFloat($("#Ind5" + count.toString()).val())
+                                            if (isNaN(ind5Value) !== true) {
+
+                                                if (ind5Value === 0) {
+                                                    return;
+                                                }
+                                                else {
+                                                    Ind5TotalValue = Ind4TotalValue - (Ind4TotalValue * (ind5Value / 100))
+
+                                                    $("#total" + count.toString()).val(parseFloat(Ind5TotalValue).toFixed(2));
+
+                                                    nettotalValue = Ind5TotalValue + (Ind5TotalValue * (vatValue / 100))
+                                                    $("#netTotal" + count.toString()).val(parseFloat(nettotalValue).toFixed(2));
+
+
+                                                }
+
+
+                                            }
+                                        }
+
+
+                                    }
+                                }
+
+
+                            }
+                        }
+
+
+                    }
+                }
+
+            }
+
+
+        }
+
+
+
+    }
+    function CalcutingMethod(event, count) {
+        CalcutingOrfiche(event, count);
+        setTimeout(function () {
+            CalcutingTotal();
+        },500 );
+
+    }
+    var inputBarcode = document.getElementById("inputBarcode")
+    //var inputAmount = document.getElementById("inputAmount")
+    var count = 1000;
+
+    inputBarcode.addEventListener("keypress", function (event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+            // Cancel the default action, if needed
+            event.preventDefault();
+
+            if (inputBarcode.value !== null || inputBarcode.value !== "") {
+
+
+
+                $.ajax({
+
+                    url: '/Order/GetItems?barcode=' + inputBarcode.value,
+
+                    type: 'GET',
+
+                    data: { format: 'json' },
+
+                    success: function (data) {
+
+
+                        count = count + 1;
+
+                        var barcode = '<input type="text" name="barcode" class="small"  id="barcode" value="' + inputBarcode.value + '" disabled  style="width:70px"/>'
+                        var itemCode = '<div class="buttonIn"><input type="text" name="itemCode" class="small" id="itemCode' + count + '" value="' + data.Code + '"   style="width:100px"/><button class="small" id="button1" onclick="InspectorForm(' + count + ')">:</button></div>'
+                        var itemName = '<div class="buttonIn"><input type="text" name="itemName" class="small" id="itemName' + count + '" value="' + data.Name + '" style="width:100px"/><button class="small" id="button2" onclick="InspectorForm(' + count + ')">:</button></div>'
+
+                        //var itemName = '<input type="text" name="itemName" class="small" id="itemName"  style="width:100px"/>'
+                        var amount = '<input type="number" name="amount" class="small"  id="amount' + count + '" onkeydown="CalcutingMethod(event,' + count + ')"    style="width:50px"/>'
+                        var mainUnit = '<div class="buttonIn"><input type="text" name="" class="small" id="mainUnit' + count + '" value="' + data.MainUnit + '" style="width:55px"/><button class="small" id="button3" onclick="MainUnitForm(' + count + ')">:</button></div>'
+                        var price = '<input type="number"  name="" class="small" id="price' + count + '" onkeydown="CalcutingMethod(event,' + count + ')" value="' + parseFloat(data.Price).toFixed(2) + '"  style="width:65px"/>'
+                        var vat = '<input type="number" name="" class="small" class="small" id="vat' + count + '"  onkeydown="CalcutingMethod(event,' + count + ')" value="' + data.Vat + '"  style="width:35px"/>'
+                        var Ind1 = '<input type="number" name="" class="small" id="Ind1' + count + '" onkeydown="CalcutingMethod(event,' + count + ')"  style="width:35px"/>'
+                        var Ind2 = '<input type="number" name="" class="small" id="Ind2' + count + '" onkeydown="CalcutingMethod(event,' + count + ')" style="width:35px"/>'
+                        var Ind3 = '<input type="number" name="" class="small" id="Ind3' + count + '" onkeydown="CalcutingMethod(event,' + count + ')" style="width:35px"/>'
+                        var Ind4 = '<input type="number" name="" class="small" id="Ind4' + count + '" onkeydown="CalcutingMethod(event,' + count + ')" style="width:35px"/>'
+                        var Ind5 = '<input type="number" name="" class="small" id="Ind5' + count + '" onkeydown="CalcutingMethod(event,' + count + ')" style="width:35px"/>'
+                        var total = '<input type="number" name="" class="small" id="total' + count + '"   style="width:65px" disabled/>'
+                        var netTotal = '<input type="number" name="" class="small" id="netTotal' + count + '"   style="width:65px" disabled/>'
+
+                        var detailsTableBody = $("#detailsTable tbody");
+
+                        var degerler = '<tr id=' + count + '><td>' + barcode + '</td><td>' + itemCode + '</td><td>' + itemName + '</td><td>' + amount + '</td><td>' + mainUnit + '</td><td>' + price + '</td><td>' + vat + '</td><td>' + Ind1 + '</td><td>' + Ind2 + '</td><td>' + Ind3 + '</td><td>' + Ind4 + '</td><td>' + Ind5 + '</td><td>' + total + '</td><td>' + netTotal + '</td><td><a data-itemId="0" href="#" class="deleteItem">x</a></td></tr>';
+                        detailsTableBody.append(degerler);
+
+                        inputBarcode.value = "";
+
+                        //inputAmount.value = "";
+
+
+
+                    },
+
+                });
+
+
+            }
+        }
+    });
+    //Row Delete Event
+    $(document).on('click', 'a.deleteItem', function (e) {
+
+        e.preventDefault();
+        var $self = $(this);
+        if ($(this).attr('data-itemId') == "0") {
+            $(this).parents('tr').css("background-color", "#ff6347").fadeOut(800, function () {
+                $(this).remove();
+                CalcutingTotal();
+            });
+
+        }
+    });
+
+
+
+</script>
+
+
+

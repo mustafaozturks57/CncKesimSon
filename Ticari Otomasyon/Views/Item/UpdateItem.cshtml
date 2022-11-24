@@ -1,0 +1,130 @@
+﻿
+@model Ticari_Otomasyon.Models.Classes.GetItem
+@{
+    Layout = null;
+}
+
+<style>
+    body {
+        background: rgb(255, 255, 255)
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #BA68C8
+    }
+
+    .profile-button {
+        background: rgb(99, 39, 120);
+        box-shadow: none;
+        border: none
+    }
+
+        .profile-button:hover {
+            background: #682773
+        }
+
+        .profile-button:focus {
+            background: #682773;
+            box-shadow: none
+        }
+
+        .profile-button:active {
+            background: #682773;
+            box-shadow: none
+        }
+
+    .back:hover {
+        color: #682773;
+        cursor: pointer
+    }
+
+    .labels {
+        font-size: 11px
+    }
+
+    .add-experience:hover {
+        background: #BA68C8;
+        color: #fff;
+        cursor: pointer;
+        border: solid 1px #BA68C8
+    }
+</style>
+<div class="container rounded bg-white mt-2 mb-2">
+    @using (Html.BeginForm("UpdateItem", "Item", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+    {
+
+        @Html.HiddenFor(m => m.Logicalref)
+        <div class="row">
+            <div class="col-md-4 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img class="rounded-circle mt-5" width="150px" src="~/Images/item-box-icon.png">
+                    <div style="margin-top:10px">
+                        <div class="col-md-12"><label class="labels">Malzeme Kodu</label> @Html.TextBoxFor(m => m.Code, new { @class = "font-weight-bold form-control" })</div>
+
+                        <div class="col-md-12"><label class="labels">Malzeme Adı</label>@Html.TextBoxFor(m => m.ItemName, new { @class = "text-black-50 form-control" })</div>
+
+                                           </div>
+                   
+                   
+                </div>
+            </div>
+            <div class="col-md-4 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Malzeme Bilgileri</h4>
+                    </div>
+
+
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Malzeme Açıklaması 2</label>@Html.TextBoxFor(m => m.ItemName2, new { @class = "form-control" })</div>
+
+                        <div class="col-md-6"><label class="labels">Anabirim</label><input class="form-control" placeholder="" value="@Model.MainUnit" disabled></div>
+
+                    </div>
+                    <br />
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Kdv Bilgileri</h4>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6"><label class="labels">Satış</label>@Html.TextBoxFor(m => m.Vat, new { @class = "form-control" })</div>
+
+                        <div class="col-md-6"><label class="labels">Satınalma</label>@Html.TextBoxFor(m => m.SellVat, new { @class = "form-control" })</div>
+
+                        <div class="col-md-6"><label class="labels">İade</label>@Html.TextBoxFor(m => m.ReturnVat, new { @class = "form-control" })</div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center experience">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Özel Bilgiler</h4>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="labels">Özel Kod</label>@Html.TextBoxFor(m => m.SpecialCode, new { @class = "form-control" })</div>
+                        <div class="col-md-6"><label class="labels">Yetki Kodu</label>@Html.TextBoxFor(m => m.CyphCode, new { @class = "form-control" })</div>
+                        <div class="col-md-12"><label class="labels">Üretici Kodu</label>@Html.TextBoxFor(m => m.ProducerCode, new { @class = "form-control" })</div>
+                    </div>
+                    <br />
+                    @*<div class="d-flex justify-content-between align-items-center experience" style="margin-top:10px">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="text-right">Ticari Bilgiler</h4>
+                            </div>
+                        </div>*@
+
+                    @*<div class="col-md-12"><label class="labels">Vergi Kimlik No</label><input type="text" class="form-control" placeholder="experience" value="@Model.IdentityNumber" disabled></div> <br>
+                        <div class="col-md-12"><label class="labels">Vergi Dairesi</label><input type="text" class="form-control" placeholder="additional details" value="@Model.TaxOffice" disabled></div>*@
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn-sm btn-primary" value="Submit" style="float:right;">Güncelle</button>
+    }
+    </div>
+
+
+
+

@@ -1,0 +1,127 @@
+﻿@model IEnumerable<Ticari_Otomasyon.Models.CncModel.Customer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<br />
+<br />
+<br />
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fırma_Adı)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vergi_No)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Banka_HesapNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active_fl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EPosta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Yetkılı)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Yetkılı_cep)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nott)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Borc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Odeme)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Iptal)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fırma_Adı)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vergi_No)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Banka_HesapNo)
+            </td>
+            @if (item.Active_fl == true)
+            {
+                <td class="btn btn-info">
+                    Aktif
+                </td>
+
+            }
+            else
+            {
+                <td>
+                    Pasif
+                </td>
+
+            }
+
+            <td>
+                @Html.DisplayFor(modelItem => item.EPosta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Yetkılı)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Yetkılı_cep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nott)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Borc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Odeme)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Iptal)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>

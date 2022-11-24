@@ -1,0 +1,147 @@
+﻿@model IEnumerable<Ticari_Otomasyon.Models.CncModel.Satıslar>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Alınanlar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TARIH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MIKTAR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ADET)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MUSTERI_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SATIS_NO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TOPLAM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TUR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ODEME_TUTARI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BIRIM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TUR_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ACIKLAMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KULLANICI_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ODEME_ZAMANI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ODEME_HABER)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.URUN_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ALIS_FIYATI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ISKONTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KDV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FATURA)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Alınanlar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TARIH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MIKTAR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ADET)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MUSTERI_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SATIS_NO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TOPLAM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TUR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ODEME_TUTARI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BIRIM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TUR_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACIKLAMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KULLANICI_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ODEME_ZAMANI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ODEME_HABER)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.URUN_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ALIS_FIYATI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ISKONTO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KDV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FATURA)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

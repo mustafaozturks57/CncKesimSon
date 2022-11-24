@@ -1,0 +1,187 @@
+﻿@model  Ticari_Otomasyon.Models.Classes.GetOrderView
+
+
+@{
+    ViewBag.Title = "GetOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
+
+<div class="container-fluid">
+    <div class="row" style="margin-top:10px">
+        <div class="col-sm-3">
+            <h6 style="color:#ff6347">Satış Siparişi- @Model.GetOrderTop_.FicheNo</h6>
+        </div>
+        <div class="col-sm-6">
+
+        </div>
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-danger btn-sm" onclick="PreviusRoute()">Geri</button>
+        </div>
+    </div>
+
+    <hr />
+    <div class="container-fluid">
+        <div class="row">
+            <input type="hidden" id="Faturaid" />
+
+            <div class="col-sm-2">
+                <div class="form-group-sm">
+                    <label class="form-label">Fiş No</label><br />
+                    @Html.TextBoxFor(x => x.GetOrderTop_.FicheNo, new { @class = "small" , @disabled="disabled" })<br />
+
+                    <label class="form-label">Tarih</label><br />
+                    @Html.TextBoxFor(x => x.GetOrderTop_.Date, new { @class = "small", @disabled = "disabled" })<br />
+
+                    <label class="form-label">Belge No </label><br />
+                    @Html.TextBoxFor(x => x.GetOrderTop_.Docode, new { @class = "small", @disabled = "disabled" })
+                </div>
+            </div>
+            <div class="col-sm-2 " style="margin-left:15px">
+
+                <div class="form-group-sm">
+                    <label class="label">Cari Kod</label><br />
+                    @Html.TextBoxFor(x => x.GetOrderTop_.CustomerCode, new { @class = "small", @disabled = "disabled" }) <br />
+
+
+                    <label class="label">Cari Ünvan</label><br />
+                    @Html.TextBoxFor(x => x.GetOrderTop_.CustomerDefinition, new { @class = "small", @disabled = "disabled" }) <br />
+
+                    <label class="label">Yetki Kodu</label><br />
+                    @Html.TextBoxFor(x => x.GetOrderTop_.CyphCode, new { @class = "small", @disabled = "disabled" })
+                </div>
+
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group-sm">
+                    <label class="label">Özel Kod</label><br />
+                    <input type="text" name="GetOrderTop_.SpecialCode" value="" class="small" id="SpecialCode" disabled/>
+                    <br />
+                    <label class="label">Tic Grup</label><br /> 
+                    @Html.TextBoxFor(x => x.GetOrderTop_.TradingGrp, new { @class = "small", @disabled = "disabled" })
+                    <br />
+                    <label class="label">Satış Elemanı</label><br />
+                    @Html.TextBoxFor(x => x.GetOrderTop_.SalesMan, new { @class = "small", @disabled = "disabled" })
+                </div>
+            </div>
+            <div class="col-sm-2 " style="margin-left:15px">
+
+                <div class="form-group-sm">
+                    <label class="label">İşyeri</label><br />
+                    @Html.TextBoxFor(x => x.GetOrderTop_.CapiDiv, new { @class = "small", @disabled = "disabled" }) <br />
+
+
+                    <label class="label">Bölüm</label><br />
+                    @Html.TextBoxFor(x => x.GetOrderTop_.Department, new { @class = "small", @disabled = "disabled" }) <br />
+
+                    <label class="label">Ambar</label><br />
+                    @Html.TextBoxFor(x => x.GetOrderTop_.Whouse, new { @class = "small", @disabled = "disabled" })
+                </div>
+
+            </div>
+            <div class="col">
+                <div class="form-group-sm">
+
+                    <label class="label">Toplam</label>
+                    @Html.TextBoxFor(x => x.GetOrderTop_.Total, new { @class = "small", @disabled = "disabled" })
+                    <br />
+
+
+
+
+                    <label class="label">Toplam İndirim</label>
+                    @Html.TextBoxFor(x => x.GetOrderTop_.TotalDiscount, new { @class = "small", @disabled = "disabled" })
+
+                    <br />
+
+
+
+                    <label class="label">Toplam Kdv</label>
+                    @Html.TextBoxFor(x => x.GetOrderTop_.TotalVat, new { @class = "small", @disabled = "disabled" })
+                    <br />
+                    <label class="label">Net Tutar</label>
+                    @Html.TextBoxFor(x => x.GetOrderTop_.NetTotal, new { @class = "small", @disabled = "disabled" })
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    @*Fatura Kalemleri*@
+
+
+<br />
+
+    <div class="form" style="margin-top:10px">
+        <input type="hidden" id="id" />
+
+
+        <table id="detailsTable" class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Barkod</th>
+                    <th>Malzeme Kodu</th>
+                    <th>Malzeme Ack</th>
+                    <th>Miktar</th>
+                    <th>Birim</th>
+                    <th>Birim Fiyat</th>
+                    <th>KDV</th>
+                    <th>IND1</th>
+                    <th>IND2</th>
+                    <th>IND3</th>
+                    <th>IND4</th>
+                    <th>IND5</th>
+                    <th>Tutar</th>
+                    <th>Net Tutar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var param in @Model.GetOrderEnd_)
+                {
+                <tr>
+                    <td><input type="text" class="small" style="width:70px" disabled  value="@param.barcode" /></td>
+                    <td><input type="text" class="small" style="width:100px" disabled value="@param.itemCode" /></td>
+                    <td><input type="text" class="small" style="width:105px" disabled value="@param.itemName" /></td>
+                    <td><input type="text" class="small" style="width:50px" disabled value="@param.amount" /></td>
+                    <td><input type="text" class="small" style="width:45px" disabled value="@param.mainUnit" /></td>
+                    <td><input type="text" class="small" style="width:50px" disabled value="@param.price" /></td>
+                    <td><input type="text" class="small" style="width:30px" disabled value="@param.vat" /></td>
+                    <td><input type="text" class="small" style="width:30px" disabled value="@param.Ind1" /></td>
+                    <td><input type="text" class="small" style="width:30px" disabled value="@param.Ind2" /></td>
+                    <td><input type="text" class="small" style="width:30px" disabled value="@param.Ind3" /></td>
+                    <td><input type="text" class="small" style="width:30px" disabled value="@param.Ind4" /></td>
+                    <td><input type="text" class="small" style="width:30px" disabled value="@param.Ind5" /></td>
+                    <td><input type="text" class="small" style="width:60px" disabled value="@param.total" /></td>
+                    <td><input type="text" class="small" style="width:60px" disabled value="@param.netTotal" /></td>
+                </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+</div>
+
+
+
+<script>
+    function PreviusRoute() {
+        $(window).attr('location', '@Url.Action("Index","Order")');
+
+    }
+</script>
+
+
+
+
+

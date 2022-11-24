@@ -1,0 +1,184 @@
+﻿@model Ticari_Otomasyon.Models.CncModel.Satıslar
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Satıslar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Alınanlar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alınanlar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TARIH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TARIH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MIKTAR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MIKTAR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ADET)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ADET)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MUSTERI_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MUSTERI_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SATIS_NO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SATIS_NO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TOPLAM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TOPLAM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TUR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TUR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ODEME_TUTARI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ODEME_TUTARI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BIRIM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BIRIM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TUR_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TUR_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ACIKLAMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ACIKLAMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KULLANICI_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KULLANICI_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ODEME_ZAMANI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ODEME_ZAMANI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ODEME_HABER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ODEME_HABER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.URUN_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.URUN_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ALIS_FIYATI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ALIS_FIYATI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ISKONTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISKONTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KDV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KDV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FATURA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FATURA)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

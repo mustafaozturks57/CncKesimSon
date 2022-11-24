@@ -1,0 +1,33 @@
+﻿@model Ticari_Otomasyon.Models.Classes.Personel
+@{
+    ViewBag.Title = "PersonelEkle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Personel Ekleme Sayfası</h2>
+
+@using (Html.BeginForm("PersonelEkle", "Personel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<form class="form-group" method="post">
+    @Html.LabelFor(x => x.Ad)
+    @Html.TextBoxFor(x => x.Ad, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.Soyad)
+    @Html.TextBoxFor(x => x.Soyad, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.Mail)
+    @Html.TextBoxFor(x => x.Mail, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.PersonelGorseli)
+    <br />
+    <input type="file" name="PersonelGorseli" />
+    <br />
+    @Html.LabelFor(x => x.Departman)
+    @Html.DropDownListFor(x => x.DepartmanId, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
+
+    @*@Html.TextBoxFor(x => x.KategoriId, new { @class = "form-control" })*@
+    <br />
+
+    <button class="btn btn-success">Kaydet</button>
+</form>
+}

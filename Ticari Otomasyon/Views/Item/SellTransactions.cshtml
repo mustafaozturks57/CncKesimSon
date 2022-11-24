@@ -1,0 +1,168 @@
+﻿@using Ticari_Otomasyon.Models.Classes;
+
+@model List<SellTransactionCustomer>
+@{
+    ViewBag.Title = "SellTransactionCustomer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta charset="UTF-8">
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+</head>
+<div class="container-fluid">
+
+
+    <div class="row" style="margin-top:10px">
+        <div class="col-md-11">
+            <div class="card">
+                <div class="card-header">
+                    <h4>@ViewBag.itemName</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-11" style="margin-top:10px">
+            <table id="tbl1" class="table display nowrap" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Tarih</th>
+                        <th>Fiş No</th>
+                         <th>Cari Ünvan</th>
+                        <th>Özel Kod</th>
+                        <th>Tic Grup</th>
+                        <th>İşyeri</th>
+                        <th>Bölüm</th>
+                        @*<th>Departman</th>*@
+                        <th>Satış Elemanı</th>
+                        <th>Tutar</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+@*-------Datatable özellikleri------*@
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+
+
+
+<script>
+
+    var InspectorPopup, UpdatePopup, table;
+    var code = '@ViewBag.itemTemp';
+
+
+   //------List Data -------
+    table = $('#tbl1').DataTable({
+        processing: true,
+        serverSide: true,
+
+        ajax: {
+            url: '@Url.Action("ListSellTransactions", "Item")'+'?data='+code,
+            type: "POST",
+            datatype: "json"
+        },
+        columns: [
+            { data: "Date", "name": "Date" },
+            { data: "Ficheno", "name": "Ficheno" },
+            { data: "CompanyName", "name": "CompanyName" },
+            { data: "SpecialCode", "name": "SpecialCode" },
+            { data: "TradingGrp", "name": "TradingGrp" },
+            { data: "SourceIndex", "name": "SourceIndex" },
+            { data: "Branch", "name": "Branch" },
+            //{ data: "Department", "name": "Department" },
+            { data: "SalesMan", "name": "SalesMan" },
+            { data: "Amount", "name": "Amount" }
+            @*{
+                data:  "Code", "render": function (data) {
+                    return "<button type='button' class='btn-xs btn-secondary' onclick=InspectorForm('@Url.Action("GetCustomer","Customer")?data=" + data + "','" + data + "')><i class='fas fa-eye'></i></button>" +
+                        "<button class='btn-xs btn-danger' onclick=UpdateForm('@Url.Action("UpdateCustomer", "Customer")?data=" + data + "','" + data + "')> <i class='fas fa-pen'></i></button> ";
+
+                }
+            }*@
+        ],
+
+        buttons: [
+            {
+                extend: 'copyHtml5',
+                text: '<i class="fa fa-copy"></i>',
+                titleAttr: 'Kopyala'
+            },
+            {
+                extend: 'excelHtml5',
+                text: '<i class="fa fa-file-excel"></i>',
+                titleAttr: 'Excel'
+            },
+
+            {
+                extend: 'pdfHtml5',
+                text: '<i class="fa fa-file-pdf"></i>',
+                titleAttr: 'PDF'
+            },
+            {
+                extend: 'print',
+                text: '<i class="fa fa-print"></i>',
+                titleAttr: 'Yazdır'
+            }
+        ],
+        language: {
+            info: "_TOTAL_ kayıttan _START_ - _END_ kayıt gösteriliyor.",
+            infoEmpty: "Gösterilecek hiç kayıt yok.",
+            loadingRecords: "Kayıtlar yükleniyor.",
+            zeroRecords: "Tablo boş",
+            search: "Arama:",
+            infoFiltered: "(toplam _MAX_ kayıttan filtrelenenler)",
+            buttons: {
+
+                copyTitle: "Panoya kopyalandı.",
+                copySuccess: "Panoya %d satır kopyalandı",
+                copy: "Kopyala",
+                print: "Yazdır",
+
+            },
+
+
+            paginate: {
+                first: "İlk",
+                previous: "Önceki",
+                next: "Sonraki",
+                last: "Son"
+            }
+        },
+
+
+        dom: 'Bfrtip',
+        //scrollX: true,
+        //scrollCollapse: true,
+        //responsive: {
+        //    details: false
+        //}
+    });
+
+
+
+</script>
+
+

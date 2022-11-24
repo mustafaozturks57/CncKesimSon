@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CncTicariOtomasyonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fırma_Adı" Type="varchar" MaxLength="50" />
+          <Property Name="Telefon" Type="varchar" MaxLength="50" />
+          <Property Name="Adres" Type="varchar" MaxLength="100" />
+          <Property Name="Vergi_No" Type="varchar" MaxLength="50" />
+          <Property Name="Banka_HesapNo" Type="varchar" MaxLength="50" />
+          <Property Name="Active_fl" Type="bit" />
+          <Property Name="EPosta" Type="varchar" MaxLength="50" />
+          <Property Name="Yetkılı" Type="varchar" MaxLength="50" />
+          <Property Name="Yetkılı_cep" Type="varchar" MaxLength="50" />
+          <Property Name="Fax" Type="varchar" MaxLength="50" />
+          <Property Name="Nott" Type="varchar" MaxLength="50" />
+          <Property Name="Borc" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Odeme" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Iptal" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="BARKOD" Type="varchar" MaxLength="50" />
+          <Property Name="URUNADI" Type="varchar" MaxLength="100" />
+          <Property Name="FIYAT" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SONFIYAT" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ALISFIYATI" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="STOK_DURUMU" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="EKLEME" Type="bit" />
+          <Property Name="UYARI_SAYISI" Type="int" />
+          <Property Name="BIRIM" Type="varchar" MaxLength="50" />
+          <Property Name="GRUP" Type="varchar" MaxLength="50" />
+          <Property Name="KDV" Type="varchar" MaxLength="50" />
+          <Property Name="INDIRIMLI_FIYAT" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="STOK_TAKIP" Type="bit" />
+        </EntityType>
+        <EntityType Name="Satıslar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Alınanlar" Type="varchar" MaxLength="200" />
+          <Property Name="TARIH" Type="date" />
+          <Property Name="MIKTAR" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ADET" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MUSTERI_ID" Type="int" />
+          <Property Name="SATIS_NO" Type="int" />
+          <Property Name="TOPLAM" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TUR" Type="varchar" MaxLength="50" />
+          <Property Name="ODEME_TUTARI" Type="varchar" MaxLength="50" />
+          <Property Name="BIRIM" Type="varchar" MaxLength="50" />
+          <Property Name="TUR_ID" Type="smallint" />
+          <Property Name="ACIKLAMA" Type="varchar" MaxLength="100" />
+          <Property Name="KULLANICI_ID" Type="int" />
+          <Property Name="ODEME_ZAMANI" Type="date" />
+          <Property Name="ODEME_HABER" Type="bit" />
+          <Property Name="URUN_ID" Type="int" />
+          <Property Name="ALIS_FIYATI" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ISKONTO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="KDV" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FATURA" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="CncTicariOtomasyonModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Satıslar" EntityType="Self.Satıslar" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CncTicariOtomasyonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CncTicariOtomasyonEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="CncTicariOtomasyonModel.Customer" />
+          <EntitySet Name="Items" EntityType="CncTicariOtomasyonModel.Item" />
+          <EntitySet Name="Satıslar" EntityType="CncTicariOtomasyonModel.Satıslar" />
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fırma_Adı" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Vergi_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Banka_HesapNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active_fl" Type="Boolean" />
+          <Property Name="EPosta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Yetkılı" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Yetkılı_cep" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nott" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Borc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Odeme" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Iptal" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="BARKOD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="URUNADI" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FIYAT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SONFIYAT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ALISFIYATI" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="STOK_DURUMU" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="EKLEME" Type="Boolean" />
+          <Property Name="UYARI_SAYISI" Type="Int32" />
+          <Property Name="BIRIM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GRUP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KDV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="INDIRIMLI_FIYAT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="STOK_TAKIP" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Satıslar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Alınanlar" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TARIH" Type="DateTime" Precision="0" />
+          <Property Name="MIKTAR" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ADET" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MUSTERI_ID" Type="Int32" />
+          <Property Name="SATIS_NO" Type="Int32" />
+          <Property Name="TOPLAM" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TUR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ODEME_TUTARI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BIRIM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TUR_ID" Type="Int16" />
+          <Property Name="ACIKLAMA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="KULLANICI_ID" Type="Int32" />
+          <Property Name="ODEME_ZAMANI" Type="DateTime" Precision="0" />
+          <Property Name="ODEME_HABER" Type="Boolean" />
+          <Property Name="URUN_ID" Type="Int32" />
+          <Property Name="ALIS_FIYATI" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ISKONTO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="KDV" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FATURA" Type="Boolean" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CncTicariOtomasyonModelStoreContainer" CdmEntityContainer="CncTicariOtomasyonEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="CncTicariOtomasyonModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Iptal" ColumnName="Iptal" />
+                <ScalarProperty Name="Odeme" ColumnName="Odeme" />
+                <ScalarProperty Name="Borc" ColumnName="Borc" />
+                <ScalarProperty Name="Nott" ColumnName="Nott" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Yetkılı_cep" ColumnName="Yetkılı_cep" />
+                <ScalarProperty Name="Yetkılı" ColumnName="Yetkılı" />
+                <ScalarProperty Name="EPosta" ColumnName="EPosta" />
+                <ScalarProperty Name="Active_fl" ColumnName="Active_fl" />
+                <ScalarProperty Name="Banka_HesapNo" ColumnName="Banka_HesapNo" />
+                <ScalarProperty Name="Vergi_No" ColumnName="Vergi_No" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Fırma_Adı" ColumnName="Fırma_Adı" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="CncTicariOtomasyonModel.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="STOK_TAKIP" ColumnName="STOK_TAKIP" />
+                <ScalarProperty Name="INDIRIMLI_FIYAT" ColumnName="INDIRIMLI_FIYAT" />
+                <ScalarProperty Name="KDV" ColumnName="KDV" />
+                <ScalarProperty Name="GRUP" ColumnName="GRUP" />
+                <ScalarProperty Name="BIRIM" ColumnName="BIRIM" />
+                <ScalarProperty Name="UYARI_SAYISI" ColumnName="UYARI_SAYISI" />
+                <ScalarProperty Name="EKLEME" ColumnName="EKLEME" />
+                <ScalarProperty Name="STOK_DURUMU" ColumnName="STOK_DURUMU" />
+                <ScalarProperty Name="ALISFIYATI" ColumnName="ALISFIYATI" />
+                <ScalarProperty Name="SONFIYAT" ColumnName="SONFIYAT" />
+                <ScalarProperty Name="FIYAT" ColumnName="FIYAT" />
+                <ScalarProperty Name="URUNADI" ColumnName="URUNADI" />
+                <ScalarProperty Name="BARKOD" ColumnName="BARKOD" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Satıslar">
+            <EntityTypeMapping TypeName="CncTicariOtomasyonModel.Satıslar">
+              <MappingFragment StoreEntitySet="Satıslar">
+                <ScalarProperty Name="FATURA" ColumnName="FATURA" />
+                <ScalarProperty Name="KDV" ColumnName="KDV" />
+                <ScalarProperty Name="ISKONTO" ColumnName="ISKONTO" />
+                <ScalarProperty Name="ALIS_FIYATI" ColumnName="ALIS_FIYATI" />
+                <ScalarProperty Name="URUN_ID" ColumnName="URUN_ID" />
+                <ScalarProperty Name="ODEME_HABER" ColumnName="ODEME_HABER" />
+                <ScalarProperty Name="ODEME_ZAMANI" ColumnName="ODEME_ZAMANI" />
+                <ScalarProperty Name="KULLANICI_ID" ColumnName="KULLANICI_ID" />
+                <ScalarProperty Name="ACIKLAMA" ColumnName="ACIKLAMA" />
+                <ScalarProperty Name="TUR_ID" ColumnName="TUR_ID" />
+                <ScalarProperty Name="BIRIM" ColumnName="BIRIM" />
+                <ScalarProperty Name="ODEME_TUTARI" ColumnName="ODEME_TUTARI" />
+                <ScalarProperty Name="TUR" ColumnName="TUR" />
+                <ScalarProperty Name="TOPLAM" ColumnName="TOPLAM" />
+                <ScalarProperty Name="SATIS_NO" ColumnName="SATIS_NO" />
+                <ScalarProperty Name="MUSTERI_ID" ColumnName="MUSTERI_ID" />
+                <ScalarProperty Name="ADET" ColumnName="ADET" />
+                <ScalarProperty Name="MIKTAR" ColumnName="MIKTAR" />
+                <ScalarProperty Name="TARIH" ColumnName="TARIH" />
+                <ScalarProperty Name="Alınanlar" ColumnName="Alınanlar" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

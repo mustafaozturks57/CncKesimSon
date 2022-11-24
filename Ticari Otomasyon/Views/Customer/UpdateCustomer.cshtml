@@ -1,0 +1,131 @@
+﻿
+@model Ticari_Otomasyon.Models.Classes.GetCustomer
+@{
+    Layout = null;
+}
+
+<style>
+    body {
+        background: rgb(255, 255, 255)
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #BA68C8
+    }
+
+    .profile-button {
+        background: rgb(99, 39, 120);
+        box-shadow: none;
+        border: none
+    }
+
+        .profile-button:hover {
+            background: #682773
+        }
+
+        .profile-button:focus {
+            background: #682773;
+            box-shadow: none
+        }
+
+        .profile-button:active {
+            background: #682773;
+            box-shadow: none
+        }
+
+    .back:hover {
+        color: #682773;
+        cursor: pointer
+    }
+
+    .labels {
+        font-size: 11px
+    }
+
+    .add-experience:hover {
+        background: #BA68C8;
+        color: #fff;
+        cursor: pointer;
+        border: solid 1px #BA68C8
+    }
+</style> 
+ @using (Html.BeginForm("UpdateCustomer", "Customer", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+<div class="container rounded bg-white mt-2 mb-2">
+
+    @Html.HiddenFor(m => m.Logicalref)
+    <div class="row">
+        <div class="col-md-4 border-right">
+            <div class=" p-3 py-5">
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <img class="rounded-circle mt-5" width="150px" src="~/Images/company-icon.jpg">
+                    </div>
+                </div>
+                <div class="col-md-12"><label class="labels">Cari Kod</label>   @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })</div>
+                <div class="col-md-12"><label class="labels">Cari Ünvan</label> @Html.TextBoxFor(m => m.CompanyName, new { @class = " small form-control" })</div>
+                <div class="col-md-12"><label class="labels">Cari Ünvan 2</label> @Html.TextBoxFor(m => m.CompanyName2, new { @class = " small form-control" })</div>
+            </div>
+        </div>
+        <div class="col-md-4 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">İletişim Bilgileri</h4>
+                </div>
+
+
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Adres</label> @Html.TextAreaFor(m => m.Adress, new { @class = "form-control" })</div>
+                    <div class="col-md-6"><label class="labels">İlçe</label> @Html.TextBoxFor(m => m.Town, new { @class = "form-control" })</div>
+                    <div class="col-md-6"><label class="labels">Şehir</label> @Html.TextBoxFor(m => m.City, new { @class = "form-control" })</div>
+                    <div class="col-md-12"><label class="labels">Ülke</label> @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })</div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">E-mail</label> @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })</div>
+
+                    <div class="col-md-12"><label class="labels">Telefon</label> @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })</div>
+
+                    <div class="col-md-12"><label class="labels">İlgili</label> @Html.TextBoxFor(m => m.Incharge, new { @class = "form-control" })</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center experience">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Özel Bilgiler</h4>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Özel Kod</label> @Html.TextBoxFor(m => m.SpecialCode, new { @class = "form-control" })</div>
+                    <div class="col-md-6"><label class="labels">Yetki Kodu</label> @Html.TextBoxFor(m => m.CyphCode, new { @class = "form-control" })</div>
+                    <div class="col-md-12"><label class="labels">Ticari İşlem Grubu</label> @Html.TextBoxFor(m => m.TradingGrp, new { @class = "form-control" })</div>
+                </div>
+                <br />
+                <div class="d-flex justify-content-between align-items-center experience" style="margin-top:10px">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Ticari Bilgiler</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-6"><label class="labels">Vergi Kimlik No</label> @Html.TextBoxFor(m => m.Vkn, new { @class = "form-control" })</div>
+                <div class="col-md-6"><label class="labels">TC No</label> @Html.TextBoxFor(m => m.TckNo, new { @class = "form-control" })</div> <br>
+                <div class="col-md-12"><label class="labels">Vergi Dairesi</label> @Html.TextBoxFor(m => m.TaxOffice, new { @class = "form-control" })</div>
+            </div>
+        </div>
+
+
+    </div>
+
+        <button type="submit" class="btn-sm btn-primary" value="Submit" style="float:right;">Güncelle</button>
+        
+   
+
+
+</div>
+ }
+
+

@@ -1,0 +1,103 @@
+﻿@using Ticari_Otomasyon.Models.Classes;
+
+@model List<Customer>
+@{
+    ViewBag.Title = "Cari";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+</head>
+<div class="container-fluid">
+
+    <div class="row" style="margin-top:10px">
+        <div class="col-md-10">
+            <table id="tbl1" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Kod</th>
+                        <th>Ünvan</th>
+                        <th>İlgili</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var cariler in Model)
+                    {
+                        <tr>
+                            <td>
+                                @cariler.Id
+                            </td>
+                            <td>
+                                @cariler.Name
+                            </td>
+                            <td>
+                                @cariler.Surname
+                            </td>
+                            <td>
+                                @cariler.City
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+@*-------Datatable özellikleri------*@
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+
+
+<script>
+    var table = $('#tbl1').DataTable({
+
+        lengthChange: false,
+
+        buttons: ['copy', 'excel', 'pdf']
+
+    });
+
+
+    table.buttons().container()
+
+        .appendTo('#tbl1_wrapper .col-md-6:eq(0)');
+
+
+</script>

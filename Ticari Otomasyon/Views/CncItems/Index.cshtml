@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Ticari_Otomasyon.Models.CncModel.Item>
+
+@{
+    ViewBag.Title = "Index";
+}
+ 
+<br />
+<br />
+<br />
+<br />
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BARKOD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.URUNADI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FIYAT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SONFIYAT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ALISFIYATI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.STOK_DURUMU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EKLEME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UYARI_SAYISI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BIRIM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GRUP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KDV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.INDIRIMLI_FIYAT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.STOK_TAKIP)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BARKOD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.URUNADI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FIYAT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SONFIYAT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ALISFIYATI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.STOK_DURUMU)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EKLEME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UYARI_SAYISI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BIRIM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GRUP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KDV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.INDIRIMLI_FIYAT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.STOK_TAKIP)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

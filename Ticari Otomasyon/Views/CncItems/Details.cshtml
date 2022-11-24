@@ -1,0 +1,122 @@
+﻿@model Ticari_Otomasyon.Models.CncModel.Item
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Item</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BARKOD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BARKOD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.URUNADI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.URUNADI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FIYAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FIYAT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SONFIYAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SONFIYAT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ALISFIYATI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ALISFIYATI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STOK_DURUMU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STOK_DURUMU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EKLEME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EKLEME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UYARI_SAYISI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UYARI_SAYISI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BIRIM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BIRIM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GRUP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GRUP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KDV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KDV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.INDIRIMLI_FIYAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.INDIRIMLI_FIYAT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STOK_TAKIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STOK_TAKIP)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
