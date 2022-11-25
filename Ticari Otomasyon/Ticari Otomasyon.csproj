@@ -169,8 +169,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AlertController.cs" />
+    <Compile Include="Controllers\CncCustomersController.cs" />
     <Compile Include="Controllers\CncDepartmentsController.cs" />
     <Compile Include="Controllers\CncItemsController.cs" />
+    <Compile Include="Controllers\CncOrfichesController.cs" />
     <Compile Include="Controllers\CncSatıslarController.cs" />
     <Compile Include="Controllers\CncSpecialCodesController.cs" />
     <Compile Include="Controllers\CncWarehousesController.cs" />
@@ -212,6 +214,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model2.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\CncModel\Orfiche.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CncModel\OrficheDto.cs" />
+    <Compile Include="Models\CncModel\Orfline.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CncModel\OrflineDto.cs" />
     <Compile Include="Models\CncModel\Satıslar.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
@@ -3303,6 +3313,10 @@
     <Content Include="Views\CncSpecialCodes\Details.cshtml" />
     <Content Include="Views\CncSpecialCodes\Edit.cshtml" />
     <Content Include="Views\CncSpecialCodes\Index.cshtml" />
+    <Content Include="Views\CncOrfiches\Details.cshtml" />
+    <Content Include="Views\CncOrfiches\Edit.cshtml" />
+    <Content Include="Views\CncOrfiches\Index.cshtml" />
+    <Content Include="Views\CncOrfiches\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,109 +9,112 @@ using System.Web.Mvc;
 using Ticari_Otomasyon.Models.CncModel;
 
 namespace Ticari_Otomasyon.Controllers
-{    [AllowAnonymous]
-    public class CncItemsController : Controller
+{
+
+
+    [AllowAnonymous]
+    public class CncCustomersController : Controller
     {
+
         private CncTicariOtomasyonEntities db = new CncTicariOtomasyonEntities();
 
-    
-        // GET: CncItems
+        // GET: CncCustomers
         public ActionResult Index()
         {
-            return View(db.Items.ToList());
+            return View(db.Customers.ToList());
         }
 
-        // GET: CncItems/Details/5
+        // GET: CncCustomers/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.Items.Find(id);
-            if (item == null)
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
             {
                 return HttpNotFound();
             }
-            return View(item);
+            return View(customer);
         }
 
-        // GET: CncItems/Create
+        // GET: CncCustomers/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CncItems/Create
+        // POST: CncCustomers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,BARKOD,URUNADI,FIYAT,SONFIYAT,ALISFIYATI,STOK_DURUMU,EKLEME,UYARI_SAYISI,BIRIM,GRUP,KDV,INDIRIMLI_FIYAT,STOK_TAKIP")] Item item)
+        public ActionResult Create([Bind(Include = "id,Fırma_Adı,Telefon,Adres,Vergi_No,Banka_HesapNo,Active_fl,EPosta,Yetkılı,Yetkılı_cep,Fax,Nott,Borc,Odeme,Iptal")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                db.Items.Add(item);
+                db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(item);
+            return View(customer);
         }
 
-        // GET: CncItems/Edit/5
+        // GET: CncCustomers/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.Items.Find(id);
-            if (item == null)
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
             {
                 return HttpNotFound();
             }
-            return View(item);
+            return View(customer);
         }
 
-        // POST: CncItems/Edit/5
+        // POST: CncCustomers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,BARKOD,URUNADI,FIYAT,SONFIYAT,ALISFIYATI,STOK_DURUMU,EKLEME,UYARI_SAYISI,BIRIM,GRUP,KDV,INDIRIMLI_FIYAT,STOK_TAKIP")] Item item)
+        public ActionResult Edit([Bind(Include = "id,Fırma_Adı,Telefon,Adres,Vergi_No,Banka_HesapNo,Active_fl,EPosta,Yetkılı,Yetkılı_cep,Fax,Nott,Borc,Odeme,Iptal")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(item).State = EntityState.Modified;
+                db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(item);
+            return View(customer);
         }
 
-        // GET: CncItems/Delete/5
+        // GET: CncCustomers/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.Items.Find(id);
-            if (item == null)
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
             {
                 return HttpNotFound();
             }
-            return View(item);
+            return View(customer);
         }
 
-        // POST: CncItems/Delete/5
+        // POST: CncCustomers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Item item = db.Items.Find(id);
-            db.Items.Remove(item);
+            Customer customer = db.Customers.Find(id);
+            db.Customers.Remove(customer);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

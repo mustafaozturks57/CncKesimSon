@@ -1,0 +1,299 @@
+﻿@model Ticari_Otomasyon.Models.CncModel.Orfiche
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<br />
+<br />
+<br />
+<br />
+<div class="form-group">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" value="Kaydet" class="btn btn-success" id="saveOrder" />
+        </div>
+    </div>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.FisNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    <input type="text" class="form-control" name="FisNo" id="FisNo" />
+
+
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MusteriId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    <input type="text" class="form-control" name="MusteriId" id="MusteriId" />
+
+
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Tarih, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="date" class="form-control" name="Tarih" id="Tarih" />
+                </div>
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.BarkodNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="BarkodNo" id="BarkodNo" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SiparisSekli, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="SiparisSekli" id="SiparisSekli" />
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="col-md-3">
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="BID" id="BID" />
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Aciklama, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="Aciklama" id="Aciklama" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TerminTarihi, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="date" class="form-control" name="TerminTarihi" id="TerminTarihi" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BelgeNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="BelgeNo" id="BelgeNo" />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OzelKod, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="OzelKod" id="OzelKod" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Bölüm, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="Bölüm" id="Bölüm" />
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Departman, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="Departman" id="Departman" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Isyeri, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="Isyeri" id="Isyeri" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SiparisDurumu, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="SiparisDurumu" id="SiparisDurumu" />
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+            fotofraf
+        </div>
+    </div>
+
+
+
+
+</div>
+<hr />
+<a href="#" class="btn btn-warning" id="addToRow">Satır Ekle</a>
+
+<table class="table align-middle mb-0 bg-white" id="detailsTable">
+    <thead class="bg-light">
+        <tr>
+            <th>Model</th>
+            <th>Malzeme</th>
+            <th>Özellik</th>
+            <th>Boy</th>
+            <th>En</th>
+            <th>M2</th>
+            <th>Adet</th>
+            <th>M2 Fiyat</th>
+            <th>Fiyat</th>
+            <th>#</th>
+        </tr>
+        
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+    var count = 0;
+    $("#addToRow").click(function (e) {
+
+        e.preventDefault();
+        count = count + 1;
+        var model = '<input type="text" name="model" class="small"  id="model' + count + '" style="width:70px" />';
+        var malzeme = '<input type="text" name="malzeme" class="small"  id="malzeme' + count + '" style="width:70px" />';
+        var ozellik = '<input type="text" name="ozellik" class="small"  id="ozellik' + count + '" style="width:70px" />';
+        var boy = '<input type="text" name="boy" class="small"  id="boy' + count + '" style="width:70px" />';
+        var en = '<input type="text" name="en" class="small"  id="en' + count + '" style="width:70px" />';
+        var m2 = '<input type="text" name="m2" class="small"  id="m2' + count + '" style="width:70px" />';
+        var adet = '<input type="text" name="adet" class="small"  id="adet' + count + '" style="width:70px" />';
+        var m2Fiyat = '<input type="text" name="m2Fiyat" class="small"  id="m2Fiyat' + count + '" style="width:70px" />';
+        var fiyat = '<input type="text" name="fiyat" class="small"  id="fiyat' + count + '" style="width:70px" />';
+
+
+
+        var detailsTableBody = $("#detailsTable tbody");
+
+        var degerler = '<tr id=' + count + '><td>' + model + '</td><td>' + malzeme + '</td><td>' + ozellik + '</td><td>' + boy + '</td><td>' + en + '</td><td>' + m2 + '</td><td>' + adet + '</td><td>' + m2Fiyat + '</td><td>' + fiyat + '</td><td><a data-itemId="0" href="#"  class="deleteItem">x</a></td></tr>';
+        detailsTableBody.append(degerler);
+
+    });
+    $(document).on('click', 'a.deleteItem', function (e) {
+
+        e.preventDefault();
+        var $self = $(this);
+        if ($(this).attr('data-itemId') == "0") {
+            $(this).parents('tr').css("background-color", "#ff6347").fadeOut(800, function () {
+                $(this).remove();
+                CalcutingTotal();
+            });
+
+        }
+    });
+    function saveOrder(data) {
+        return $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: "/CncOrfiches/Create",
+            data: data,
+            success: function (result) {
+                //alert(result);
+               /* location.reload();*/
+            },
+            error: function () {
+                //alert("Error!")
+            }
+        });
+    }
+    //Collect Multiple Order List For Pass To Controller
+    $("#saveOrder").click(function (e) {
+        //e.preventDefault();
+        //var bForm = formValidate();
+        //console.log(bForm)
+        //if (bForm) {
+            var orderArr = [];
+            orderArr.length = 0;
+            var trValue = 0;
+
+            $.each($("#detailsTable tbody tr"), function () {
+
+                trValue = $(this).attr("id");
+
+                //alert(trValue);
+                //alert($("#itemCode" + trValue.toString()).val());
+
+
+                orderArr.push({
+                    MalzemeKodu: $("#model" + trValue.toString()).val(),
+                    MalzemeAdi: $("#malzeme" + trValue.toString()).val(),
+                    Ozellik: parseFloat($("#ozellik" + trValue.toString()).val()),
+                    Boy: $("#boy" + trValue.toString()).val(),
+                    En: parseFloat($("#en" + trValue.toString()).val()),
+                    M2: parseFloat($("#m2" + trValue.toString()).val()),
+                    Adet: parseFloat($("#adet" + trValue.toString()).val()),
+                    M2Fiyat: parseFloat($("#m2Fiyat" + trValue.toString()).val()),
+                    Fiyat: parseFloat($("#fiyat" + trValue.toString()).val())
+                   
+
+                });
+
+            });
+
+
+            var data = JSON.stringify({
+
+                FisNo: $("#FisNo").val(),
+                MusteriId: $("#MusteriId").val().toString(),
+                BarkodNo: $("#BarkodNo").val(),
+                SiparisSekli: $("#SiparisSekli").val(),
+                BID: $("#BID").val(),
+                Aciklama: $("#Aciklama").val(),
+                TerminTarihi: $("#TerminTarihi").val(),
+                BelgeNo: $("#BelgeNo").val(),
+                OzelKod: $("#OzelKod").val(),
+                Bölüm: $("#Bölüm").val(),
+                Departman: $("#Departman").val(),
+                Isyeri: $("#Isyeri").val(),
+                SiparisDurumu: $("#SiparisDurumu").val(),
+
+               
+                orflines: orderArr
+            });
+
+            $.when(saveOrder(data)).then(function (response) {
+                console.log(response);
+                $(window).attr('location', '@Url.Action("Index","CncOrfiches")');
+
+            }).fail(function (err) {
+                console.log(err);
+            });
+        //}
+
+
+    });
+
+</script>
+
+
+
+

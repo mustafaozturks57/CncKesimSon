@@ -1,0 +1,123 @@
+﻿@model Ticari_Otomasyon.Models.CncModel.Orfiche
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Orfiche</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MusteriId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MusteriId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tarih)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tarih)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BarkodNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BarkodNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SiparisSekli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SiparisSekli)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aciklama)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aciklama)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TerminTarihi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TerminTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BelgeNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BelgeNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OzelKod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OzelKod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bölüm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bölüm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Departman)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departman)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Isyeri)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Isyeri)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SiparisDurumu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SiparisDurumu)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

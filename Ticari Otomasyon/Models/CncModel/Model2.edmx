@@ -5,6 +5,26 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="CncTicariOtomasyonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fırma_Adı" Type="varchar" MaxLength="50" />
+          <Property Name="Telefon" Type="varchar" MaxLength="50" />
+          <Property Name="Adres" Type="varchar" MaxLength="100" />
+          <Property Name="Vergi_No" Type="varchar" MaxLength="50" />
+          <Property Name="Banka_HesapNo" Type="varchar" MaxLength="50" />
+          <Property Name="Active_fl" Type="bit" />
+          <Property Name="EPosta" Type="varchar" MaxLength="50" />
+          <Property Name="Yetkılı" Type="varchar" MaxLength="50" />
+          <Property Name="Yetkılı_cep" Type="varchar" MaxLength="50" />
+          <Property Name="Fax" Type="varchar" MaxLength="50" />
+          <Property Name="Nott" Type="varchar" MaxLength="50" />
+          <Property Name="Borc" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Odeme" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Iptal" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
         <EntityType Name="Departments">
           <Key>
             <PropertyRef Name="Id" />
@@ -16,7 +36,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BARKOD" Type="varchar" MaxLength="50" />
           <Property Name="URUNADI" Type="varchar" MaxLength="100" />
           <Property Name="FIYAT" Type="decimal" Precision="18" Scale="2" />
@@ -30,6 +50,42 @@
           <Property Name="KDV" Type="varchar" MaxLength="50" />
           <Property Name="INDIRIMLI_FIYAT" Type="decimal" Precision="18" Scale="2" />
           <Property Name="STOK_TAKIP" Type="bit" />
+        </EntityType>
+        <EntityType Name="Orfiche">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MusteriId" Type="int" />
+          <Property Name="Tarih" Type="date" />
+          <Property Name="FisNo" Type="varchar" MaxLength="100" />
+          <Property Name="BarkodNo" Type="varchar" MaxLength="100" />
+          <Property Name="SiparisSekli" Type="varchar" MaxLength="100" />
+          <Property Name="BID" Type="varchar" MaxLength="100" />
+          <Property Name="Aciklama" Type="varchar" MaxLength="100" />
+          <Property Name="TerminTarihi" Type="date" />
+          <Property Name="BelgeNo" Type="varchar" MaxLength="100" />
+          <Property Name="OzelKod" Type="int" />
+          <Property Name="Bölüm" Type="int" />
+          <Property Name="Departman" Type="int" />
+          <Property Name="Isyeri" Type="int" />
+          <Property Name="SiparisDurumu" Type="int" />
+        </EntityType>
+        <EntityType Name="Orfline">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrficheNo" Type="varchar" MaxLength="100" />
+          <Property Name="MalzemeKodu" Type="int" Nullable="false" />
+          <Property Name="MalzemeAdi" Type="varchar" MaxLength="100" />
+          <Property Name="Ozellik" Type="varchar" MaxLength="100" />
+          <Property Name="Boy" Type="float" />
+          <Property Name="En" Type="float" />
+          <Property Name="Adet" Type="int" />
+          <Property Name="M2" Type="float" />
+          <Property Name="M2Fiyat" Type="float" />
+          <Property Name="Fiyat" Type="float" />
         </EntityType>
         <EntityType Name="Satıslar">
           <Key>
@@ -79,8 +135,11 @@
           <Property Name="Name" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="CncTicariOtomasyonModelStoreContainer">
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orfiche" EntityType="Self.Orfiche" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orfline" EntityType="Self.Orfline" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Satıslar" EntityType="Self.Satıslar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpecialCodes" EntityType="Self.SpecialCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WareHouses" EntityType="Self.WareHouses" Schema="dbo" store:Type="Tables" />
@@ -91,53 +150,16 @@
     <edmx:ConceptualModels>
       <Schema Namespace="CncTicariOtomasyonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="CncTicariOtomasyonEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Customers" EntityType="CncTicariOtomasyonModel.Customer" />
-          <EntitySet Name="Items" EntityType="CncTicariOtomasyonModel.Item" />
           <EntitySet Name="Satıslar" EntityType="CncTicariOtomasyonModel.Satıslar" />
           <EntitySet Name="Departments" EntityType="CncTicariOtomasyonModel.Department" />
           <EntitySet Name="WareHouses" EntityType="CncTicariOtomasyonModel.Warehouse" />
           <EntitySet Name="WorkPlaces" EntityType="CncTicariOtomasyonModel.WorkPlace" />
           <EntitySet Name="SpecialCodes" EntityType="CncTicariOtomasyonModel.SpecialCode" />
+          <EntitySet Name="Customers" EntityType="CncTicariOtomasyonModel.Customer" />
+          <EntitySet Name="Items" EntityType="CncTicariOtomasyonModel.Item" />
+          <EntitySet Name="Orfiches" EntityType="CncTicariOtomasyonModel.Orfiche" />
+          <EntitySet Name="Orflines" EntityType="CncTicariOtomasyonModel.Orfline" />
         </EntityContainer>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Fırma_Adı" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Adres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Vergi_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Banka_HesapNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Active_fl" Type="Boolean" />
-          <Property Name="EPosta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Yetkılı" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Yetkılı_cep" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Nott" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Borc" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Odeme" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Iptal" Type="Decimal" Precision="18" Scale="2" />
-        </EntityType>
-        <EntityType Name="Item">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="BARKOD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="URUNADI" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="FIYAT" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="SONFIYAT" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ALISFIYATI" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="STOK_DURUMU" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="EKLEME" Type="Boolean" />
-          <Property Name="UYARI_SAYISI" Type="Int32" />
-          <Property Name="BIRIM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="GRUP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="KDV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="INDIRIMLI_FIYAT" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="STOK_TAKIP" Type="Boolean" />
-        </EntityType>
         <EntityType Name="Satıslar">
           <Key>
             <PropertyRef Name="ID" />
@@ -192,32 +214,87 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fırma_Adı" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Vergi_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Banka_HesapNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active_fl" Type="Boolean" />
+          <Property Name="EPosta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Yetkılı" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Yetkılı_cep" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nott" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Borc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Odeme" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Iptal" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BARKOD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="URUNADI" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FIYAT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SONFIYAT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ALISFIYATI" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="STOK_DURUMU" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="EKLEME" Type="Boolean" />
+          <Property Name="UYARI_SAYISI" Type="Int32" />
+          <Property Name="BIRIM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GRUP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KDV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="INDIRIMLI_FIYAT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="STOK_TAKIP" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Orfiche">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MusteriId" Type="Int32" />
+          <Property Name="Tarih" Type="DateTime" Precision="0" />
+          <Property Name="FisNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BarkodNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SiparisSekli" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Aciklama" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TerminTarihi" Type="DateTime" Precision="0" />
+          <Property Name="BelgeNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="OzelKod" Type="Int32" />
+          <Property Name="Bölüm" Type="Int32" />
+          <Property Name="Departman" Type="Int32" />
+          <Property Name="Isyeri" Type="Int32" />
+          <Property Name="SiparisDurumu" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Orfline">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrficheNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MalzemeKodu" Type="Int32" Nullable="false" />
+          <Property Name="MalzemeAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Ozellik" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Boy" Type="Double" />
+          <Property Name="En" Type="Double" />
+          <Property Name="Adet" Type="Int32" />
+          <Property Name="M2" Type="Double" />
+          <Property Name="M2Fiyat" Type="Double" />
+          <Property Name="Fiyat" Type="Double" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CncTicariOtomasyonModelStoreContainer" CdmEntityContainer="CncTicariOtomasyonEntities">
-          <EntitySetMapping Name="Items">
-            <EntityTypeMapping TypeName="CncTicariOtomasyonModel.Item">
-              <MappingFragment StoreEntitySet="Items">
-                <ScalarProperty Name="STOK_TAKIP" ColumnName="STOK_TAKIP" />
-                <ScalarProperty Name="INDIRIMLI_FIYAT" ColumnName="INDIRIMLI_FIYAT" />
-                <ScalarProperty Name="KDV" ColumnName="KDV" />
-                <ScalarProperty Name="GRUP" ColumnName="GRUP" />
-                <ScalarProperty Name="BIRIM" ColumnName="BIRIM" />
-                <ScalarProperty Name="UYARI_SAYISI" ColumnName="UYARI_SAYISI" />
-                <ScalarProperty Name="EKLEME" ColumnName="EKLEME" />
-                <ScalarProperty Name="STOK_DURUMU" ColumnName="STOK_DURUMU" />
-                <ScalarProperty Name="ALISFIYATI" ColumnName="ALISFIYATI" />
-                <ScalarProperty Name="SONFIYAT" ColumnName="SONFIYAT" />
-                <ScalarProperty Name="FIYAT" ColumnName="FIYAT" />
-                <ScalarProperty Name="URUNADI" ColumnName="URUNADI" />
-                <ScalarProperty Name="BARKOD" ColumnName="BARKOD" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Satıslar">
             <EntityTypeMapping TypeName="CncTicariOtomasyonModel.Satıslar">
               <MappingFragment StoreEntitySet="Satıslar">
@@ -273,6 +350,85 @@
             <EntityTypeMapping TypeName="CncTicariOtomasyonModel.SpecialCode">
               <MappingFragment StoreEntitySet="SpecialCodes">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="CncTicariOtomasyonModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Iptal" ColumnName="Iptal" />
+                <ScalarProperty Name="Odeme" ColumnName="Odeme" />
+                <ScalarProperty Name="Borc" ColumnName="Borc" />
+                <ScalarProperty Name="Nott" ColumnName="Nott" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Yetkılı_cep" ColumnName="Yetkılı_cep" />
+                <ScalarProperty Name="Yetkılı" ColumnName="Yetkılı" />
+                <ScalarProperty Name="EPosta" ColumnName="EPosta" />
+                <ScalarProperty Name="Active_fl" ColumnName="Active_fl" />
+                <ScalarProperty Name="Banka_HesapNo" ColumnName="Banka_HesapNo" />
+                <ScalarProperty Name="Vergi_No" ColumnName="Vergi_No" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Fırma_Adı" ColumnName="Fırma_Adı" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="CncTicariOtomasyonModel.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="STOK_TAKIP" ColumnName="STOK_TAKIP" />
+                <ScalarProperty Name="INDIRIMLI_FIYAT" ColumnName="INDIRIMLI_FIYAT" />
+                <ScalarProperty Name="KDV" ColumnName="KDV" />
+                <ScalarProperty Name="GRUP" ColumnName="GRUP" />
+                <ScalarProperty Name="BIRIM" ColumnName="BIRIM" />
+                <ScalarProperty Name="UYARI_SAYISI" ColumnName="UYARI_SAYISI" />
+                <ScalarProperty Name="EKLEME" ColumnName="EKLEME" />
+                <ScalarProperty Name="STOK_DURUMU" ColumnName="STOK_DURUMU" />
+                <ScalarProperty Name="ALISFIYATI" ColumnName="ALISFIYATI" />
+                <ScalarProperty Name="SONFIYAT" ColumnName="SONFIYAT" />
+                <ScalarProperty Name="FIYAT" ColumnName="FIYAT" />
+                <ScalarProperty Name="URUNADI" ColumnName="URUNADI" />
+                <ScalarProperty Name="BARKOD" ColumnName="BARKOD" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orfiches">
+            <EntityTypeMapping TypeName="CncTicariOtomasyonModel.Orfiche">
+              <MappingFragment StoreEntitySet="Orfiche">
+                <ScalarProperty Name="SiparisDurumu" ColumnName="SiparisDurumu" />
+                <ScalarProperty Name="Isyeri" ColumnName="Isyeri" />
+                <ScalarProperty Name="Departman" ColumnName="Departman" />
+                <ScalarProperty Name="Bölüm" ColumnName="Bölüm" />
+                <ScalarProperty Name="OzelKod" ColumnName="OzelKod" />
+                <ScalarProperty Name="BelgeNo" ColumnName="BelgeNo" />
+                <ScalarProperty Name="TerminTarihi" ColumnName="TerminTarihi" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="BID" ColumnName="BID" />
+                <ScalarProperty Name="SiparisSekli" ColumnName="SiparisSekli" />
+                <ScalarProperty Name="BarkodNo" ColumnName="BarkodNo" />
+                <ScalarProperty Name="FisNo" ColumnName="FisNo" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="MusteriId" ColumnName="MusteriId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orflines">
+            <EntityTypeMapping TypeName="CncTicariOtomasyonModel.Orfline">
+              <MappingFragment StoreEntitySet="Orfline">
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="M2Fiyat" ColumnName="M2Fiyat" />
+                <ScalarProperty Name="M2" ColumnName="M2" />
+                <ScalarProperty Name="Adet" ColumnName="Adet" />
+                <ScalarProperty Name="En" ColumnName="En" />
+                <ScalarProperty Name="Boy" ColumnName="Boy" />
+                <ScalarProperty Name="Ozellik" ColumnName="Ozellik" />
+                <ScalarProperty Name="MalzemeAdi" ColumnName="MalzemeAdi" />
+                <ScalarProperty Name="MalzemeKodu" ColumnName="MalzemeKodu" />
+                <ScalarProperty Name="OrficheNo" ColumnName="OrficheNo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

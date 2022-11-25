@@ -25,12 +25,14 @@ namespace Ticari_Otomasyon.Models.CncModel
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Satıslar> Satıslar { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Warehouse> WareHouses { get; set; }
         public virtual DbSet<WorkPlace> WorkPlaces { get; set; }
         public virtual DbSet<SpecialCode> SpecialCodes { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<Orfiche> Orfiches { get; set; }
+        public virtual DbSet<Orfline> Orflines { get; set; }
     }
 }
