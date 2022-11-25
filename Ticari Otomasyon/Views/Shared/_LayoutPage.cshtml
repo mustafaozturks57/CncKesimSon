@@ -75,20 +75,20 @@
                    aria-current="true">
                     <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Sipariş Listesi (списъци с поръчки)</span>
                 </a>
-                <br>
+                @*<br>
                 <a style="background-color: orange;"
                    href="#"
                    class="list-group-item list-group-item-action py-2 ripple active"
                    aria-current="true">
                     <i class="fas fa-calendar-times -alt fa-fw me-3"></i><span>Acil Siparişler (Спешни поръчки)  </span>
-                </a>
-                <br>
+                </a>*@
+                @*<br>
                 <a style="background-color: red ;color: white;"
                    [routerLink]="['SIPARIS-FORM']"
                    class="list-group-item list-group-item-action py-2 ripple active"
                    aria-current="true">
                     <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Yeni Sipariş (Нова поръчка)</span>
-                </a>
+                </a>*@
 
                 <a href="#" class="list-group-item list-group-item-action py-2 ripple ">
                     <div class="dropdown">
@@ -166,11 +166,10 @@
                     <div class="dropdown">
                         <i class="fas fa-sign-in-alt fa-fw me-3"></i><span> Tanımlar</span>
                         <div class="dropdown-content">
-                            <a href="#">Müşteri Kartı  </a>
-                            <a href="#">Satışlar </a>
-                            <a href="#">İstatik </a>
-
-
+                            <a href="#">Ambarlar</a>
+                            <a href="#">İşyerleri</a>
+                            <a href="#">Departmanlar</a>
+                            <a href="#">Özel Kodlar</a>
                         </div>
                     </div>
                 </a>

@@ -11,107 +11,107 @@ using Ticari_Otomasyon.Models.CncModel;
 namespace Ticari_Otomasyon.Controllers
 {
     [AllowAnonymous]
-    public class CncCustomersController : Controller
+    public class CncSpecialCodesController : Controller
     {
         private CncTicariOtomasyonEntities db = new CncTicariOtomasyonEntities();
 
-        // GET: CncCustomers
+        // GET: CncSpecialCodes
         public ActionResult Index()
         {
-            return View(db.Customers.ToList());
+            return View(db.SpecialCodes.ToList());
         }
 
-        // GET: CncCustomers/Details/5
+        // GET: CncSpecialCodes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            SpecialCode specialCode = db.SpecialCodes.Find(id);
+            if (specialCode == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(specialCode);
         }
 
-        // GET: CncCustomers/Create
+        // GET: CncSpecialCodes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CncCustomers/Create
+        // POST: CncSpecialCodes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Fırma_Adı,Telefon,Adres,Vergi_No,Banka_HesapNo,Active_fl,EPosta,Yetkılı,Yetkılı_cep,Fax,Nott,Borc,Odeme,Iptal")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id,Name")] SpecialCode specialCode)
         {
             if (ModelState.IsValid)
             {
-                db.Customers.Add(customer);
+                db.SpecialCodes.Add(specialCode);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(customer);
+            return View(specialCode);
         }
 
-        // GET: CncCustomers/Edit/5
+        // GET: CncSpecialCodes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            SpecialCode specialCode = db.SpecialCodes.Find(id);
+            if (specialCode == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(specialCode);
         }
 
-        // POST: CncCustomers/Edit/5
+        // POST: CncSpecialCodes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Fırma_Adı,Telefon,Adres,Vergi_No,Banka_HesapNo,Active_fl,EPosta,Yetkılı,Yetkılı_cep,Fax,Nott,Borc,Odeme,Iptal")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,Name")] SpecialCode specialCode)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(customer).State = EntityState.Modified;
+                db.Entry(specialCode).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(customer);
+            return View(specialCode);
         }
 
-        // GET: CncCustomers/Delete/5
+        // GET: CncSpecialCodes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            SpecialCode specialCode = db.SpecialCodes.Find(id);
+            if (specialCode == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(specialCode);
         }
 
-        // POST: CncCustomers/Delete/5
+        // POST: CncSpecialCodes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer customer = db.Customers.Find(id);
-            db.Customers.Remove(customer);
+            SpecialCode specialCode = db.SpecialCodes.Find(id);
+            db.SpecialCodes.Remove(specialCode);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -61,10 +60,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="JQDT, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jQDataTables.ServerSide.MVC5.1.1.1\lib\JQDTServerSide\MVC\JQDT.dll</HintPath>
@@ -170,9 +169,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AlertController.cs" />
-    <Compile Include="Controllers\CncCustomersController.cs" />
+    <Compile Include="Controllers\CncDepartmentsController.cs" />
     <Compile Include="Controllers\CncItemsController.cs" />
     <Compile Include="Controllers\CncSatıslarController.cs" />
+    <Compile Include="Controllers\CncSpecialCodesController.cs" />
+    <Compile Include="Controllers\CncWarehousesController.cs" />
+    <Compile Include="Controllers\CncWorkPlacesController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -187,6 +189,9 @@
     <Compile Include="Models\Classes\Order.cs" />
     <Compile Include="Models\Classes\OrderListModel.cs" />
     <Compile Include="Models\CncModel\Customer.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CncModel\Department.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CncModel\Item.cs">
@@ -208,6 +213,15 @@
       <DependentUpon>Model2.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\CncModel\Satıslar.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CncModel\SpecialCode.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CncModel\Warehouse.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CncModel\WorkPlace.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Roles\SessionControl.cs" />
@@ -3269,6 +3283,26 @@
     <Content Include="Views\CncSatıslar\Details.cshtml" />
     <Content Include="Views\CncSatıslar\Edit.cshtml" />
     <Content Include="Views\CncSatıslar\Index.cshtml" />
+    <Content Include="Views\CncDepartments\Create.cshtml" />
+    <Content Include="Views\CncDepartments\Delete.cshtml" />
+    <Content Include="Views\CncDepartments\Details.cshtml" />
+    <Content Include="Views\CncDepartments\Edit.cshtml" />
+    <Content Include="Views\CncDepartments\Index.cshtml" />
+    <Content Include="Views\CncWarehouses\Create.cshtml" />
+    <Content Include="Views\CncWarehouses\Delete.cshtml" />
+    <Content Include="Views\CncWarehouses\Details.cshtml" />
+    <Content Include="Views\CncWarehouses\Edit.cshtml" />
+    <Content Include="Views\CncWarehouses\Index.cshtml" />
+    <Content Include="Views\CncWorkPlaces\Create.cshtml" />
+    <Content Include="Views\CncWorkPlaces\Delete.cshtml" />
+    <Content Include="Views\CncWorkPlaces\Details.cshtml" />
+    <Content Include="Views\CncWorkPlaces\Edit.cshtml" />
+    <Content Include="Views\CncWorkPlaces\Index.cshtml" />
+    <Content Include="Views\CncSpecialCodes\Create.cshtml" />
+    <Content Include="Views\CncSpecialCodes\Delete.cshtml" />
+    <Content Include="Views\CncSpecialCodes\Details.cshtml" />
+    <Content Include="Views\CncSpecialCodes\Edit.cshtml" />
+    <Content Include="Views\CncSpecialCodes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3322,12 +3356,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
     <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <Import Project="..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets')" />
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
