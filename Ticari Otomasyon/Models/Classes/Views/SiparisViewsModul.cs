@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace Ticari_Otomasyon.Models.Classes.Views
+{
+    public class SiparisViewsModul
+    {
+        //view adı [[SiparisModuls]] 
+        public string FisNo                              { get; set; }
+public string Müşteri_Adı                  { get; set; }
+public DateTime Tarih                           { get; set; }
+public DateTime Termin_Tarihi                   { get; set; }
+public string Sipariş_Şekli                { get; set; }
+public string Sipariş_Durumu               { get; set; }
+public string BID                          { get; set; }
+public string Belge_No                     { get; set; }
+public string Aciklama                     { get; set; }
+public string MalzemeKodu                  { get; set; }
+public string Model                        { get; set; }
+public string Ozellik                      { get; set; }
+
+public bool Teslim_fl                      { get; set; }
+public decimal Boy                          { get; set; }
+public decimal En                           { get; set; }
+public int Adet                               { get; set; }
+public decimal m2                           { get; set; }
+public decimal m2fiyat                      { get; set; }
+public decimal fiyat    { get; set; }
+
+
+
+    }
+}

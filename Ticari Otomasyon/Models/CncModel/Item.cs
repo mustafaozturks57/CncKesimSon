@@ -15,18 +15,13 @@ namespace Ticari_Otomasyon.Models.CncModel
     public partial class Item
     {
         public int ID { get; set; }
-        public string BARKOD { get; set; }
-        public string URUNADI { get; set; }
-        public Nullable<decimal> FIYAT { get; set; }
-        public Nullable<decimal> SONFIYAT { get; set; }
-        public Nullable<decimal> ALISFIYATI { get; set; }
-        public Nullable<decimal> STOK_DURUMU { get; set; }
-        public Nullable<bool> EKLEME { get; set; }
-        public Nullable<int> UYARI_SAYISI { get; set; }
-        public string BIRIM { get; set; }
-        public string GRUP { get; set; }
-        public string KDV { get; set; }
-        public Nullable<decimal> INDIRIMLI_FIYAT { get; set; }
-        public Nullable<bool> STOK_TAKIP { get; set; }
+        public string MODEL { get; set; }
+        public Nullable<decimal> FIYATHG { get; set; }
+        public Nullable<decimal> FIYATMAT { get; set; }
+        public Nullable<decimal> CAM { get; set; }
+        public Nullable<decimal> CAM2 { get; set; }
+        public Nullable<decimal> CAM4 { get; set; }
+        public Nullable<decimal> CAM6 { get; set; }
+        public Nullable<decimal> CAM8 { get; set; }
     }
 }

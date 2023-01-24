@@ -21,5 +21,10 @@ namespace Ticari_Otomasyon.Models.CncModel
         public int Departman { get; set; }
         public int Isyeri { get; set; }
         public int SiparisDurumu { get; set; }
+        public Nullable<double> ToplamIndirim { get; set; }
+        public Nullable<double> TasarimTutari { get; set; }
+        public Nullable<double> KargoTutari { get; set; }
+        public Nullable<double> Toplam { get; set; }
+        public Nullable<double> NetTutar { get; set; }
     }
 }

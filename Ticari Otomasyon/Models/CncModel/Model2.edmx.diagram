@@ -5,15 +5,20 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="812bfcb88b6943df92bc015ac8fc9ab4" Name="Diagram1">
-        <EntityTypeShape EntityType="CncTicariOtomasyonModel.Satıslar" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="CncTicariOtomasyonModel.Department" Width="1.5" PointX="0.75" PointY="5.75" />
         <EntityTypeShape EntityType="CncTicariOtomasyonModel.Warehouse" Width="1.5" PointX="2.75" PointY="5.75" />
         <EntityTypeShape EntityType="CncTicariOtomasyonModel.WorkPlace" Width="1.5" PointX="4.75" PointY="6.75" />
         <EntityTypeShape EntityType="CncTicariOtomasyonModel.SpecialCode" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="CncTicariOtomasyonModel.Customer" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CncTicariOtomasyonModel.Item" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="CncTicariOtomasyonModel.sysdiagram" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CncTicariOtomasyonModel.Bolumler" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CncTicariOtomasyonModel.Isyeri" Width="1.5" PointX="3.375" PointY="9.75" />
+        <EntityTypeShape EntityType="CncTicariOtomasyonModel.SıpDurumu" Width="1.5" PointX="10.375" PointY="6.75" />
         <EntityTypeShape EntityType="CncTicariOtomasyonModel.Orfiche" Width="1.5" PointX="0.75" PointY="8.75" />
-        <EntityTypeShape EntityType="CncTicariOtomasyonModel.Orfline" Width="1.5" PointX="7.75" PointY="8.75" />
+        <EntityTypeShape EntityType="CncTicariOtomasyonModel.Orfline" Width="1.5" PointX="7.375" PointY="8.75" />
+        <EntityTypeShape EntityType="CncTicariOtomasyonModel.Item" Width="1.5" PointX="9.375" PointY="9.75" />
+        <EntityTypeShape EntityType="CncTicariOtomasyonModel.ItemsColor" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CncTicariOtomasyonModel.SıparısAppPool" Width="1.5" PointX="7.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

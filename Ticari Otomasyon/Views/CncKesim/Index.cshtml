@@ -1,0 +1,359 @@
+﻿@model List<Ticari_Otomasyon.Models.Classes.Views.SiparişQliste>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet" />
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="~/Content/MDB5-STANDARD-UI-KIT-Free-6.0.1/css/mdb.min.css" rel="stylesheet" />
+<script src="~/Content/MDB5-STANDARD-UI-KIT-Free-6.0.1/js/mdb.min.js"></script>
+
+<br />
+<br />
+<br />
+<br />
+
+<div class="alert alert-danger" role="alert" id="alerts">
+    <h4 class="alert-heading">Acil Siparişler Var !</h4>
+    <p> Acil siparişleriniz mevcut bu siparişlere öncelik verebilir siniz , Acil Siparişler <font color="red">KIRMIZI</font> , Acil Olmayan Siparişler <font color="green">YEŞİL</font> olarak gösterilir. </p>
+    <hr>
+    <p class="mb-0">Acil Durumda Sistem Yöneticisinden destek alabilir siniz .</p>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+    document.getElementById("alerts").hidden = false;
+
+
+</script>
+
+
+<script>
+
+    function myFunction() {
+        var x = document.getElementById("alerts")
+
+        if (x.hidden == false) {
+            x.hidden = true
+        }
+        else {
+            x.hidden = false
+        }
+
+    }
+
+
+    function MyGetAlert() {
+
+        setTimeout(function () {
+
+            myFunction()
+        }, 10000);
+
+        setTimeout(function () {
+
+            myFunction()
+        }, 12000);
+
+        setTimeout(function () {
+
+            myFunction()
+        }, 14000);
+    }
+
+
+</script>
+
+@if (1 == 1)
+{
+    <script>
+        this.MyGetAlert()
+    </script>
+}
+<table class="table table-bordered">
+    <thead>
+        <tr style="background-color:antiquewhite;color:black">
+            <th scope="col">Matlar</th>
+            <th scope="col">Parlaklar</th>
+            <th scope="col">Acil Mat</th>
+            <th scope="col">Acil Parlak</th>
+            <th scope="col">Toplam </th>
+        </tr>
+    </thead>
+    <tbody>
+   
+        <tr>
+            @foreach (var x in ViewBag.SiparislerToplam)
+            {
+
+
+
+                <td>@x.MAT</td>
+                <td>@x.PARLAK</td>
+                <td>@x.ACİLPARLAK</td>
+                <td>@x.ACİLMAT</td>
+                <td>@x.SumTop</td>
+
+            }
+        </tr>
+
+
+
+        </tbody>
+    </table>
+
+<hr />
+<table class="table table-sm align-middle mb-0">
+    <thead>
+        <tr style="background-color:blue;color:white">
+            <th style="background-color:red" colspan="4">Son Kesilen Siparişler Seç</th>
+            <th colspan="4">Sipariş No İle Kesim Yap</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+            <td colspan="4">
+                <select class="form-control" id="dropdownsip">
+                    @foreach (var item in ViewBag.Siparisler)
+                    {
+
+                        <option><b>@item.SipID </b></option>
+
+
+                        <option disabled style="font-style:italic">&nbsp;&nbsp;&nbsp;Cari Adı :@item.MusterıAdı </option>
+                    }
+
+
+
+                </select> 
+
+                <br />
+                <button onclick="DropdownSip()" class="btn"><i class="fa fa-kickstarter"></i> Siparişi Kes</button>
+            </td>
+
+
+            <td colspan="4">
+                <input type="text" id="SipNo" placeholder="Sipariş No Okutunuz" class="form form-control" />
+                <br />
+                <a  onclick="myfunction()" class="btn"><i class="fa fa-kickstarter"></i>  Siparişi Kes</a>
+            </td>
+            
+
+        </tr>
+
+        <tr>
+        </tr>
+
+
+
+
+    </tbody>
+</table>
+<script>
+    function ShowSiparis(id)
+    {
+        alert(id)
+        window.open("https://localhost:44361/CncOrfiches/Edit/"+id, "_blank");
+
+    }
+</script>
+<script>
+    var SıpDurum = $("#SipNo").val()
+    function myfunction() {
+        console.log("test");
+        var SıpDurum = "";
+        if (!SıpDurum) {
+            var url = "/CncKesim/KesWorks?id="
+
+            SıpDurum = $("#SipNo").val()
+            $(window).attr('location', '@Url.Action("KesWorks","CncKesim")?id='+SıpDurum);
+        }
+    }
+
+   
+    function DropdownSip() {
+        var SıpDurum = $("#dropdownsip").val()
+        console.log("test dropdown");
+        var SıpDurum = "";
+        if (!SıpDurum) {
+            var url = "/CncKesim/KesWorks?id="
+
+            SıpDurum = $("#dropdownsip").val()
+            $(window).attr('location', '@Url.Action("KesWorks","CncKesim")?id='+SıpDurum);
+        }
+    }
+
+
+
+
+</script>
+
+ 
+ 
+
+<div class="alert alert-success" role="alert" id="alertskesim">
+
+    <p>
+        Kesilen Siparişleriniz Mevcut , <b>
+            <a href="/CncPalet/Index">Etiket Ve Palet İşlemleri</a>
+        </b>
+        Yazısında tıklayarak  İşlem Yapabilir siniz.
+    </p>
+    <p>
+     
+        <table>
+            <tr>
+                <th>   Kesilen Sipariş Numaraları :  </th>
+                @foreach (var item in ViewBag.Siparisler)
+                {
+
+                    <th> @item.SipID , </th>
+
+                }
+            </tr>
+        </table>
+    </p>
+    </div>
+  
+
+<hr />
+
+<table class="table table-sm align-middle mb-0">
+    <tr style="background-color:darkseagreen;color:white">
+
+        <th>
+            Sipariş Numarası
+        </th>
+        <th>
+            Sipariş Son Hareket
+        </th>
+        <th>
+            Müşteri Adı
+        </th>
+        <th>
+            Sipariş Durumu
+        </th>
+
+        <th>
+            Tarih
+        </th>
+        @*<th>
+            Kalan Gün
+        </th>*@
+
+        <th>
+            Termin Tarihi
+        </th>
+
+        <th>
+            Acıklama
+        </th>
+        <th>
+            Stok Adı
+        </th>
+
+        <th>
+            Renk Adı
+        </th>
+        <th>
+            Toplam adet
+        </th>
+        <th>
+            Toplam m2
+        </th>
+
+        <th></th>
+    </tr>
+
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.SipID
+            </td>
+            <td>
+                @if (item.Kesim_fl == false)
+                {
+                    <p style="color:red">Kesilecek</p>
+                }
+                else
+                {
+                    <p style="color:green">Kesildi</p>
+                }
+            </td>
+            <td>
+                @item.MusterıAdı
+            </td>
+            <td>
+                @if (item.SiparisDurumu == "Acil")
+                {
+                    <p class="badge badge-danger rounded-pill d-inline">@item.SiparisDurumu</p>
+                }
+                else
+                {
+                    <p class="badge badge-success rounded-pill d-inline">@item.SiparisDurumu</p>
+                }
+
+            </td>
+            <td>
+                @item.Tarih.ToString("MM/dd/yyyy")
+            </td>
+            <td>
+                @item.TerminTarihi.ToString("MM/dd/yyyy")
+            </td>
+            <td>
+                @item.Aciklama
+            </td>
+            <td>
+                @item.StokAdı
+            </td>
+            <td>
+                @item.RenkAdı
+            </td>
+            <td>
+                @item.Adet
+            </td>
+            <td>
+                @item.m2
+            </td>
+
+
+
+
+
+            <td>
+                @if (item.Kesim_fl == false)
+                {
+                    <a href="/CncKesim/KesWorks/@item.SipID" class="badge badge-success rounded-pill d-inline">Kesim Yap</a>
+                }
+                else
+                {
+                    <a href="/CncKesim/KesWorksIptal/@item.SipID" class="badge badge-danger rounded-pill d-inline">Kesim İptal Et </a>
+                }
+                <br />
+                <br />
+                <br />
+                <a  href="/CncOrfiches/Edit/@item.SipID"  target="_blank" class="badge badge-danger rounded-pill d-inline" style="color:blue">Sipariş Önizleme </a>
+
+
+
+            </td>
+        </tr>
+    }
+
+</table>

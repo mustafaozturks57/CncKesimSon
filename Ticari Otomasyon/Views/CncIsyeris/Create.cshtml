@@ -1,0 +1,96 @@
+﻿@model Ticari_Otomasyon.Models.CncModel.Isyeri
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+ 
+
+
+
+
+
+
+    
+    <div class="form-horizontal">
+        <h4>Isyeri</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsyeriName, htmlAttributes: new { @class = "control-label col-md-2" , @id= "IsyeriName" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsyeriName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IsyeriName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" id="SaveClick" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+    $("#SaveClick").click(function (e) {
+
+        var data = JSON.stringify({
+
+            IsyeriName: $("#IsyeriName").val(), 
+           
+
+
+
+        });
+        $.when(saveOrder(data)).then(function (response) {
+            console.log(response);
+            $(window).attr('location', '@Url.Action("Index","CncIsyeris")');
+
+        }).error(function (err) {
+            console.log(err);
+        });
+   
+
+
+
+          function saveOrder(data) {
+            return $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: "/CncIsyeris/Create",
+                data: data,
+                success: function (result) {
+                    //alert(result);
+                    /* location.reload();*/
+                },
+                error: function () {
+                    //alert("Error!")
+                }
+            });
+
+          }
+
+
+</script>

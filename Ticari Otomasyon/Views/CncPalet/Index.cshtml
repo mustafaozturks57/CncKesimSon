@@ -1,0 +1,481 @@
+﻿
+@model List<Ticari_Otomasyon.Models.Classes.Views.SiparişQliste>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet" />
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet" />
+<!-- MDB -->
+      rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="~/Content/MDB5-STANDARD-UI-KIT-Free-6.0.1/css/mdb.min.css" rel="stylesheet" />
+<script src="~/Content/MDB5-STANDARD-UI-KIT-Free-6.0.1/js/mdb.min.js"></script>
+
+<br />
+<br />
+<br />
+<br />
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body"> 
+                <div id="bul">
+
+                </div>
+            
+          
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="alert alert-danger" role="alert" id="alerts">
+    <h4 class="alert-heading">Acil Siparişler Var !</h4>
+    <p> Acil siparişleriniz mevcut bu siparişlere öncelik verebilir siniz , Acil Siparişler <font color="red">KIRMIZI</font> , Acil Olmayan Siparişler <font color="green">YEŞİL</font> olarak gösterilir. </p>
+    <hr>
+    <p class="mb-0">Acil Durumda Sistem Yöneticisinden destek alabilir siniz .</p>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+    document.getElementById("alerts").hidden = false;
+
+
+</script>
+
+
+<script>
+
+    function myFunction() {
+        var x = document.getElementById("alerts")
+
+        if (x.hidden == false) {
+            x.hidden = true
+        }
+        else {
+            x.hidden = false
+        }
+
+    }
+
+
+    function MyGetAlert() {
+
+        setTimeout(function () {
+
+            myFunction()
+        }, 10000);
+
+        setTimeout(function () {
+
+            myFunction()
+        }, 12000);
+
+        setTimeout(function () {
+
+            myFunction()
+        }, 14000);
+    }
+
+
+</script>
+
+@if (1 == 1)
+{
+    <script>
+        this.MyGetAlert()
+    </script>
+}
+
+
+<script>
+    function PaletNoGiris() {
+
+        var sipno = $("#sipno").val()  
+        var paletno = $("#paletno").val()
+        var data = JSON.stringify({
+            sipno: sipno,
+            paletno: paletno
+
+            })
+
+        $.ajax({
+            type: "POST",
+            url: '/CncPalet/PaletOnay',
+            data: data,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                window.alert(data)
+                window.location.reload();
+            }, error(error) {
+                alert(error);
+
+            }
+
+            
+
+
+            })
+
+    
+        
+
+    }
+
+
+
+</script>
+<script>
+
+    function SıpOnay() {
+
+        var sipno2 = $("#sipno2").val()
+        alert("Burdayım");
+        var data2 = JSON.stringify({
+            sipno: sipno2,
+
+
+        })
+
+        $.ajax({
+            type: "POST",
+            url: '/CncPalet/PaletYazdır',
+            data: data2,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                window.alert(data)
+                window.location.reload();
+            }, error(error) {
+                console.log(error);
+
+            }
+
+
+
+
+        })
+
+
+
+
+    }
+</script>
+<script>
+    function PaletNoBul() {
+
+        var e = $("#sipno").val();
+        //var doc = $("#bul");
+         
+        //var tags = "             <table class='table table-bordered''><thead><tr style='background-color:red;color:white'> <th scope='col''>Renk</th><th>Palet Numarası</th><th>İşlem</th> </tr></thead><tbody><tr> <td>1</td><td>11.00</td></tr></tbody></table> ";
+        if (e == null) {
+            alert("Lütfen Sipariş Numarası Giriniz");
+            return
+        }
+        else {
+
+        
+
+
+
+        //doc.append(tags);
+
+
+        var benımdata = JSON.stringify({
+            renk: e
+            })
+
+        $.ajax({
+            type: "POST",
+            url: "/CncPalet/PaletNoBul",
+            data: benımdata,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                var palet = data;
+                var text = data+"  Numaralı Palete Siparişinizi Eklemek ve Onaylamak İster misiniz ?";
+                if (confirm(text) == true) {
+                    PaletNoOnayAndSıpOnay(palet,e)
+                } else {
+                    window.location.reload()
+                     
+                }
+                
+
+            }
+
+
+            })
+        }
+        
+          
+
+    }
+</script>
+
+
+<script>
+    function PaletNoOnayAndSıpOnay(p, s) {
+        
+
+     var datams =    JSON.stringify({
+         sipno: s,
+         paletno: p.toString()
+            })
+
+    
+
+    $.ajax({
+        type: "POST",
+        url: '/CncPalet/PaletYazdırAndOnay',
+        data: datams,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            alert(data);
+            window.location.reload();
+
+            }
+
+
+    })
+    }
+</script>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr style="background-color:antiquewhite;color:black">
+            <th scope="col">Matlar</th>
+            <th scope="col">Parlaklar</th>
+            <th scope="col">Acil Mat</th>
+            <th scope="col">Acil Parlak</th>
+            <th scope="col">Toplam </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+            <td>2</td>
+            <td>3.00 </td>
+            <td>5</td>
+            <td>1</td>
+            <td>11.00</td>
+        </tr>
+
+
+
+
+    </tbody>
+</table>
+
+<hr />
+
+<table class="table table-bordered">
+    <thead>
+        <tr style="background-color:blue;color:white">
+
+            <th colspan="8">Sipariş No İle Prese Gönder</th>
+        
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+
+
+
+            <td colspan="4">
+                <input type="text" id="sipno" placeholder="Sipariş No Okutunuz" class="form form-control" />
+                <br />
+                <input type="text" id="paletno" placeholder="Palet numarası Belirleyiniz" class="form form-control" />
+                <br />
+
+                <br />
+
+                <button type="button" onclick="PaletNoGiris()" style="background-color:orange" class="btn"><i class="fa fa-shopping-bag"></i> Palet Numarası Onayla</button>
+                &nbsp;
+                 
+
+                <input style="background-color:blue" onclick="PaletNoBul()" type="button" value="Palet Numarası Bul Ve Sipariş Onayla"   class="btn btn-warning"  />
+
+            </td>
+
+            <td colspan="4">
+                <input style="background-color:gainsboro;color:white" type="text" id="sipno2" placeholder="Sipariş No Okutunuz" class="form form-control" />
+           
+                <br />
+        
+                <br />
+                <br />
+                <br />
+                <br />
+                <button type="button" onclick="SıpOnay()" class="btn"><i class="fa fa-print"></i> Sipariş Onayla Ve Etiket Yazdır</button>  &nbsp;
+
+                &nbsp;
+                <a href="/CncPalet/PressIndex" style="background-color:blue;color:white" class="btn"><i class="fa fa-shopping-cart"></i> Pres Gönderim İşlemleri</a>
+            </td>
+            <!--Palet kesime press e gönderilmemişse aynı renkleri aynı palete yüklencek burda bildirim ver
+
+        mahmut beyden etiket palet yazdırma formatı almak lazım
+        -->
+
+        </tr>
+
+        <tr>
+        </tr>
+
+
+
+
+    </tbody>
+</table>
+
+<hr />
+ 
+
+
+ 
+
+<table class="table table-sm align-middle mb-0">
+    <tr style="background-color:darkseagreen;color:white">
+
+        <th>
+            Sipariş Numarası
+        </th>
+        <th>
+            Sipariş Son Hareket
+        </th>
+        <th>
+            Palet Numarası
+        </th>
+        <th>
+            Müşteri Adı
+        </th>
+        <th>
+            Sipariş Durumu
+        </th>
+
+        <th>
+            Tarih
+        </th>
+        @*<th>
+            Kalan Gün
+        </th>*@
+
+        <th>
+            Termin Tarihi
+        </th>
+
+        <th>
+            Acıklama
+        </th>
+        <th>
+            Toplam adet
+        </th>
+        <th>
+            Toplam Fiyat
+        </th>
+
+        <th></th>
+    </tr>
+
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.SipID
+            </td>
+            <td>
+                @if (item.Palet_fl == false)
+                {
+                    <span class="badge badge-danger rounded-pill d-inline">Palete Yerleştirilmedi</span>
+
+                }
+                else
+                {
+                    <span class="badge badge-success rounded-pill d-inline">Palete Yerleştirildi</span>
+                }
+            </td>
+            <td>
+                <span class="badge badge-warning rounded-pill d-inline">@item.PaletNo</span>   
+            </td>
+            <td>
+                @item.MusterıAdı
+            </td>
+            <td>
+                @item.SiparisDurumu
+            </td>
+            <td>
+                @item.Tarih
+            </td>
+            <td>
+                @item.TerminTarihi
+            </td>
+            <td>
+                @item.Aciklama
+            </td>
+            <td>
+                @item.Adet
+            </td>
+            <td>
+                @item.Fiyat
+            </td>
+
+
+
+
+
+            <td>
+                @if (item.Kesim_fl == true)
+                {
+                    <a href="/CncCustomers/Delete/@item.SipID" class="badge badge-warning rounded-pill d-inline">Kesim İptal Et </a>
+
+                }
+                else
+                {
+                    <a href="/CncCustomers/Edit/@item.SipID" class="badge badge-success rounded-pill d-inline">Kesim Yap</a>
+                }
+
+                <br />
+                <br />
+                <a href="/CncOrfiches/Edit/@item.SipID" target="_blank" class="badge badge-danger rounded-pill d-inline" style="color:blue">Sipariş Önizleme </a>
+
+
+
+            </td>
+        </tr>
+    }
+
+</table>

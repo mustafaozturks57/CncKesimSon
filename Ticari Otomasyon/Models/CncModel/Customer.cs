@@ -29,5 +29,6 @@ namespace Ticari_Otomasyon.Models.CncModel
         public Nullable<decimal> Borc { get; set; }
         public Nullable<decimal> Odeme { get; set; }
         public Nullable<decimal> Iptal { get; set; }
+        public Nullable<System.DateTime> CredateTıme { get; set; }
     }
 }

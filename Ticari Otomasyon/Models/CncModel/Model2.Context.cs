@@ -31,8 +31,14 @@ namespace Ticari_Otomasyon.Models.CncModel
         public virtual DbSet<WorkPlace> WorkPlaces { get; set; }
         public virtual DbSet<SpecialCode> SpecialCodes { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Bolumler> Bolumlers { get; set; }
+        public virtual DbSet<Isyeri> Isyeris { get; set; }
+        public virtual DbSet<SıpDurumu> SıpDurumu { get; set; }
         public virtual DbSet<Orfiche> Orfiches { get; set; }
         public virtual DbSet<Orfline> Orflines { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<ItemsColor> ItemsColors { get; set; }
+        public virtual DbSet<SıparısAppPool> SıparısAppPool { get; set; }
     }
 }

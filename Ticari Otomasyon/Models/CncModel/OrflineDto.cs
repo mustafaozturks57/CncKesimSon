@@ -6,8 +6,8 @@
        
         public string OrficheNo{ get; set; }
        
-        public int MalzemeKodu { get; set; }
-        public string MalzemeAdi { get; set; }
+        public string MalzemeKodu { get; set; }
+        public string Model { get; set; }
         public string Ozellik { get; set; }
         public double Boy { get; set; }
         public double En { get; set; }

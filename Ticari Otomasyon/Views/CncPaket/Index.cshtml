@@ -1,0 +1,401 @@
+﻿
+@model List<Ticari_Otomasyon.Models.Classes.Views.SiparişQliste>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet" />
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet" />
+<!-- MDB -->
+      
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="~/Content/MDB5-STANDARD-UI-KIT-Free-6.0.1/css/mdb.min.css" rel="stylesheet" />
+<script src="~/Content/MDB5-STANDARD-UI-KIT-Free-6.0.1/js/mdb.min.js"></script>
+
+<br />
+<br />
+<br />
+<br />
+
+
+
+
+
+<!-- Modal -->
+@*<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading">Well done!</h4>
+                        <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+                        <hr>
+                        <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+
+
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="alert alert-danger" role="alert" id="alerts" style="color:white">
+    <h4 class="alert-heading">Acil Siparişler Var !</h4>
+    <p> Acil siparişleriniz mevcut bu siparişlere öncelik verebilir siniz , Acil Siparişler <font color="red">KIRMIZI</font> , Acil Olmayan Siparişler <font color="green">YEŞİL</font> olarak gösterilir. </p>
+    <hr>
+    <p class="mb-0">Acil Durumda Sistem Yöneticisinden destek alabilir siniz .</p>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+    document.getElementById("alerts").hidden = false;
+
+
+</script>
+
+
+<button class="btn btn-primary" id="btn-full-screen">
+    Full
+    screen
+</button>
+<script>
+
+    function myFunction() {
+        var x = document.getElementById("alerts")
+
+        if (x.hidden == false) {
+            x.hidden = true
+        }
+        else {
+            x.hidden = false
+        }
+
+    }
+
+
+    function MyGetAlert() {
+
+        setTimeout(function () {
+
+            myFunction()
+        }, 10000);
+
+        setTimeout(function () {
+
+            myFunction()
+        }, 12000);
+
+        setTimeout(function () {
+
+            myFunction()
+        }, 14000);
+    }
+
+
+</script>
+
+@if (1 == 1)
+{
+    <script>
+        this.MyGetAlert()
+    </script>
+}
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr style="background-color:antiquewhite;color:black">
+            <th scope="col">Matlar</th>
+            <th scope="col">Parlaklar</th>
+            <th scope="col">Acil Mat</th>
+            <th scope="col">Acil Parlak</th>
+            <th scope="col">Toplam </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+           
+
+               
+
+            <td> x.MAT</td>
+            <td> x.PARLAK</td>
+            <td> x.ACİLPARLAK</td>
+            <td> x.ACİLMAT</td>
+        
+          
+        </tr>
+
+
+
+
+    </tbody>
+</table>
+
+<hr />
+
+<table class="table table-bordered">
+    <thead>
+        <tr style="background-color:blue;color:white">
+            <th style="background-color:blue" colspan="8">Pres İşlemleri</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+            <td colspan="8">
+                @using (Html.BeginForm("PaketYazdır", "CncPaket", FormMethod.Post))
+                {
+                    <input style="background-color:greenyellow" name="sipno"  type="text" placeholder="Sipariş No Giriniz Veya Okutunuz." class="form form-control" />
+                    <br />
+                    <input type="text" name="pakeysayı" placeholder="Paket Sayısını Giriniz." class="form form-control" />
+                    <br />
+
+
+                    <br />
+
+                    <button class="btn"><i class="fa fa-print"></i>Yazdır</button>
+                }
+            </td>
+
+
+
+
+
+        </tr>
+
+        <tr>
+        </tr>
+
+
+
+
+    </tbody>
+</table>
+
+<hr />
+<div class="alert alert-success" role="alert" id="alertskesim" style="color:white">
+
+    <p >
+        Kesilen Siparişleriniz Mevcut , <b>
+            Aşağıdaki Siparişleri Yazdırabilir siniz.
+        </b>
+       
+    </p>
+    <p>
+
+        <table style="color:black">
+            <tr>
+                <th>   Kesilen Sipariş Numaraları :  </th>
+                @foreach (var item in ViewBag.Yazdır)
+                {
+
+                    <th> @item.SipID , </th>
+
+                }
+            </tr>
+        </table>
+    </p>
+</div>
+
+
+
+
+<table class="table table-sm align-middle mb-0">
+    <tr style="background-color:red;color:white">
+        <th colspan="4">Matlar</th>
+
+    </tr>
+
+    <tr>
+        <td colspan="4">
+            <table class="table table-sm align-middle mb-0">
+                <tr style="background-color:darkseagreen;color:white">
+
+                    <th>
+                        Sipariş Numarası
+                    </th>
+                    <th>
+                        Sipariş Son Hareket
+                    </th>
+                    <th>
+                        Palet Numarası
+                    </th>
+                    <th>
+                        Müşteri Adı
+                    </th>
+
+                    <th>
+                        Toplam adet
+                    </th>
+                    <th>
+                        Toplam Fiyat
+                    </th>
+
+
+                </tr>
+
+
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.SipID
+                        </td>
+                        <td>
+                            @if (item.Paket_fl == false)
+                            {
+                                <font style="color:red">Paketlenmeyi Bekliyor</font>
+                            }
+                            else
+                            {
+                                <font style="color:green">Paketlendi</font>
+                            }
+                        </td>
+                        <td>
+                            @item.PaletNo
+                        </td>
+                        <td>
+                            @item.MusterıAdı
+                        </td>
+                        <td>
+                            @item.Adet
+                        </td>
+                        <td>
+                            @item.Fiyat
+                        </td>
+
+
+
+
+
+
+                    </tr>
+                }
+
+            </table>
+
+
+
+
+        </td>
+
+    </tr>
+</table>
+
+
+
+
+<table class="table table-sm align-middle mb-0">
+    <tr style="background-color:blueviolet;color:white">
+        <th colspan="4">Parlak</th>
+
+    </tr>
+
+    <tr>
+        <td colspan="4">
+            <table class="table table-sm align-middle mb-0">
+                <tr style="background-color:darkseagreen;color:white">
+
+                    <th>
+                        Sipariş Numarası
+                    </th>
+                    <th>
+                        Sipariş Son Hareket
+                    </th>
+                    <th>
+                        Palet Numarası
+                    </th>
+                    <th>
+                        Müşteri Adı
+                    </th>
+
+                    <th>
+                        Toplam adet
+                    </th>
+                    <th>
+                        Toplam Fiyat
+                    </th>
+
+
+
+                </tr>
+
+
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @item.SipID
+                        </td>
+                        <td>
+                            @if (item.Palet_fl == false)
+                            {
+                                <font style="color:red">Palete Yerleştirilmeyi Bekliyor</font>
+                            }
+                            else
+                            {
+                                <font style="color:green">Palete Yerleştirildi</font>
+                            }
+                        </td>
+                        <td>
+                            @item.PaletNo
+                        </td>
+                        <td>
+                            @item.MusterıAdı
+                        </td>
+
+                        <td>
+                            @item.Adet
+                        </td>
+                        <td>
+                            @item.Fiyat
+                        </td>
+
+
+
+
+
+
+
+                    </tr>
+                }
+
+            </table>
+
+
+
+
+        </td>
+
+    </tr>
+</table>
+
+
+

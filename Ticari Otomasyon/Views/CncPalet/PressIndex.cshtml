@@ -1,0 +1,703 @@
+﻿
+@model List<Ticari_Otomasyon.Models.Classes.Views.SiparişQliste>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet" />
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet" />
+<!-- MDB -->
+      rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="~/Content/MDB5-STANDARD-UI-KIT-Free-6.0.1/css/mdb.min.css" rel="stylesheet" />
+<script src="~/Content/MDB5-STANDARD-UI-KIT-Free-6.0.1/js/mdb.min.js"></script>
+
+<br />
+<br />
+<br />
+<br />
+
+
+
+
+<!-- Modal -->
+@*<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading">Well done!</h4>
+                        <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+                        <hr>
+                        <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+
+
+
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="alert alert-danger" role="alert" id="alerts">
+    <h4 class="alert-heading">Acil Siparişler Var !</h4>
+    <p> Acil siparişleriniz mevcut bu siparişlere öncelik verebilir siniz , Acil Siparişler <font color="red">KIRMIZI</font> , Acil Olmayan Siparişler <font color="green">YEŞİL</font> olarak gösterilir. </p>
+    <hr>
+    <p class="mb-0">Acil Durumda Sistem Yöneticisinden destek alabilir siniz .</p>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+    document.getElementById("alerts").hidden = false;
+
+
+</script>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Onaylama İşlemi</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="onaydurumu">
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="popupkapat" data-mdb-dismiss="modal">Vazgeç</button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+
+    function Onay(e) {
+
+
+        $.ajax({
+            type: "POST",
+            url: '/CncPalet/CncKesimKısayol?sipno=' + e,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                alert(e + "  numaralı Barkodlu Sipariş Kesilmiştir.");
+
+
+                setTimeout(window.location.reload(), 100000);
+
+
+            }
+
+        })
+
+
+
+
+    }
+</script>
+<script>
+    function PaletAdd(e) {
+        var paletnos = $('#paletnos').val();
+
+ 
+        var data = JSON.stringify({
+            sipno: e,
+            paletno: paletnos
+
+        })
+        $.ajax({
+            type: "POST",
+            url: '/CncPalet/PaleteEkle',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: data,
+            success: function (data) {
+                alert(data);
+
+
+                setTimeout(window.location.reload(), 100000);
+
+
+            }, error: function (error) {
+
+                document.getElementById('onaydurumu').innerHTML = "Bir Hata Oluştu";
+            }
+
+        })
+
+    }
+
+</script>
+<script>
+    function PalettenCıkar(e) {
+      
+        var data = JSON.stringify({
+            sipno: e,
+
+
+            })
+
+
+        $.ajax({
+            type: "POST",
+            url: '/CncPalet/PalettenCıkar',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: data,
+            success: function (data) {
+                alert(data);
+                window.location.reload();
+            }, error: function (error) {
+
+                alert("Bir Hata Oluştu ");
+            }
+
+            })
+
+    }
+
+</script>
+<script>
+
+ 
+
+    function Kesimİptal(e) {
+        var data = JSON.stringify({
+            sipno: e,
+
+
+        })
+
+
+
+        $.ajax({
+            type: "POST",
+            url:"/CncPalet/Kesimİptal",
+            contentType: "application/json; charset=utf-8",
+            dataType: "Json",
+            data: data,
+            success: function (data) {
+                alert(data);
+                window.location.reload();
+            }, error: function (error) {
+
+                alert("Bir Hata Oluştu ");
+            }
+
+            })
+
+
+    }
+</script>
+<script>
+
+    function KesimVePaletNo(e) {
+
+        var paletnos = $('#paletnos').val();
+
+
+        var data = JSON.stringify({
+            sipno: e,
+            paletno: paletnos
+
+        })
+
+        $.ajax({
+            type: "POST",
+            url: "/CncPalet/KesimVePaletNo",
+            contentType: "application/json; charset=utf-8",
+            dataType: "Json",
+            data: data,
+            success: function (data) {
+                alert(data);
+                window.location.reload();
+            }, error: function (error) {
+
+                alert("Bir Hata Oluştu ");
+            }
+
+            })
+    }
+
+
+</script>
+<script>
+
+    function myFunction() {
+        var x = document.getElementById("alerts")
+
+        if (x.hidden == false) {
+            x.hidden = true
+        }
+        else {
+            x.hidden = false
+        }
+
+    }
+
+
+    function MyGetAlert() {
+
+        setTimeout(function () {
+
+            myFunction()
+        }, 10000);
+
+        setTimeout(function () {
+
+            myFunction()
+        }, 12000);
+
+        setTimeout(function () {
+
+            myFunction()
+        }, 14000);
+    }
+
+
+</script>
+
+
+
+
+
+@if (1 == 1)
+{
+    <script>
+        this.MyGetAlert()
+    </script>
+}
+
+
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr style="background-color:blue;color:white">
+
+            <th colspan="8">Sipariş No İle Prese Gönder</th>
+            <th colspan="8">Palet No İle Prese Gönder</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+
+
+
+            <td colspan="8">
+
+                <input type="text" placeholder="Sipariş No Giriniz" class="form form-control" />
+                <br />
+
+                <br />
+                <a style="background-color: orange; color: white" href="/CncPalet/PressIndex" class="btn"><i style="color:white" class="fa fa-shopping-bag"></i> Sipariş No ile Prese Gönder</a>
+
+            </td>
+            <td colspan="8">
+                @using (Html.BeginForm("PressIndex", "CncPalet", FormMethod.Get))
+                {
+                    <input type="text" name="paletno" id="paletno" placeholder="Palet No Giriniz" class="form form-control" />
+                    <br />
+
+
+                    <br />
+                    <button type="submit" class="btn btn-warning">Ara</button>
+                    <a style="background-color:orange;color:white" href="/CncPalet/PressIndex" class="btn"><i class="fa fa-shopping-bag"></i> Palet No ile Prese Gönder</a>
+                }
+            </td>
+            <!--Palet kesime press e gönderilmemişse aynı renkleri aynı palete yüklencek burda bildirim ver
+
+            mahmut beyden etiket palet yazdırma formatı almak lazım
+            -->
+
+        </tr>
+
+        <tr>
+        </tr>
+
+
+
+
+    </tbody>
+</table>
+
+@if (ViewBag.sıp!=null)
+{
+
+
+<div class="alert alert-success" role="alert" id="alertskesim">
+
+    @*<p>
+            Kesilen Siparişleriniz Mevcut , <b>
+                <a href="/CncPalet/Index">Etiket Ve Palet İşlemleri</a>
+            </b>
+            Yazısında tıklayarak  İşlem Yapabilir siniz.
+        </p>*@
+    <table>
+        <tr>
+            <th >  İşlem Yapılan Model Rengi :  </th>
+            <th style="color:red">  @ViewBag.renk</th>
+        </tr>
+        <tr>
+            <th>  İşlem Yapılan Palet No : </th>
+            <th style="color:red">   <input id="paletnos"  class="badge badge-danger rounded-pill d-inline" value="@ViewBag.sıp" type="text"  disabled  /></th>
+        </tr>
+    </table>
+
+</div>
+}
+<hr />
+
+
+
+
+<table class="table table-sm align-middle mb-0">
+
+    <tr style="background-color:darkseagreen;color:white">
+
+        <th>
+            Sipariş Numarası
+        </th>
+        <th>
+            Sipariş Son Hareket
+        </th>
+        <th>
+            Palet Numarası
+        </th>
+        <th>
+            Müşteri Adı
+        </th>
+        <th>
+            Sipariş Durumu
+        </th>
+
+        <th>
+            Tarih
+        </th>
+        @*<th>
+                Kalan Gün
+            </th>*@
+
+        <th>
+            Termin Tarihi
+        </th>
+        <th>
+            Stok Adı
+        </th>
+        <th>
+            Renk Adı
+        </th>
+        <th>
+            Toplam adet
+        </th>
+        <th>
+            Toplam Fiyat
+        </th>
+
+        <th></th>
+    </tr>
+
+
+    @if (Model.Count != 0)
+    {
+
+
+
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.SipID
+                </td>
+                <td>
+                    @if (item.Palet_fl == false)
+                    {
+                        <span class="badge badge-danger rounded-pill d-inline">Palete Yerleştirilmedi</span>
+
+                    }
+                    else
+                    {
+                        <span class="badge badge-success rounded-pill d-inline">Palete Yerleştirildi</span>
+                    }
+                </td>
+                <td>
+                    <span class="badge badge-warning rounded-pill d-inline">@item.PaletNo</span>
+                </td>
+                <td>
+                    @item.MusterıAdı
+                </td>
+                <td>
+                    @item.SiparisDurumu
+                </td>
+                <td>
+                    @item.Tarih
+                </td>
+                <td>
+                    @item.TerminTarihi
+                </td>
+                <td>
+                    @item.StokAdı
+                </td>
+                <td>
+                    @item.RenkAdı
+                </td>
+                <td>
+                    @item.Adet
+                </td>
+                <td>
+                    @item.Fiyat
+                </td>
+
+
+
+
+
+                <td>
+                    @if (item.Kesim_fl == true && item.Palet_fl == true && item.PaletNo > 0)
+                    {
+                        <button type="button" onclick="PalettenCıkar(@item.SipID)"  class="badge badge-danger rounded-pill d-inline">Paletten  Çıkart</button>
+                    }
+
+
+
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+
+<br />
+
+<table class="table table-sm align-middle mb-0">
+    <tr style="background-color:palevioletred;color:white">
+
+        <th>
+            Sipariş Numarası
+        </th>
+        <th colspan="2">
+            Sipariş Son Hareket
+        </th>
+
+        <th>
+            Palet Numarası
+        </th>
+        <th>
+            Müşteri Adı
+        </th>
+        <th>
+            Sipariş Durumu
+        </th>
+
+        <th>
+            Tarih
+        </th>
+        @*<th>
+                Kalan Gün
+            </th>*@
+
+        <th>
+            Termin Tarihi
+        </th>
+
+        <th>
+            Stok Adı
+        </th>
+        <th>
+            Renk Adı
+        </th>
+        <th>
+            Toplam adet
+        </th>
+        <th>
+            Toplam Fiyat
+        </th>
+
+        <th>İşlemler</th>
+    </tr>
+
+
+    @if (ViewBag.alwayas != null)
+    {
+
+
+
+
+        foreach (var x in ViewBag.alwayas)
+        {
+
+
+
+
+
+            <tr>
+
+
+
+
+
+
+
+                <td>
+                    @x.SipID
+                </td>
+                <td>
+                    @if (x.Kesim_fl == false)
+                    {
+                        <span class="badge badge-danger rounded-pill d-inline">Kesilecek</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-success rounded-pill d-inline">Kesildi</span>
+                    }
+                </td>
+                <td>
+                    @if (x.Palet_fl == false)
+                    {
+                        <span class="badge badge-danger rounded-pill d-inline">Palete Yerleştirilmedi</span>
+
+                    }
+                    else
+                    {
+                        <span class="badge badge-success rounded-pill d-inline">Palete Yerleştirildi</span>
+                    }
+                </td>
+                <td>
+                    <span class="badge badge-warning rounded-pill d-inline">@x.PaletNo</span>
+                </td>
+                <td>
+                    @x.MusterıAdı
+                </td>
+                <td>
+                    @x.SiparisDurumu
+                </td>
+                <td>
+                    @x.Tarih.ToString("MM/dd/yyyy")
+                </td>
+                <td>
+                    @x.TerminTarihi.ToString("MM/dd/yyyy")
+                </td>
+                <td>
+                    @x.StokAdı
+                </td>
+                <td>
+                    @x.RenkAdı
+                </td>
+                <td>
+                    @x.Adet
+                </td>
+                <td>
+                    @x.Fiyat
+                </td>
+
+
+
+
+
+                <td>
+                    @if (x.Kesim_fl == true && x.Palet_fl == true && x.PaletNo > 0)
+                    {
+                        <p  style="background-color:cornflowerblue;color:white" class="badge badge-info rounded-pill d-inline"> Şuan Palette . Palet No : @x.PaletNo </p>
+                    }
+                    else if (x.Kesim_fl == true && x.PaletNo == 0)
+                    {
+                        <input type="button" value="Palete Ekle" onclick="PaletAdd(@x.SipID)" class="badge badge-info rounded-pill d-inline" />
+                        <br />
+                        <br />
+                        <input type="button" value="Kesim İptal Et" onclick="Kesimİptal(@x.SipID)" class="badge badge-warning rounded-pill d-inline" />
+
+                    }
+                    else if (x.Kesim_fl == false)
+                    {
+                        <input type="button" value="Kesim Yap" onclick="Onay(@x.SipID)" class="badge badge-info rounded-pill d-inline" data-mdb-toggle="modal" />
+                        <br />
+                        <br />
+                        <input type="button" value="Kesim Yap ve Palet Numarası Ver" onclick="KesimVePaletNo(@x.SipID)" class="badge badge-success rounded-pill d-inline" />
+
+                    }
+
+
+
+                    @*@if (x.Kesim_fl == true)
+        {
+            <a href="/CncCustomers/Edit/@x.SipID" class="btn btn-danger">Kesim İptal Et</a>
+        }
+        else
+        {
+            <a href="/CncCustomers/Edit/@x.SipID" class="btn btn-success">Kesim Yap</a>
+        }*@
+
+
+                </td>
+            </tr>
+
+
+        }
+    }
+
+
+</table>
+
+<script>
+    //$('#paletno').change(function () {
+
+    //    console.log("test");
+
+    //    var paletno = $("#paletno").val()
+    //    var data = JSON.stringify({
+
+    //        paletno: paletno
+
+    //    })
+
+
+    //    $.ajax({
+    //        type: "GET",
+    //        url: '/CncPalet/PressIndex?paletno=' + paletno,
+
+    //        contentType: "application/json; charset=utf-8",
+    //        dataType: "json",
+    //        success: function (data) {
+    //            alert("Liste Başarılı")
+    //        }
+
+
+
+    //    })
+
+
+    //})
+
+</script>

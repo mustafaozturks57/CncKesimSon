@@ -19,60 +19,82 @@
 <br />
 <br />
 
-<p> 
-   <a  href="/CncCustomers/Create" class="btn btn-success">Yeni Müşteri Oluştur</a>
+<p>
+    <a href="/CncCustomers/Create" class="btn btn-success">Yeni Müşteri Oluştur</a>
 </p>
-<table class="table" >
-    <tr style="background-color:darkseagreen;color:white">
 
-        <th>
-            @Html.DisplayNameFor(model => model.id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fırma_Adı)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Active_fl)
-        </th>
+<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+        <h6 class="text-white text-capitalize ps-3">Müşteri Tablosu</h6>
+    </div>
 
-        <th>
-            @Html.DisplayNameFor(model => model.Borc)
-        </th>
 
-        <th></th>
-    </tr >
 
-    @foreach (var item in Model)
-    {
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fırma_Adı)
-            </td>
 
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fırma_Adı)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active_fl)
+            </th>
 
-            @if (item.Active_fl == true)
-            {
-                <td>Aktif </td>
-            }
-            else
-            {
-                <td>Pasif </td>
-            }
+            <th>
+                @Html.DisplayNameFor(model => model.Borc)
+            </th>
 
-
-            <td>
-                @Html.DisplayFor(modelItem => item.Borc)
-            </td>
-
-            <td>
-                <a href="/CncCustomers/Edit/@item.id" class="btn btn-success">Düzenle</a>
-                <a   href="/CncCustomers/Delete/@item.id" class="btn btn-danger">Sil</a>
-                 
-            </td>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fırma_Adı)
+                </td>
+
+
+                @if (item.Active_fl == true)
+                {
+                    <td>Aktif </td>
+                }
+                else
+                {
+                    <td>Pasif </td>
+                }
+
+
+                <td style="color:crimson ">
+                    <b> @Html.DisplayFor(modelItem => item.Borc)</b>
+                </td>
+
+                <td>
+                    <a href="/CncCustomers/Edit/@item.id" class="btn btn-success">Düzenle</a>
+                    <a href="/CncCustomers/Delete/@item.id" class="btn btn-danger">Sil</a>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+<!-- Nucleo Icons -->
+<link href="~/assets/css/nucleo-icons.css" rel="stylesheet" />
+<link href="~/assets/css/nucleo-svg.css" rel="stylesheet" />
+<!-- Font Awesome Icons -->
+<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<!-- CSS Files -->
+<link id="pagestyle" href="~/assets/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
+
+

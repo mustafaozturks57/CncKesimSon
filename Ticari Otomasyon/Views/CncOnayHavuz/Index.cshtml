@@ -1,0 +1,202 @@
+﻿@using Ticari_Otomasyon.Models.Classes.Views
+@model List<SiparisModulsOnayHavuz>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h6>Hızlı İşlemler</h6>
+<hr />
+@*<div class="col-lg-14 col-sm-10 col-12" style="background-color:white">
+    <input type="text" placeholder="Sipariş Numarası Giriniz veya Okutunuz" class="form-control" />
+    <div class="col-lg-3 col-sm-10 col-12" style="background-color:white">
+ 
+        <a href="/CncOrfiches/Create" class="btn bg-gradient-success w-100 mb-0 toast-btn" data-target="successToast">Sipariş Ara</a>
+    </div>
+   
+</div>*@
+<br />
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">Siparişler Listesi</h6>
+
+
+
+
+                        <div class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
+                            <div class="toast-header border-1">
+                                <i class="material-icons text-success me-2">
+                                    check
+                                </i>
+                                <span class="me-auto font-weight-bold">Em Bilgilendirme </span>
+                                <small class="text-body">Şimdi</small>
+                                <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+                            </div>
+                            <hr class="horizontal dark m-0">
+                            <div class="toast-body">
+                                Yeni Sipariş Kayıt Sayfası Açılıyor.
+                            </div>
+                        </div>
+
+                        <div class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="deleteToast" aria-atomic="true">
+                            <div class="toast-header border-1">
+                                <i class="pace-material-danger text-danger me-2">
+                                    X
+                                </i>
+                                <span class="me-auto font-weight-bold">Em Bilgilendirme </span>
+                                <small class="text-body">Şimdi</small>
+                                <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+                            </div>
+                            <hr class="horizontal dark m-0">
+                            <div class="toast-body">
+                                Kayıt Başarı ile silinmiştir
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+
+
+
+
+                        <table class="table table-sm align-middle mb-0">
+                            <thead>
+                                <tr>
+
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Sipariş Numarası
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Müşteri Adı
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Tarih
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Termin Tarihi
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Sipariş Şekli
+                                    </th>
+
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Sipariş Durumu
+                                    </th>
+
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        BID
+                                    </th>
+
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Acıklama
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Adet
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        M2
+                                    </th>
+                                    <th> </th>
+
+
+                                    @*<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
+                                        <th class="text-secondary opacity-7"></th>*@
+                                    @*<p  >Manager</p>
+                                        <p class="text-xs text-secondary mb-0">Organization</p>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+
+
+                                        <td>
+                                            <a href="/CncOrfiches/Edit/@item.FisNo">  @Html.DisplayFor(modelItem => item.FisNo) </a>
+
+                                        </td>
+                                        <td>
+                                            <p>  @Html.DisplayFor(modelItem => item.Müşteri_Adı)</p>
+
+                                        </td>
+                                        <td>
+                                            <p>  @item.Tarih.ToString("MM/dd/yyyy")</p>
+
+                                        </td>
+                                        <td>
+                                            <p>  @item.Termin_Tarihi.ToString("MM/dd/yyyy")</p>
+                                        </td>
+
+                                        <td>
+                                            <p>  @Html.DisplayFor(modelItem => item.Sipariş_Şekli)</p>
+                                        </td>
+
+
+
+                                        <td>
+                                            <p>    @Html.DisplayFor(modelItem => item.Sipariş_Durumu)</p>
+
+                                        </td>
+
+                                        <td>
+                                            <p>       @Html.DisplayFor(modelItem => item.BID)</p>
+
+                                        </td>
+                                        <td>
+                                            <p>        @Html.DisplayFor(modelItem => item.Aciklama)</p>
+
+                                        </td>
+                                        <td>
+                                            <p>        @Html.DisplayFor(modelItem => item.Adet)</p>
+
+                                        </td>
+                                        <td>
+                                        <td>
+                                            <p>        @Html.DisplayFor(modelItem => item.m2)</p>
+
+                                        </td>
+                                        <td>
+                                            @if (item.Onay_fl == false && item.Teslim_fl == false)
+                                            {
+                                                <a href="/CncOnayHavuz/Onay/@item.FisNo"> <p class="btn btn-secondary" style="background-color:blue;color:white">        Siparişi Onayla</p></a>
+
+                                            }
+                                            else if (item.Onay_fl == true && item.Teslim_fl == false)
+                                            {
+
+                                                <br />
+                                                <a href="/CncOnayHavuz/Teslim/@item.FisNo">  <p class="btn btn-secondary" style="background-color:seagreen;color:white">        Siparişi Teslim Et</p></a>
+                                                <br />
+                                                <a href="/CncOnayHavuz/Onayİptal/@item.FisNo">  <p class="btn btn-secondary" style="background-color:brown;color:white">        Siparişi Onay Kaldır</p></a>
+                                            }
+                                            else if (item.Onay_fl == true && item.Teslim_fl == true)
+                                            {
+                                                <p class="btn btn-secondary" style="background-color:darkorange;color:white">     Siparişiniz Teslim Edilmiştir.  </p>
+                                                <br />
+                                                <a href="/CncOnayHavuz/Teslimİptal/@item.FisNo">  <p class="btn btn-secondary" style="background-color:red;color:white">        Siparişi Teslim  İptal</p></a>
+                                            }
+
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

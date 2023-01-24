@@ -1,139 +1,966 @@
-﻿@model Ticari_Otomasyon.Models.CncModel.Orfiche
+﻿@model Ticari_Otomasyon.Models.OrficheUpdateDto
 
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
-<h2>Edit</h2>
+<br />
+<br />
+<br />
+<br />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet" />
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet" />
+<!-- MDB -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="~/Content/MDB5-STANDARD-UI-KIT-Free-6.0.1/css/mdb.min.css" rel="stylesheet" />
+<script src="~/Content/MDB5-STANDARD-UI-KIT-Free-6.0.1/js/mdb.min.js"></script>
+
+<div class="form-group">
+    <div class="form-group">
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Orfiche</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+        <div id="logtable">
+            <p>  <b>Onay durumu:</b>   <font style="color:red">Onaysız</font></p>
+            <p>  <b>Kayıt Eden Kullanıcı:</b>   <font style="color:red">Mert Ertaş</font></p>
+            <p>  <b>Kayıt Tarihi</b>   <font style="color:red">2022.11.26 09:54</font></p>
+            <hr />
+        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.MusteriId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MusteriId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MusteriId, "", new { @class = "text-danger" })
+
+        <input style="background-color:blue" type="button" value="Kaydet Ve Onayla " class="btn btn-warning" data-mdb-toggle="modal" data-mdb-target="#exampleModal" />
+        <input type="submit" value="Kaydet" class="btn btn-success" id="saveOrder" />
+        <input type="submit" value="Onayla" class="btn btn-warning" data-mdb-toggle="modal" data-mdb-target="#exampleModal" />
+        <input type="submit" value="Yazdır" class="btn btn-info" />
+
+
+        <button style="background-color:darkkhaki" type="button" value="LOG Göster" class="btn btn-close-white" onclick="myFunction()">Log Göster</button>
+        <br />
+
+
+        <!-- Button trigger modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Onaylama İşlemi</h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        57 numaralı Barkodlu Siparişi Onaylamak İster misiniz ?
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Vazgeç</button>
+                        <button type="button" class="btn btn-success">Onaylıyorum</button>
+                        <button style="background-color:blue" type="button" class="btn btn-success">Kaydet Ve Onay</button>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Tarih, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Tarih, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Tarih, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.BarkodNo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BarkodNo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BarkodNo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SiparisSekli, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SiparisSekli, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SiparisSekli, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.BID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Aciklama, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Aciklama, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Aciklama, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TerminTarihi, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TerminTarihi, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TerminTarihi, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.BelgeNo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BelgeNo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BelgeNo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.OzelKod, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.OzelKod, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.OzelKod, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Bölüm, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Bölüm, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Bölüm, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Departman, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Departman, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Departman, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Isyeri, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Isyeri, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Isyeri, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SiparisDurumu, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SiparisDurumu, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SiparisDurumu, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+
+            <div class="form-group">
+
+                <div class="col-md-10">
+
+                    <input type="text" class="form-control" name="FisNo" id="FisNo" hidden />
+
+
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Orfiche.BarkodNo, htmlAttributes: new { @class = "control-label col-md-7" })
+                <div class="col-md-10">
+                    <input type="text" style="background-color:yellow" class="form-control" name="BarkodNo" placeholder="Barkod Okutunuz." id="BarkodNo" value="@Model.Orfiche.FisNo" />
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Orfiche.MusteriId, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-10">
+
+
+
+                    @Html.DropDownListFor(x => x.Orfiche.MusteriId, (List<SelectListItem>)ViewBag.Musteri, "Müşteri Seçiniz", new { @class = "form-control", @id = "MusteriId" })
+
+
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Orfiche.Tarih, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-10">
+                    <input type="date" class="form-control" name="Tarih" id="Tarih" value="@ViewBag.Tarih" />
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Orfiche.SiparisSekli, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-10">
+                    <select class="form-control" id="SiparisSekli">
+                        <option>@Model.Orfiche.SiparisSekli</option>
+                        <option>Kargo</option>
+                        <option>Fabrika</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Orfiche.SiparisDurumu, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-10">
+
+                    @Html.DropDownListFor(x => x.Orfiche.SiparisDurumu, (List<SelectListItem>)ViewBag.getSıpDurum, "Sipariş Durumu Seçiniz", new { @class = "form-control", @id = "SiparisDurumu" })
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="col-md-3">
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Orfiche.BID, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="BID" id="BID" value="@Model.Orfiche.BID" />
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Orfiche.Aciklama, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="Aciklama" id="Aciklama" value="@Model.Orfiche.Aciklama" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Orfiche.TerminTarihi, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-10">
+                    <input type="date" class="form-control" name="TerminTarihi" id="TerminTarihi" value="@ViewBag.TerminTarihi" />
+                </div>
+            </div>
+          
+            <div class="form-group">
+                @Html.LabelFor(model => model.Orfiche.BelgeNo, htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="BelgeNo" id="BelgeNo" value="@Model.Orfiche.BelgeNo" />
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Orfiche.OzelKod, htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Orfiche.OzelKod, (List<SelectListItem>)ViewBag.ozelkod, "ÖzelKod Seçiniz", new { @class = "form-control", @id = "OzelKod" })
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-md-2">
+
+
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Orfiche.Bölüm, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+
+                    @Html.DropDownListFor(model => model.Orfiche.Bölüm, (List<SelectListItem>)ViewBag.GetBolum, "Seçiniz", new { @class = "form-control", @id = "Bölüm" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Orfiche.Departman, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(x => x.Orfiche.Departman, (List<SelectListItem>)ViewBag.GetDepartman, "Seçiniz", new { @class = "form-control", @id = "Departman" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Orfiche.Isyeri, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(x => x.Orfiche.Isyeri, (List<SelectListItem>)ViewBag.GetISyeri, "Seçiniz", new { @class = "form-control", @id = "Isyeri" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-8">Tasarım Ücreti</label>
+                <div class="col-md-8">
+
+                    <input class="form-control" type="text" value="@Model.Orfiche.TasarimTutari" id="tasarimUcretiInput" onkeydown="Calcute(event)"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-8">Kargo Ücreti</label>
+                <div class="col-md-8">
+
+                    <input class="form-control" type="text" id="kargoUcretiInput" value="@Model.Orfiche.KargoTutari" onkeydown="Calcute(event)"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-8">İndirim Oranı</label>
+                <div class="col-md-8">
+
+                    <input class="form-control" type="text" id="indirimOraniInput" value="@Model.Orfiche.ToplamIndirim" onkeydown="Calcute(event)"/>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+            <table class="table table-bordered">
+                <thead>
+                    <tr style="background-color:cadetblue;color:white">
+                        <th scope="col">Tutar Türü</th>
+                        <th scope="col">Genel Toplam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+                        <td>İskonto</td>
+                        <td><label id="iskontoTutar">@Model.Orfiche.ToplamIndirim</label>  TRY</td>
+
+                    </tr>
+                    <tr>
+
+                        <td>Kargo Ücreti</td>
+                        <td><label id="kargoUcret">@Model.Orfiche.KargoTutari</label>  TRY</td>
+                    </tr>
+                    <tr>
+
+                        <td>Tasarım Ücreti</td>
+                        <td><label id="tasarimUcret">@Model.Orfiche.TasarimTutari</label>  TRY</td>
+                    </tr>
+                    <tr>
+
+                        <td>Kalem Toplam</td>
+                        <td><label id="kalemTutar">@Model.Orfiche.Toplam</label> TRY</td>
+                    </tr>
+                    <tr>
+
+                        <td>Genel Toplam </td>
+                        <td><label id="netTutar">@Model.Orfiche.NetTutar</label> TRY</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
 </div>
+<hr />
+<a href="#" class="btn btn-warning" id="addToRow">Satır Ekle</a>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<table class="table align-middle mb-0 bg-white" id="detailsTable">
+    <thead class="bg-light">
+        <tr>
+            <th>Model</th>
+            <th>Malzeme</th>
+            <th>Özellik</th>
+            <th>Boy</th>
+            <th>En</th>
+            <th> Adet</th>
+            <th>M2</th>
+            <th>M2 Fiyat</th>
+            <th>Fiyat</th>
+            <th>#</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @{
+            var oldCount = 9000;
+        }
+        @foreach (var item in Model.Orflines)
+        {
+            oldCount = oldCount + 1;
+            var oldModelId = "";
+            oldModelId = "model" + oldCount;
+
+            var oldMalzemeId = "";
+            oldMalzemeId = "malzeme" + oldCount;
+
+            var oldOzellikId = "";
+            oldOzellikId = "ozellik" + oldCount;
+
+            var oldBoyId = "";
+            oldBoyId = "boy" + oldCount;
+
+            var oldEnId = "";
+            oldEnId = "en" + oldCount;
+
+            var oldM2Id = "";
+            oldM2Id = "m2" + oldCount;
+
+            var oldAdetId = "";
+            oldAdetId = "adet" + oldCount;
+
+            var oldM2FiyatId = "";
+            oldM2FiyatId = "m2Fiyat" + oldCount;
+
+            var oldFiyatId = "";
+            oldFiyatId = "fiyat" + oldCount;
+
+        <tr id="@oldCount">
+            <td>
+                <select name="model" id="@oldModelId" style="width:100px">
+                    <option value="@item.Model" selected>@item.Model</option>
+                    @foreach (var x in ViewBag.Items)
+                    {
+                        <option value="@x.Value">@x.Value</option>
+
+                    }
+                </select>
+            </td>
+            <td>
+                <select type="text" name="malzeme" id="@oldMalzemeId" style="width:100px">
+                    <option value="@item.MalzemeKodu" selected>@item.MalzemeKodu</option>
+                    @foreach (var x in ViewBag.ItemsColor)
+                    {
+                        <option value="@x.Value">@x.Value</option>
+
+                    }
+                </select>
+            </td>
+            <td>
+                <select type="text" name="malzeme" id="@oldOzellikId" style="width:70px">
+                    <option value="@item.Ozellik" selected>@item.Ozellik</option>
+                    @foreach (var x in ViewBag.ItemsColor)
+                    {
+                        <option value="@x.Value">@x.Value</option>
+
+                    }
+                </select>
+            </td>
+            <td><input type="text" name="ozellik" class="small" id="@oldOzellikId" style="width:70px" value="@item.Ozellik" /></td>
+            <td><input type="text" name="boy" class="small" id="@oldBoyId" style="width:70px" value="@item.Boy" /></td>
+            <td><input type="text" name="en" class="small" id="@oldEnId" style="width:70px" value="@item.En" /></td>
+            <td><input type="text" name="m2" class="small" id="@oldM2Id" style="width:70px" value="@item.M2" /></td>
+            <td><input type="text" name="adet" class="small" id="@oldAdetId" style="width:70px" value="@item.Adet" /></td>
+            <td><input type="text" name="m2Fiyat" class="small" id="@oldM2FiyatId" style="width:70px" value="@item.M2Fiyat" /></td>
+            <td><input type="text" name="fiyat" class="small" id="@oldFiyatId" style="width:70px" value="@item.Fiyat" /></td>
+            <td><a data-itemId="0" href="#" class="deleteItem">x</a></td>
+        </tr>
+
+        }
+    </tbody>
+</table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+
+    function myFunction() {
+        console.log("Buradayım");
+        var x = document.getElementById("logtable")
+
+        if (x.hidden == true) {
+            x.hidden = false
+        }
+        else {
+            x.hidden = true
+        }
+
+    }
+
+</script>
+
+
+<script>
+
+
+   
+    document.getElementById('logtable').hidden = true;
+
+
+    $('#SiparisDurumu').change(function () {
+
+
+
+        Date.prototype.addDays = function (days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+
+        var date = new Date();
+
+
+        var tarih2 = $('#TerminTarihi').val();
+        var Durum = $('#SiparisDurumu').val();
+        console.log(Durum)
+        if (Durum == '1') {
+
+            //TODO buraya sipariş acil ise termin 5 gün değil ise 15 gün yapılacak
+            document.getElementById('TerminTarihi').valueAsDate = date.addDays(5);
+
+
+
+            console.log('Acil')
+        }
+        else {
+            console.log('acil değil')
+            console.log(Durum)
+            document.getElementById('TerminTarihi').valueAsDate = date.addDays(15);
+        }
+
+
+    })
+
+
+
+
+</script>
+
+<script>
+    $(document).ready(function () {
+
+
+        $('#BarkodNo').change(function () {
+
+            var Durum = $('#BarkodNo').val();
+            console.log("barkoddayım")
+            console.log(Durum)
+
+            if (Durum != null) {
+                console.log("barkoddayım")
+                //TODO buraya sipariş acil ise termin 5 gün değil ise 15 gün yapılacak
+
+                document.getElementById("FisNo").Value = Durum.Value;
+            }
+
+
+
+        })
+
+    })
+</script>
+
+<script>
+
+    var ekle;
+
+    function ModelOlustur(parameter) {
+        this.ekle = '#' + parameter;
+
+
+
+
+        $.ajax({
+            type: "GET",
+            url: "/CncOrfiches/ItemsGet",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                // $(ekle).append("<option value='0'>Bir Model seçiniz</option>")
+                for (var i = 0; i < data.length; i++) {
+
+                    $(ekle).append("<option value='" + data[i].Value + "'>" + data[i].Text + "</option>");
+                }
+                //dropdownlistimizi dolduruyoruz.(select tagı ile başlıyor ve seçenekler option ile belirtiliyor)
+                // <select id="dropdownlist"></select> dropdownlist'imizin html kodu
+
+
+
+            }, error: function (msg) {
+                $(ekle).append("<option value='0'>Veri Tabanında Bağlantı Sorunu Mevcut</option>")
+            }
+
+
+        });
+    }
+
+
+
+</script>
+<script>
+    var malzeme;
+    function MalzemeOlustur(parameter) {
+        this.malzeme = '#' + parameter;
+
+        console.log("geldim burdayım")
+
+
+        $.ajax({
+            type: "GET",
+            url: "/CncOrfiches/ItemsColorGet",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                // $(malzeme).append("<option value='0'>Bir Malzeme seçiniz</option>")
+                for (var i = 0; i < data.length; i++) {
+
+                    $(malzeme).append("<option value='" + data[i].Value + "'>" + data[i].Text + "</option>");
+                }
+                //dropdownlistimizi dolduruyoruz.(select tagı ile başlıyor ve seçenekler option ile belirtiliyor)
+                // <select id="dropdownlist"></select> dropdownlist'imizin html kodu
+
+
+
+            }, error: function (msg) {
+                $(ekle).append("<option value='0'>Veri Tabanında Bağlantı Sorunu Mevcut</option>")
+            }
+
+
+        });
+    }
+
+</script>
+
+<script>
+    var netTutarValue;
+    var iskontoValue;
+    var tasarimUcretValue;
+    var kargoUcretValue;
+    var count = 0;
+    $("#addToRow").click(function (e) {
+
+
+
+
+        e.preventDefault();
+        count = count + 1;
+        var model = '<select   name="model" class=="malzeme' + count + '"   id="model'+count+ '" style="width:200px" /select>';
+        var ModelZıp = 'model' + count;
+        console.log(ModelZıp);
+        ModelOlustur(ModelZıp);
+        var malzeme = '<select type="text" name="malzeme"  class=="malzeme' + count + '"   id="malzeme' + count + '" style="width:200px" /select>';
+        var MalzemeZıp = 'malzeme' + count;
+        MalzemeOlustur(MalzemeZıp);
+
+
+        var ozellik = '<input type="text" name="ozellik" class="small"  id="ozellik' + count + '" style="width:70px" />';
+        var boy = '<input type="text" name="boy" class="small"  id="boy' + count + '" style="width:70px" />';
+        var en = '<input type="text" name="en" class="small"  id="en' + count + '" style="width:70px" />';
+        var adet = '<input type="text" name="m2" class="small"  id="adet' + count + '" style="width:70px" />';
+        var m2 = '<input type="text" name="adet" class="small"  id="m2' + count + '" style="width:70px" />';
+        var m2Fiyat = '<input type="text" name="m2Fiyat" class="small"  id="m2Fiyat' + count + '" style="width:70px" />';
+        var fiyat = '<input type="text" name="fiyat" class="small"  id="fiyat' + count + '" style="width:70px" />';
+
+
+
+        var detailsTableBody = $("#detailsTable tbody");
+
+        var degerler = '<tr id=' + count + '><td>' + model + '</td><td>' + malzeme + '</td><td>' + ozellik + '</td><td>' + boy + '</td><td>' + en + '</td><td>' + adet + '</td><td>' + m2 + '</td><td>' + m2Fiyat + '</td><td>' + fiyat + '</td><td><a data-itemId="0" href="#"  class="deleteItem">x</a></td></tr>';
+        detailsTableBody.append(degerler);
+
+
+
+        var adet = '#adet' + count;
+        var m2 = '#m2' + count;
+        var m2getBy = 'm2' + count;
+        var m2FiyatGetBy = 'm2Fiyat' + count;
+        var fiyat = '#fiyat' + count;
+        var fiyatGetBy = 'fiyat' + count;
+        var m2Fiyat = '#m2Fiyat' + count;
+
+        var boy = '#boy' + count;
+        var en = '#en' + count;
+
+
+        $(adet).change(function () {
+
+            var m2value = $(m2).val();
+            var fiyatvalue = $(fiyat).val();
+            var m2Fiyatvalue = $(m2Fiyat).val();
+            var boyvalue = $(boy).val();
+            var envalue = $(en).val();
+            var adetvalue = $(adet).val();
+
+            var deger = m2value * adetvalue;
+            var sonfıyat = m2Fiyatvalue * deger;
+
+            document.getElementById(m2getBy).value = deger;
+            document.getElementById(fiyatGetBy).value = sonfıyat;
+            MyGetToplam();
+
+
+        })
+
+        $(en).change(function () {
+
+
+            var m2value = $(m2).val();
+            var fiyatvalue = $(fiyat).val();
+            var m2Fiyatvalue = $(m2Fiyat).val();
+            var boyvalue = $(boy).val();
+            var envalue = $(en).val();
+
+            if (boyvalue != null  ) {
+
+                var deger = (boyvalue * envalue) / 10000;
+                document.getElementById(m2getBy).value = deger;
+                document.getElementById(m2FiyatGetBy).value = 100;
+
+
+            }
+
+
+
+        })
+
+
+
+        MyGetToplam();
+
+              
+
+
+
+    });
+    $(document).on('click', 'a.deleteItem', function (e) {
+
+        e.preventDefault();
+        var $self = $(this);
+        if ($(this).attr('data-itemId') == "0") {
+            $(this).parents('tr').css("background-color", "#ff6347").fadeOut(800, function () {
+                $(this).remove();
+                CalcutingTotal();
+            });
+
+        }
+    });
+
+    $(function () {
+        MyGetToplam();
+
+
+    });
+
+   
+
+    function saveOrder(data) {
+        return $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: "/CncOrfiches/Edit",
+            data: data,
+            success: function (result) {
+                alert(result);
+               /* location.reload();*/
+            },
+            error: function () {
+                //alert("Error!")
+            }
+        });
+    }
+
+    function formValidate() {
+
+        var customerCodeValidate = $("#MusteriId").val();
+        var orficheDeliveryStatus = $("#SiparisDurumu").val();
+        console.log(customerCodeValidate);
+
+        if (customerCodeValidate == 0) {
+
+            alert("Lütfen Müşteri Seçiniz");
+            return false;
+        }
+        if (orficheDeliveryStatus == 0) {
+
+
+            alert("Lütfen Sipariş Durumu Seçiniz.");
+            return false;
+        }
+
+
+
+        if ($("#detailsTable tbody tr").length == 0) {
+            alert("Satır Girilmeden kaydetme işlemi yapılamaz.");
+            return false;
+        }
+        var bBool;
+        $.each($("#detailsTable tbody tr"), function () {
+
+            lineValidate = $(this).attr("id");
+
+
+
+            if ($("#model" + lineValidate.toString()).val() == 0) {
+                alert("Model Dolu Olmayan Satırlar Var.");
+                bBool = false;
+            }
+            if ($("#malzeme" + lineValidate.toString()).val() == 0) {
+                alert("Malzeme Dolu Olmayan Satırlar Var.");
+                bBool = false;
+            }
+            if ($("#boy" + lineValidate.toString()).val().length < 1) {
+                alert("Boy Dolu Olmayan Satırlar Var.");
+                bBool = false;
+            }
+            if ($("#en" + lineValidate.toString()).val().length < 1) {
+                alert("En  Dolu Olmayan Satırlar Var.");
+                bBool = false;
+            }
+            if ($("#adet" + lineValidate.toString()).val().length < 1) {
+                alert("Adet Dolu Olmayan Satırlar Var.");
+                bBool = false;
+            }
+            if ($("#m2" + lineValidate.toString()).val().length < 1) {
+                alert("M2 Dolu Olmayan Satırlar Var.");
+                bBool = false;
+            }
+
+
+        });
+        // alert(bBool);
+        if (bBool == false) {
+            return false;
+        }
+        return true;
+
+
+    }
+    function MyGetToplam() {
+
+        var fiyatArr = [];
+        fiyatArr.length = 0;
+
+        var iskontoArr = [];
+        iskontoArr.length = 0;
+
+
+        netTutarValue = 0;
+        iskontoValue = 0;
+        tasarimUcretValue = 0;
+        kargoUcretValue = 0;
+        //---------------------------------------------------------------------
+        $.each($("#detailsTable tbody tr"), function () {
+
+            trValue = $(this).attr("id");
+
+
+
+
+            fiyatArr.push({
+                NetTutar5: parseFloat($("#fiyat" + trValue.toString()).val())
+            });
+
+            fiyatArr.forEach(function (a) {
+                if (parseFloat(a.NetTutar5) > 0) {
+                    netTutarValue += parseFloat(a.NetTutar5);
+                }
+
+            });
+
+            iskontoArr.push({
+                Iskonto5: parseFloat(1)
+            });
+
+            iskontoArr.forEach(function (a) {
+                if (parseFloat(a.Iskonto5) > 0) {
+                    iskontoValue += parseFloat(a.Iskonto5);
+                }
+
+            });
+
+        });
+
+        //-------------------------------------------------------------------------------
+        var netG = 0;
+        //alert(iskontoValue);
+        //alert(iskontoValue.toFixed(2));
+        document.getElementById("kalemTutar").innerHTML = netTutarValue.toFixed(2);
+        document.getElementById("iskontoTutar").innerHTML = parseFloat($("#indirimOraniInput").val()).toFixed(2);
+        document.getElementById("tasarimUcret").innerHTML = parseFloat($("#tasarimUcretiInput").val()).toFixed(2);
+        document.getElementById("kargoUcret").innerHTML = parseFloat($("#kargoUcretiInput").val()).toFixed(2);
+
+        netG = netTutarValue + parseFloat($("#indirimOraniInput").val()) + parseFloat($("#tasarimUcretiInput").val()) + parseFloat($("#kargoUcretiInput").val());
+
+        document.getElementById("netTutar").innerHTML = netG.toFixed(2);
+        //var toplam = 0;
+        //for (genel of orderArr) {
+
+        //    console.log(genel[0].GenelToplam);
+
+        //}
+        //console.log(toplam);
+
+
+
+
+    }
+    function Calcute(event) {
+
+        var code = event.keyCode || event.which;
+        if (code == 9) {
+
+
+            var fiyatArr = [];
+            fiyatArr.length = 0;
+
+            var iskontoArr = [];
+            iskontoArr.length = 0;
+
+
+            netTutarValue = 0;
+            iskontoValue = 0;
+            tasarimUcretValue = 0;
+            kargoUcretValue = 0;
+            //---------------------------------------------------------------------
+            $.each($("#detailsTable tbody tr"), function () {
+
+                trValue = $(this).attr("id");
+
+
+
+
+                fiyatArr.push({
+                    NetTutar5: parseFloat($("#fiyat" + trValue.toString()).val())
+                });
+
+                fiyatArr.forEach(function (a) {
+                    if (parseFloat(a.NetTutar5) > 0) {
+                        netTutarValue += parseFloat(a.NetTutar5);
+                    }
+
+                });
+
+                iskontoArr.push({
+                    Iskonto5: parseFloat(1)
+                });
+
+                iskontoArr.forEach(function (a) {
+                    if (parseFloat(a.Iskonto5) > 0) {
+                        iskontoValue += parseFloat(a.Iskonto5);
+                    }
+
+                });
+
+            });
+
+            //-------------------------------------------------------------------------------
+            var netG = 0;
+            //alert(iskontoValue);
+            //alert(iskontoValue.toFixed(2));
+            document.getElementById("kalemTutar").innerHTML = netTutarValue.toFixed(2);
+            document.getElementById("iskontoTutar").innerHTML = parseFloat($("#indirimOraniInput").val()).toFixed(2);
+            document.getElementById("tasarimUcret").innerHTML = parseFloat($("#tasarimUcretiInput").val()).toFixed(2);
+            document.getElementById("kargoUcret").innerHTML = parseFloat($("#kargoUcretiInput").val()).toFixed(2);
+
+            netG = netTutarValue + parseFloat($("#tasarimUcretiInput").val()) + parseFloat($("#kargoUcretiInput").val()) - parseFloat($("#indirimOraniInput").val());
+
+            document.getElementById("netTutar").innerHTML = netG.toFixed(2);
+            //var toplam = 0;
+            //for (genel of orderArr) {
+
+            //    console.log(genel[0].GenelToplam);
+
+            //}
+            //console.log(toplam);
+
+
+
+
+        }
+
+    }
+
+    //Collect Multiple Order List For Pass To Controller
+    $("#saveOrder").click(function (e) {
+        //e.preventDefault();
+        alert(netTutarValue);
+        var bForm = formValidate();
+        console.log(bForm)
+        if (bForm) {
+            var orderArr = [];
+            orderArr.length = 0;
+            var trValue = 0;
+
+            $.each($("#detailsTable tbody tr"), function () {
+
+                trValue = $(this).attr("id");
+
+             
+
+
+                orderArr.push({
+                    MalzemeKodu: $("#model" + trValue.toString()).val(),
+                    Model: $("#malzeme" + trValue.toString()).val(),
+                    Ozellik: parseFloat($("#ozellik" + trValue.toString()).val()),
+                    Boy: $("#boy" + trValue.toString()).val(),
+                    En: parseFloat($("#en" + trValue.toString()).val()),
+                    M2: parseFloat($("#m2" + trValue.toString()).val()),
+                    Adet: parseFloat($("#adet" + trValue.toString()).val()),
+                    M2Fiyat: parseFloat($("#m2Fiyat" + trValue.toString()).val()),
+                    Fiyat: parseFloat($("#fiyat" + trValue.toString()).val())
+
+
+                });
+
+            });
+
+            alert($("#OzelKod").val());
+            var data = JSON.stringify({
+
+
+                FisNo: $("#BarkodNo").val(),
+                MusteriId: $("#MusteriId").val().toString(),
+                BarkodNo: $("#BarkodNo").val(),
+                SiparisSekli: $("#SiparisSekli").val(),
+                BID: $("#BID").val(),
+                Aciklama: $("#Aciklama").val(),
+                Tarih: $("#Tarih").val(),
+                TerminTarihi: $("#TerminTarihi").val(),
+                BelgeNo: $("#BelgeNo").val(),
+                OzelKod: $("#OzelKod").val(),
+                Bölüm: $("#Bölüm").val(),
+                Departman: $("#Departman").val(),
+                Isyeri: $("#Isyeri").val(),
+                SiparisDurumu: $("#SiparisDurumu").val(),
+
+                ToplamIndirim: parseFloat($("#indirimOraniInput").val()),
+                TasarimTutari: parseFloat($("#tasarimUcretiInput").val()),
+                KargoTutari: parseFloat($("#kargoUcretiInput").val()),
+                Toplam: netTutarValue,
+                NetTutar: netTutarValue + parseFloat($("#indirimOraniInput").val()) + parseFloat($("#tasarimUcretiInput").val()) + parseFloat($("#kargoUcretiInput").val()),
+
+              
+                orflines: orderArr
+            });
+
+            $.when(saveOrder(data)).then(function (response) {
+                console.log(response);
+                $(window).attr('location', '@Url.Action("Index","CncOrfiches")');
+
+            }).fail(function (err) {
+                console.log(err);
+            });
+        }
+
+
+    });
+
+</script>
+
+
+
+

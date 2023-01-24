@@ -9,53 +9,146 @@
 <br />
 <br />
 <br />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet" />
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet" />
+<!-- MDB -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="~/Content/MDB5-STANDARD-UI-KIT-Free-6.0.1/css/mdb.min.css" rel="stylesheet" />
+<script src="~/Content/MDB5-STANDARD-UI-KIT-Free-6.0.1/js/mdb.min.js"></script>
+
 <div class="form-group">
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="button" value="Kaydet" class="btn btn-success" id="saveOrder" />
+
+
+        <div id="logtable">
+            <p>  <b>Onay durumu:</b>   <font style="color:red">Onaysız</font></p>
+            <p>  <b>Kayıt Eden Kullanıcı:</b>   <font style="color:red">Mert Ertaş</font></p>
+            <p>  <b>Kayıt Tarihi</b>   <font style="color:red">2022.11.26 09:54</font></p>
+            <hr />
         </div>
+
+
+        <input type="submit" value="Kaydet" class="btn btn-success" data-target="successToast" id="saveOrder" />
+        <input type="submit" value="Onayla" class="btn btn-warning" data-mdb-toggle="modal" onclick="Onay()" data-mdb-target="#exampleModal" />
+        <input style="background-color:blueviolet;color:white" type="submit" value="Muhtelif Formu Yazdır" class="btn btn-info" />
+        <input style="background-color:darkblue;color:white" type="submit" value="Muhtelif Formu Yazdır(Fabrika)" class="btn btn-info" />
+        <input style="background-color:forestgreen;color:white" type="submit" value="Excelden İçeri Aktar" class="btn btn-info" />
+
+
+
+
+
+
+
+        <div class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
+            <div class="toast-header border-1">
+                <i class="material-icons text-success me-2">
+                    check
+                </i>
+                <span class="me-auto font-weight-bold">Em Bilgilendirme </span>
+                <small class="text-body">Şimdi</small>
+                <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+            </div>
+            <hr class="horizontal dark m-0">
+            <div class="toast-body" id="benımalert">
+
+            </div>
+        </div>
+
+
+
+
+        <button style="background-color:darkkhaki" type="button" value="LOG Göster" class="btn btn-close-white" onclick="myFunction()">Log Göster</button>
+        <br />
+
+
+        <!-- Button trigger modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Onaylama İşlemi</h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="onaydurumu">
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Vazgeç</button>
+                        <button type="button" class="btn btn-success" onclick="OnlyOnay()">Onaylıyorum</button>
+                        <button style="background-color:blue" type="button" id="saveOrder" class="btn btn-success">Kaydet Ve Onay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
     <hr />
     <div class="row">
         <div class="col-md-3">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
             <div class="form-group">
-                @Html.LabelFor(model => model.FisNo, htmlAttributes: new { @class = "control-label col-md-2" })
+
                 <div class="col-md-10">
 
-                    <input type="text" class="form-control" name="FisNo" id="FisNo" />
+                    <input type="text" class="form-control" name="FisNo" id="FisNo" hidden />
 
 
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.MusteriId, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.BarkodNo, htmlAttributes: new { @class = "control-label col-md-7" })
+                <div class="col-md-10">
+                    <input type="text" style="background-color:yellow" class="form-control" required name="BarkodNo" placeholder="Barkod Okutunuz." value="@ViewBag.SonNo" id="BarkodNo" />
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MusteriId, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-10">
 
-                    <input type="text" class="form-control" name="MusteriId" id="MusteriId" />
+
+
+                    @Html.DropDownListFor(x => x.MusteriId, (List<SelectListItem>)ViewBag.Musteri, "Müşteri Seçiniz", new { @class = "form-control", @id = "MusteriId" })
 
 
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Tarih, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Tarih, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-10">
-                    <input type="date" class="form-control" name="Tarih" id="Tarih" />
+                    <input type="date" class="form-control" name="Tarih" data-date-format="DD MM YYYY" id="Tarih" />
                 </div>
 
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.BarkodNo, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="BarkodNo" id="BarkodNo" />
-                </div>
-            </div>
+
 
             <div class="form-group">
-                @Html.LabelFor(model => model.SiparisSekli, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.SiparisSekli, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="SiparisSekli" id="SiparisSekli" />
+                    <select class="form-control" id="SiparisSekli">
+                        <option>Kargo</option>
+                        <option>Fabrika</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SiparisDurumu, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-10">
+
+                    @Html.DropDownListFor(x => x.SiparisDurumu, (List<SelectListItem>)ViewBag.getSıpDurum, "Sipariş Durumu Seçiniz", new { @class = "form-control", @id = "SiparisDurumu" })
+
                 </div>
             </div>
         </div>
@@ -69,81 +162,139 @@
 
 
             <div class="form-group">
-                @Html.LabelFor(model => model.BID, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.BID, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-10">
                     <input type="text" class="form-control" name="BID" id="BID" />
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Aciklama, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Aciklama, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-10">
                     <input type="text" class="form-control" name="Aciklama" id="Aciklama" />
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.TerminTarihi, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.TerminTarihi, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-10">
                     <input type="date" class="form-control" name="TerminTarihi" id="TerminTarihi" />
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.BelgeNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.BelgeNo, htmlAttributes: new { @class = "control-label col-md-6" })
                 <div class="col-md-10">
                     <input type="text" class="form-control" name="BelgeNo" id="BelgeNo" />
                 </div>
             </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.OzelKod, htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.OzelKod, (List<SelectListItem>)ViewBag.ozelkod, "ÖzelKod Seçiniz", new { @class = "form-control" })
+                </div>
+            </div>
+
         </div>
 
+
+        <div class="col-md-2">
+
+
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Bölüm, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+
+                    @Html.DropDownListFor(model => model.Bölüm, (List<SelectListItem>)ViewBag.GetBolum, "Seçiniz", new { @class = "form-control" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Departman, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(x => x.Departman, (List<SelectListItem>)ViewBag.GetDepartman, "Seçiniz", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Isyeri, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(x => x.Isyeri, (List<SelectListItem>)ViewBag.GetISyeri, "Seçiniz", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-8">Tasarım Ücreti</label>
+                <div class="col-md-8">
+
+                    <input class="form-control" type="text" placeholder="0.00 TRY" id="tasarimUcretiInput" onkeydown="Calcute(event)" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-8">Kargo Ücreti</label>
+                <div class="col-md-8">
+
+                    <input class="form-control" type="text" placeholder="0.00 TRY" id="kargoUcretiInput" onkeydown="Calcute(event)" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-8">İndirim Oranı</label>
+                <div class="col-md-8">
+
+                    <input class="form-control" type="text" placeholder="0.00 TRY" id="indirimOraniInput" onkeydown="Calcute(event)" />
+                </div>
+            </div>
+
+        </div>
 
         <div class="col-md-3">
+            <table class="table table-bordered">
+                <thead>
+                    <tr style="background-color:cadetblue;color:white">
+                        <th scope="col">Tutar Türü</th>
+                        <th scope="col">Genel Toplam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
 
+                        <td>İskonto</td>
+                        <td><label id="iskontoTutar"></label>  TRY</td>
 
+                    </tr>
+                    <tr>
 
+                        <td>Kargo Ücreti</td>
+                        <td><label id="kargoUcret"></label>  TRY</td>
+                    </tr>
+                    <tr>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.OzelKod, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-5">
-                    <input type="text" class="form-control" name="OzelKod" id="OzelKod" />
-                </div>
-            </div>
+                        <td>Tasarım Ücreti</td>
+                        <td><label id="tasarimUcret"></label>  TRY</td>
+                    </tr>
+                    <tr>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Bölüm, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-5">
-                    <input type="text" class="form-control" name="Bölüm" id="Bölüm" />
-                </div>
-            </div>
+                        <td>Kalem Toplam</td>
+                        <td><label id="kalemTutar"></label> TRY</td>
+                    </tr>
+                    <tr>
 
+                        <td>Genel Toplam </td>
+                        <td><label id="netTutar"></label> TRY</td>
+                    </tr>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Departman, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-5">
-                    <input type="text" class="form-control" name="Departman" id="Departman" />
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Isyeri, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-5">
-                    <input type="text" class="form-control" name="Isyeri" id="Isyeri" />
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.SiparisDurumu, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-5">
-                    <input type="text" class="form-control" name="SiparisDurumu" id="SiparisDurumu" />
-                </div>
-            </div>
+                </tbody>
+            </table>
 
         </div>
 
-        <div class="col-md-3">
-            fotofraf
-        </div>
+
     </div>
+
+
 
 
 
@@ -160,32 +311,519 @@
             <th>Özellik</th>
             <th>Boy</th>
             <th>En</th>
-            <th>M2</th>
             <th>Adet</th>
+            <th>M2</th>
             <th>M2 Fiyat</th>
             <th>Fiyat</th>
             <th>#</th>
         </tr>
-        
+
     </thead>
     <tbody>
     </tbody>
 </table>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
 <script>
 
+    function myFunction() {
+        console.log("Buradayım");
+        var x = document.getElementById("logtable")
+
+        if (x.hidden == true) {
+            x.hidden = false
+        }
+        else {
+            x.hidden = true
+        }
+
+    }
+
+</script>
+
+
+<script>
+
+
+    document.getElementById('Tarih').valueAsDate = new Date();
+    document.getElementById('logtable').hidden = true;
+    document.getElementById("tasarimUcretiInput").value = 0;
+    document.getElementById("kargoUcretiInput").value = 0;
+    document.getElementById("indirimOraniInput").value = 0;
+    var dateFirst = new Date();
+    document.getElementById('TerminTarihi').valueAsDate = new Date();
+    function Onay() {
+        var BarkodNo = document.getElementById("BarkodNo").value
+
+        if (BarkodNo != null) {
+
+            document.getElementById("onaydurumu").innerHTML = BarkodNo + "  numaralı Barkodlu Siparişi Onaylamak İster misiniz ?"
+        }
+    }
+
+
+
+    $('#SiparisDurumu').change(function () {
+
+
+
+        Date.prototype.addDays = function (days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+
+        var date = new Date();
+
+
+        var tarih2 = $('#TerminTarihi').val();
+        var Durum = $('#SiparisDurumu').val();
+        console.log(Durum)
+        if (Durum == '1') {
+
+            //TODO buraya sipariş acil ise termin 5 gün değil ise 15 gün yapılacak
+            document.getElementById('TerminTarihi').valueAsDate = date.addDays(5);
+
+
+
+            console.log('Acil')
+        }
+        else {
+            console.log('acil değil')
+            console.log(Durum)
+            document.getElementById('TerminTarihi').valueAsDate = date.addDays(15);
+        }
+
+
+    })
+
+
+
+
+
+</script>
+@*Barkod*@
+<script>
+    $(document).ready(function () {
+
+
+        $('#BarkodNo').change(function () {
+
+            var Durum = $('#BarkodNo').val();
+            console.log("barkoddayım")
+            console.log(Durum)
+
+            if (Durum != null) {
+                console.log("barkoddayım")
+                //TODO buraya sipariş acil ise termin 5 gün değil ise 15 gün yapılacak
+
+                document.getElementById("FisNo").Value = Durum.Value;
+            }
+
+
+
+        })
+
+    })
+</script>
+
+
+@*Model Modal*@
+<div class="container">
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#modelModal" id="btnModal" hidden>
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Model Listesi</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <table id="dataTable" class="table display nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Model Adı</th>
+                                <th>Fiyat</th>
+
+                            </tr>
+                        </thead>
+
+
+                    </table>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal" id="btnClose">Close</button>
+                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@*Model Datatable*@
+<script>
+    var table;
+    table = $('#dataTable').DataTable({
+        processing: true,
+        serverSide: true,
+
+        ajax: {
+            url: "/CncOrfiches/ItemsGet",
+            type: "POST",
+            datatype: "json",
+
+        },
+        columns: [
+            { data: "ID", "name": "ID" },
+            { data: "MODEL", "name": "MODEL" },
+            { data: "FIYATHG", "name": "FIYATHG" },
+
+
+        ],
+
+        language: {
+            info: "_TOTAL_ kayıttan _START_ - _END_ kayıt gösteriliyor.",
+            infoEmpty: "Gösterilecek hiç kayıt yok.",
+            loadingRecords: "Kayıtlar yükleniyor.",
+            zeroRecords: "Tablo boş",
+            search: "Arama:",
+            infoFiltered: "(toplam _MAX_ kayıttan filtrelenenler)",
+            buttons: {
+
+                copyTitle: "Panoya kopyalandı.",
+                copySuccess: "Panoya %d satır kopyalandı",
+                copy: "Kopyala",
+                print: "Yazdır",
+
+            },
+
+
+            paginate: {
+                first: "İlk",
+                previous: "Önceki",
+                next: "Sonraki",
+                last: "Son"
+            }
+        },
+
+
+        dom: 'Bfrtip',
+        //scrollX: true,
+        //scrollCollapse: true,
+        //responsive: {
+        //    details: false
+        //}
+    });
+    var codeDatatable = '';
+    var definitionDatatable = '';
+    var unitsetDatatable = '';
+    var countDatatable = 0;
+    $('#dataTable tbody').on('click', 'tr', function () {
+
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+
+            codeDatatable = '';
+
+            //unitsetDatatable = '';
+
+            codeDatatable = $(this).find("td:eq(1)").text();
+
+            //unitsetDatatable = $(this).find("td:eq(3)").text();
+
+            $("#model" + countDatatable).val(codeDatatable);
+            //$("#itemName" + countDatatable).val(definitionDatatable);
+            //$("#mainUnit" + countDatatable).val(unitsetDatatable);
+
+            $("#btnClose").trigger("click");
+        } else {
+
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
+    function ModelForm(count) {
+        //alert(count);
+        $("#btnModal").trigger("click");
+        countDatatable = count;
+    }
+
+</script>
+@*Malzeme Modal*@
+<div class="container">
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#malzemeModal" id="btnMalzemeModal" hidden>
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="malzemeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Malzeme Listesi</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <table id="dataTable2" class="table display nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Malzeme Adı</th>
+                                <th>Cins</th>
+
+                            </tr>
+                        </thead>
+
+
+                    </table>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal" id="btnMalzemeClose">Close</button>
+                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@*Malzeme Datatable*@
+<script>
+    var table2;
+    table2 = $('#dataTable2').DataTable({
+        processing: true,
+        serverSide: true,
+
+        ajax: {
+            url: "/CncOrfiches/ItemsColorGet",
+            type: "POST",
+            datatype: "json",
+
+        },
+        columns: [
+            { data: "id", "name": "id" },
+            { data: "MALZEME", "name": "MALZEME" },
+            { data: "MCINS", "name": "MCINS" },
+
+
+        ],
+
+        language: {
+            info: "_TOTAL_ kayıttan _START_ - _END_ kayıt gösteriliyor.",
+            infoEmpty: "Gösterilecek hiç kayıt yok.",
+            loadingRecords: "Kayıtlar yükleniyor.",
+            zeroRecords: "Tablo boş",
+            search: "Arama:",
+            infoFiltered: "(toplam _MAX_ kayıttan filtrelenenler)",
+            buttons: {
+
+                copyTitle: "Panoya kopyalandı.",
+                copySuccess: "Panoya %d satır kopyalandı",
+                copy: "Kopyala",
+                print: "Yazdır",
+
+            },
+
+
+            paginate: {
+                first: "İlk",
+                previous: "Önceki",
+                next: "Sonraki",
+                last: "Son"
+            }
+        },
+
+
+        dom: 'Bfrtip',
+        //scrollX: true,
+        //scrollCollapse: true,
+        //responsive: {
+        //    details: false
+        //}
+    });
+    var malzemeDatatable = '';
+   
+   
+    var countDatatable2 = 0;
+    $('#dataTable2 tbody').on('click', 'tr', function () {
+
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+
+            malzemeDatatable = '';
+
+           
+
+            malzemeDatatable = $(this).find("td:eq(1)").text();
+
+            
+
+            $("#malzeme" + countDatatable2).val(malzemeDatatable);
+            
+
+            $("#btnMalzemeClose").trigger("click");
+        } else {
+
+            table2.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
+    function MalzemeForm(count) {
+        //alert(count);
+        $("#btnMalzemeModal").trigger("click");
+        countDatatable2 = count;
+    }
+
+</script>
+
+
+
+<script>
+
+    function OnlyOnay() {
+        var Onaysip = $("#BarkodNo").val()
+        var datas = JSON.stringify({
+            id: Onaysip
+        })
+
+
+        $.ajax({
+            type: "POST",
+            url: "/CncOrfiches/OnlyOnay",
+            data: datas,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                alert(data)
+
+            }
+        })
+
+    }
+
+</script>
+
+
+
+<script>
+
+    function formValidate() {
+
+        var customerCodeValidate = $("#MusteriId").val();
+        var orficheDeliveryStatus = $("#SiparisDurumu").val();
+        console.log(customerCodeValidate);
+
+        if (customerCodeValidate == 0) {
+
+            alert("Lütfen Müşteri Seçiniz");
+            return false;
+        }
+        if (orficheDeliveryStatus == 0) {
+
+
+            alert("Lütfen Sipariş Durumu Seçiniz.");
+            return false;
+        }
+
+
+
+        if ($("#detailsTable tbody tr").length == 0) {
+            alert("Satır Girilmeden kaydetme işlemi yapılamaz.");
+            return false;
+        }
+        var bBool;
+        $.each($("#detailsTable tbody tr"), function () {
+
+            lineValidate = $(this).attr("id");
+
+
+
+            if ($("#model" + lineValidate.toString()).val() == 0) {
+                alert("Model Dolu Olmayan Satırlar Var.");
+                bBool = false;
+            }
+            if ($("#malzeme" + lineValidate.toString()).val() == 0) {
+                alert("Malzeme Dolu Olmayan Satırlar Var.");
+                bBool = false;
+            }
+            if ($("#boy" + lineValidate.toString()).val().length < 1) {
+                alert("Boy Dolu Olmayan Satırlar Var.");
+                 bBool=false;
+            }
+            if ($("#en" + lineValidate.toString()).val().length < 1) {
+                alert("En  Dolu Olmayan Satırlar Var.");
+                 bBool=false;
+            }
+            if ($("#adet" + lineValidate.toString()).val().length < 1) {
+                alert("Adet Dolu Olmayan Satırlar Var.");
+                 bBool=false;
+            }
+            if ($("#m2" + lineValidate.toString()).val().length < 1) {
+                alert("M2 Dolu Olmayan Satırlar Var.");
+                 bBool=false;
+            }
+
+
+        });
+       // alert(bBool);
+        if (bBool==false) {
+            return false;
+        }
+        return true;
+
+
+    }
+
+    var netTutarValue;
+    var iskontoValue;
+    var tasarimUcretValue;
+    var kargoUcretValue;
     var count = 0;
     $("#addToRow").click(function (e) {
 
+
+
+
         e.preventDefault();
         count = count + 1;
-        var model = '<input type="text" name="model" class="small"  id="model' + count + '" style="width:70px" />';
-        var malzeme = '<input type="text" name="malzeme" class="small"  id="malzeme' + count + '" style="width:70px" />';
-        var ozellik = '<input type="text" name="ozellik" class="small"  id="ozellik' + count + '" style="width:70px" />';
+        var model = '<div class="input-group mb-0"><input type="text" name="model" class="form-control form-control-sm" id="model' + count + '"  style="width:100px"/><button class="btn btn-sm btn-primary" id="button1" onclick="ModelForm(' + count + ')"></button></div>';
+
+
+        var malzeme = '<div class="input-group mb-0"><input type="text" name="malzeme" class="form-control form-control-sm" id="malzeme' + count + '"  style="width:100px"/><button class="btn btn-sm btn-primary" id="button2" onclick="MalzemeForm(' + count + ')"></button></div>';
+
+
+
+
+        var ozellik = '<div class="input-group mb-0"><input type="text" name="ozellik" class="form-control form-control-sm" id="ozellik' + count + '"  style="width:100px"/><button class="btn btn-sm btn-primary" id="button3" onclick="OzellikForm(' + count + ')"></button></div>';
+
+
         var boy = '<input type="text" name="boy" class="small"  id="boy' + count + '" style="width:70px" />';
         var en = '<input type="text" name="en" class="small"  id="en' + count + '" style="width:70px" />';
-        var m2 = '<input type="text" name="m2" class="small"  id="m2' + count + '" style="width:70px" />';
-        var adet = '<input type="text" name="adet" class="small"  id="adet' + count + '" style="width:70px" />';
+        var adet = '<input type="text" name="m2" class="small"  id="adet' + count + '" style="width:70px" />';
+        var m2 = '<input type="text" name="adet" class="small"  id="m2' + count + '" style="width:70px" />';
         var m2Fiyat = '<input type="text" name="m2Fiyat" class="small"  id="m2Fiyat' + count + '" style="width:70px" />';
         var fiyat = '<input type="text" name="fiyat" class="small"  id="fiyat' + count + '" style="width:70px" />';
 
@@ -193,8 +831,176 @@
 
         var detailsTableBody = $("#detailsTable tbody");
 
-        var degerler = '<tr id=' + count + '><td>' + model + '</td><td>' + malzeme + '</td><td>' + ozellik + '</td><td>' + boy + '</td><td>' + en + '</td><td>' + m2 + '</td><td>' + adet + '</td><td>' + m2Fiyat + '</td><td>' + fiyat + '</td><td><a data-itemId="0" href="#"  class="deleteItem">x</a></td></tr>';
+        var degerler = '<tr id=' + count + '><td>' + model + '</td><td>' + malzeme + '</td><td>' + ozellik + '</td><td>' + boy + '</td><td>' + en + '</td><td>' + adet + '</td><td>' + m2 + '</td><td>' + m2Fiyat + '</td><td>' + fiyat + '</td><td><a data-itemId="0" href="#"  class="deleteItem">x</a></td></tr>';
         detailsTableBody.append(degerler);
+
+
+        var model = '#model' + count;
+        var malzeme = '#malzeme' + count;
+        var adet = '#adet' + count;
+        var m2 = '#m2' + count;
+        var m2getBy = 'm2' + count;
+        var m2FiyatGetBy = 'm2Fiyat' + count;
+        var fiyat = '#fiyat' + count;
+        var fiyatGetBy = 'fiyat' + count;
+        var m2Fiyat = '#m2Fiyat' + count;
+
+        var boy = '#boy' + count;
+        var en = '#en' + count;
+        var boygetby = 'boy' + count;
+        var engetby = 'en' + count;
+
+
+
+
+        function FiyatGetir(id) {
+
+            e.preventDefault();
+            var deger = null;
+            $.ajax({
+                type: "GET",
+                url: "/CncOrfiches/ItemsPrice/" + id,
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    // $(ekle).append("<option value='0'>Bir Model seçiniz</option>")
+                    if (data.FIYATHG == null) {
+                        alert("Seçili Modelin Fiyatı Mevcut Değildir. Model Adı : "+data.MODEL)
+                    }
+                    else {
+                        document.getElementById(m2FiyatGetBy).value = data.FIYATHG;
+                    }
+
+
+                }
+
+
+
+            })
+
+
+        }
+
+
+        function FiyatGetirRenk(models, malzeme) {
+
+            console.log(models)
+            console.log(malzeme)
+
+
+
+            e.preventDefault();
+
+            $.ajax({
+                type: "GET",
+                url: "/CncOrfiches/ItemsPriceColor/1",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    // $(ekle).append("<option value='0'>Bir Model seçiniz</option>")
+                    //if (data.FIYATHG == null) {
+                    //    alert("Seçili Modelin Fiyatı Mevcut Değildir. Model Adı : " + data.MODEL)
+                    //}
+                    //else {
+                    //    document.getElementById(m2FiyatGetBy).value = data.FIYATHG;
+                    //}
+
+
+                }
+
+
+
+            })
+
+
+        }
+
+
+        $(model).change(function () {
+
+            var MalzemeSelected = $(model).val();
+            FiyatGetir(MalzemeSelected)
+
+        })
+
+
+        $(malzeme).change(function () {
+
+            var models = $(model).val();
+
+
+            var MalzemeSelected = $(malzeme).val();
+
+            FiyatGetirRenk(models, MalzemeSelected)
+
+        })
+
+        $(adet).change(function () {
+
+            var m2value = $(m2).val();
+            var fiyatvalue = $(fiyat).val();
+            var m2Fiyatvalue = $(m2Fiyat).val();
+            var boyvalue = $(boy).val();
+            var envalue = $(en).val();
+            var adetvalue = $(adet).val();
+
+            var deger = m2value * adetvalue;
+            var sonfıyat = m2Fiyatvalue * deger;
+
+            document.getElementById(m2getBy).value = deger;
+            document.getElementById(fiyatGetBy).value = sonfıyat;
+            setTimeout(MyGetToplam(),5000);
+
+
+
+        })
+
+
+
+
+
+
+        $(en).change(function () {
+
+
+            var m2value = $(m2).val();
+            var fiyatvalue = $(fiyat).val();
+            var m2Fiyatvalue = $(m2Fiyat).val();
+            var boyvalue = $(boy).val();
+            var envalue = $(en).val();
+
+
+            if (boyvalue>=250) {
+                alert("Boy  250 ve Üstü cm olamaz Maximum 249cm.")
+                document.getElementById(boygetby).value = '249';
+            }
+            if (envalue >= 120) {
+                alert("Boy  120 ve Üstü cm olamaz Maximum 119cm.")
+                document.getElementById(engetby).value = '119';
+            }
+
+            if (boyvalue != null  ) {
+
+                var deger = (boyvalue * envalue) / 10000;
+                document.getElementById(m2getBy).value = deger;
+
+
+            }
+
+
+
+        })
+
+
+
+        MyGetToplam();
+
+
+
+
+
 
     });
     $(document).on('click', 'a.deleteItem', function (e) {
@@ -204,11 +1010,157 @@
         if ($(this).attr('data-itemId') == "0") {
             $(this).parents('tr').css("background-color", "#ff6347").fadeOut(800, function () {
                 $(this).remove();
-                CalcutingTotal();
+                MyGetToplam();
             });
 
         }
     });
+
+    function MyGetToplam() {
+
+        var fiyatArr = [];
+        fiyatArr.length = 0;
+
+        var iskontoArr = [];
+        iskontoArr.length = 0;
+
+
+        netTutarValue = 0;
+        iskontoValue = 0;
+        tasarimUcretValue = 0;
+        kargoUcretValue = 0;
+        //---------------------------------------------------------------------
+        $.each($("#detailsTable tbody tr"), function () {
+
+            trValue = $(this).attr("id");
+
+
+
+
+            fiyatArr.push({
+                NetTutar5: parseFloat($("#fiyat" + trValue.toString()).val())
+            });
+
+            fiyatArr.forEach(function (a) {
+                if (parseFloat(a.NetTutar5) > 0) {
+                    netTutarValue += parseFloat(a.NetTutar5);
+                }
+
+            });
+
+            iskontoArr.push({
+                Iskonto5: parseFloat(1)
+            });
+
+            iskontoArr.forEach(function (a) {
+                if (parseFloat(a.Iskonto5) > 0) {
+                    iskontoValue += parseFloat(a.Iskonto5);
+                }
+
+            });
+
+        });
+
+        //-------------------------------------------------------------------------------
+        var netG = 0;
+        //alert(iskontoValue);
+        //alert(iskontoValue.toFixed(2));
+        document.getElementById("kalemTutar").innerHTML = netTutarValue.toFixed(2);
+        document.getElementById("iskontoTutar").innerHTML = parseFloat($("#indirimOraniInput").val()).toFixed(2);
+        document.getElementById("tasarimUcret").innerHTML = parseFloat($("#tasarimUcretiInput").val()).toFixed(2);
+        document.getElementById("kargoUcret").innerHTML = parseFloat($("#kargoUcretiInput").val()).toFixed(2);
+
+        netG = netTutarValue + parseFloat($("#tasarimUcretiInput").val()) + parseFloat($("#kargoUcretiInput").val()) - parseFloat($("#indirimOraniInput").val());
+
+        document.getElementById("netTutar").innerHTML = netG.toFixed(2);
+        //var toplam = 0;
+        //for (genel of orderArr) {
+
+        //    console.log(genel[0].GenelToplam);
+
+        //}
+        //console.log(toplam);
+
+
+
+
+    }
+
+    function Calcute(event) {
+
+        var code = event.keyCode || event.which;
+        if (code == 9) {
+
+
+            var fiyatArr = [];
+            fiyatArr.length = 0;
+
+            var iskontoArr = [];
+            iskontoArr.length = 0;
+
+
+            netTutarValue = 0;
+            iskontoValue = 0;
+            tasarimUcretValue = 0;
+            kargoUcretValue = 0;
+            //---------------------------------------------------------------------
+            $.each($("#detailsTable tbody tr"), function () {
+
+                trValue = $(this).attr("id");
+
+
+
+
+                fiyatArr.push({
+                    NetTutar5: parseFloat($("#fiyat" + trValue.toString()).val())
+                });
+
+                fiyatArr.forEach(function (a) {
+                    if (parseFloat(a.NetTutar5) > 0) {
+                        netTutarValue += parseFloat(a.NetTutar5);
+                    }
+
+                });
+
+                iskontoArr.push({
+                    Iskonto5: parseFloat(1)
+                });
+
+                iskontoArr.forEach(function (a) {
+                    if (parseFloat(a.Iskonto5) > 0) {
+                        iskontoValue += parseFloat(a.Iskonto5);
+                    }
+
+                });
+
+            });
+
+            //-------------------------------------------------------------------------------
+            var netG = 0;
+            //alert(iskontoValue);
+            //alert(iskontoValue.toFixed(2));
+            document.getElementById("kalemTutar").innerHTML = netTutarValue.toFixed(2);
+            document.getElementById("iskontoTutar").innerHTML = parseFloat($("#indirimOraniInput").val()).toFixed(2);
+            document.getElementById("tasarimUcret").innerHTML = parseFloat($("#tasarimUcretiInput").val()).toFixed(2);
+            document.getElementById("kargoUcret").innerHTML = parseFloat($("#kargoUcretiInput").val()).toFixed(2);
+
+            netG = netTutarValue + parseFloat($("#tasarimUcretiInput").val()) + parseFloat($("#kargoUcretiInput").val()) - parseFloat($("#indirimOraniInput").val());
+
+            document.getElementById("netTutar").innerHTML = netG.toFixed(2);
+        //var toplam = 0;
+        //for (genel of orderArr) {
+
+        //    console.log(genel[0].GenelToplam);
+
+        //}
+        //console.log(toplam);
+
+
+
+
+        }
+
+    }
     function saveOrder(data) {
         return $.ajax({
             contentType: 'application/json; charset=utf-8',
@@ -217,20 +1169,28 @@
             url: "/CncOrfiches/Create",
             data: data,
             success: function (result) {
-                //alert(result);
-               /* location.reload();*/
+                alert(result);
+
+
+
+                location.reload()
+
             },
-            error: function () {
+            error: function (error) {
                 //alert("Error!")
+
             }
         });
     }
     //Collect Multiple Order List For Pass To Controller
     $("#saveOrder").click(function (e) {
         //e.preventDefault();
-        //var bForm = formValidate();
+        var bForm = formValidate();
+        //alert(bForm);
         //console.log(bForm)
-        //if (bForm) {
+        if (bForm) {
+
+
             var orderArr = [];
             orderArr.length = 0;
             var trValue = 0;
@@ -245,15 +1205,16 @@
 
                 orderArr.push({
                     MalzemeKodu: $("#model" + trValue.toString()).val(),
-                    MalzemeAdi: $("#malzeme" + trValue.toString()).val(),
-                    Ozellik: parseFloat($("#ozellik" + trValue.toString()).val()),
+                    Model: $("#malzeme" + trValue.toString()).val(),
+                    Ozellik: $("#ozellik" + trValue.toString()).val(),
                     Boy: $("#boy" + trValue.toString()).val(),
                     En: parseFloat($("#en" + trValue.toString()).val()),
                     M2: parseFloat($("#m2" + trValue.toString()).val()),
                     Adet: parseFloat($("#adet" + trValue.toString()).val()),
                     M2Fiyat: parseFloat($("#m2Fiyat" + trValue.toString()).val()),
-                    Fiyat: parseFloat($("#fiyat" + trValue.toString()).val())
-                   
+                    Fiyat: parseFloat($("#fiyat" + trValue.toString()).val()),
+
+
 
                 });
 
@@ -262,12 +1223,13 @@
 
             var data = JSON.stringify({
 
-                FisNo: $("#FisNo").val(),
+                FisNo: $("#BarkodNo").val(),//barkod numarası unıqıe oldugu ıcın tekrar ıslem yaptırmamıza gerek yok
                 MusteriId: $("#MusteriId").val().toString(),
                 BarkodNo: $("#BarkodNo").val(),
                 SiparisSekli: $("#SiparisSekli").val(),
                 BID: $("#BID").val(),
                 Aciklama: $("#Aciklama").val(),
+                Tarih: $("#Tarih").val(),
                 TerminTarihi: $("#TerminTarihi").val(),
                 BelgeNo: $("#BelgeNo").val(),
                 OzelKod: $("#OzelKod").val(),
@@ -276,24 +1238,31 @@
                 Isyeri: $("#Isyeri").val(),
                 SiparisDurumu: $("#SiparisDurumu").val(),
 
-               
+                ToplamIndirim: parseFloat($("#indirimOraniInput").val()),
+                TasarimTutari: parseFloat($("#tasarimUcretiInput").val()),
+                KargoTutari: parseFloat($("#kargoUcretiInput").val()),
+                Toplam: netTutarValue,
+                NetTutar: netTutarValue + parseFloat($("#indirimOraniInput").val()) + parseFloat($("#tasarimUcretiInput").val()) + parseFloat($("#kargoUcretiInput").val()),
+
                 orflines: orderArr
             });
 
             $.when(saveOrder(data)).then(function (response) {
                 console.log(response);
+                document.getElementById("iskontoTutar").innerHTML.value
                 $(window).attr('location', '@Url.Action("Index","CncOrfiches")');
 
             }).fail(function (err) {
                 console.log(err);
+
+                $(window).attr('location', '@Url.Action("Index","CncOrfiches")');
             });
-        //}
 
 
+        }
     });
 
 </script>
-
 
 
 
