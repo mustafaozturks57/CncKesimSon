@@ -19,8 +19,8 @@ namespace Ticari_Otomasyon.Controllers
         // GET: Raporlar
         public ActionResult Index()
         {
-            return View();
-            
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
         }
 
         public ActionResult SiparisPdf(string id)
@@ -28,16 +28,7 @@ namespace Ticari_Otomasyon.Controllers
 
             if (id == null)
             {
-
-
-
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-
-                return View();
-
-
-
             }
             else
             {
