@@ -17,11 +17,7 @@ namespace Ticari_Otomasyon.Controllers
     {
         private CncTicariOtomasyonEntities db = new CncTicariOtomasyonEntities();
         // GET: Raporlar
-        public ActionResult Index()
-        {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-        }
+       
 
         public ActionResult SiparisPdf(string id)
         {
