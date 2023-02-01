@@ -1,0 +1,77 @@
+[
+    {
+        "country": "United States",
+        "medal": "Gold",
+        "count": 46
+    },
+    {
+        "country": "United States",
+        "medal": "Silver",
+        "count": 37
+    },
+    {
+        "country": "United States",
+        "medal": "Bronze",
+        "count": 38
+    },
+    {
+        "country": "Great Britain",
+        "medal": "Gold",
+        "count": 27
+    },
+    {
+        "country": "Great Britain",
+        "medal": "Silver",
+        "count": 23
+    },
+    {
+        "country": "Great Britain",
+        "medal": "Bronze",
+        "count": 17
+    },
+    {
+        "country": "China",
+        "medal": "Gold",
+        "count": 26
+    },
+    {
+        "country": "China",
+        "medal": "Silver",
+        "count": 18
+    },
+    {
+        "country": "China",
+        "medal": "Bronze",
+        "count": 26
+    },
+    {
+        "country": "Russia",
+        "medal": "Gold",
+        "count": 19
+    },
+    {
+        "country": "Russia",
+        "medal": "Silver",
+        "count": 17
+    },
+    {
+        "country": "Russia",
+        "medal": "Bronze",
+        "count": 20
+    },
+    {
+        "country": "Germany",
+        "medal": "Gold",
+        "count": 17
+    },
+    {
+        "country": "Germany",
+        "medal": "Silver",
+        "count": 10
+    },
+    {
+        "country": "Germany",
+        "medal": "Bronze",
+        "count": 15
+    }
+]

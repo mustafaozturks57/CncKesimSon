@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Icons</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+<div id="example">
+    <div class="demo-section">
+        <div style="margin:100px auto;">
+            <h3>SplitButton iconCss:</h3>
+            <button id="iconCssButton">Paste</button>
+        </div>
+
+        <div style="margin:100px auto;">
+            <h3>SplitButton spriteCssClass:</h3>
+            <button id="spriteButton">Play</button>
+        </div>
+        <script>
+        $("#iconCssButton").kendoSplitButton({
+            arrowIcon:"chevron-down",
+            iconClass:"fa fa-plus",
+            items: [
+                { id: "keep-text", text: "Keep Text Only", icon: "gear" },
+                { id: "paste-html", text: "Paste as HTML", icon: "paste-as-html" },
+                { id: "paste-markdown", text: "Paste Markdown", icon: "paste-markdown" },
+                { id: "paste-default", text: "Set Default Paste" }
+            ]
+        })
+
+        $("#spriteButton").kendoSplitButton({
+            spriteCssClass:"k-icon videoIcon",
+            items: [
+                { id: "stop", text: "Stop", icon: "stop" },
+                { id: "pause", text: "Pause", icon: "pause" },
+                { id: "resume", text: "Resume", icon: "play" }
+            ]
+        })
+        </script>
+    </div>
+    <style>
+        .demo-section{
+            display:flex;
+        }
+
+        .videoIcon{
+            background-image: url("../content/shared/icons/16/video.png");
+        }
+    </style>
+</div>
+</body>
+</html>

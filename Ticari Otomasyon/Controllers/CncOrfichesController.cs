@@ -174,12 +174,32 @@ namespace Ticari_Otomasyon.Controllers
          
 
         }
-      
 
 
 
 
-         
+        public ActionResult Excelİmport(HttpPostedFileBase excel)
+        {
+            if (excel!=null)
+            {
+
+
+                return View();
+            }
+            else
+            {
+
+                return View();
+            }
+
+
+
+
+        }
+
+
+
+
         public ActionResult Delete(string id)
         {
             if (id != null)

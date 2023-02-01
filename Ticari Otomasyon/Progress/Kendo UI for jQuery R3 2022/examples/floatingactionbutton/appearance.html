@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Appearance</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div class="configurator">
+    <div class="header">Configurator</div>
+    <div class="box-col">
+        <h4>Shape</h4>
+        <ul class="options">
+            <li>
+                <input id="shapes" name="shapes" />
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <h4>Size</h4>
+        <ul class="options">
+            <li>
+                <input id="size" name="size" />
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <h4>Theme Color</h4>
+        <ul class="options">
+            <li>
+                <input id="themeColor" name="themeColor" />
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <h4>Rounded</h4>
+        <ul class="options">
+            <li>
+                <input id="rounded" name="rounded" />
+            </li>
+        </ul>
+    </div>    
+</div>
+
+<div class="demo-section wide" style="height:300px">
+    <button id="fab"></button>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Configurator
+        $("#shapes").kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [                
+                { text: "Rectangle", value: "rectangle" },
+                { text: "Square", value: "square" }
+            ],
+            value: "rectangle",
+            change: onShapeSelectionChange
+        });
+
+        $("#size").kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "Small", value: "small" },
+                { text: "Medium", value: "medium" },
+                { text: "Large", value: "large" },
+                { text: "None", value: "none" }
+            ],
+            value: "medium",
+            change: onSizeSelectionChange
+        });
+
+        $("#themeColor").kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "Primary", value: "primary" },
+                { text: "Secondary", value: "secondary" },
+                { text: "Tertiary", value: "tertiary" },
+                { text: "Info", value: "info" },
+                { text: "Success", value: "success" },
+                { text: "Warning", value: "warning" },
+                { text: "Error", value: "error" },
+                { text: "Dark", value: "dark" },
+                { text: "Light", value: "light" },
+                { text: "Inverse", value: "inverse" },
+                { text: "None", value: "none" }
+            ],
+            change: onThemeColorSelectionChange
+        })
+
+        $("#rounded").kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            change: onRoundedSelectionChange,
+            value: "full",
+            dataSource: [
+                { text: "Small", value: "small" },
+                { text: "Medium", value: "medium" },
+                { text: "Large", value: "large" },
+                { text: "Full", value: "full" },
+                { text: "None", value: "none" }
+            ]
+        }).data("kendoDropDownList");        
+
+        // FAB
+        $("#fab").kendoFloatingActionButton({
+            icon: "home",
+            text: "Home",
+            positionMode: "absolute",
+            align: "middle center"
+        }).data("kendoFloatingActionButton");      
+    });
+
+    function onShapeSelectionChange(e) {
+        var fab = $("#fab").getKendoFloatingActionButton();
+
+        fab.shape(e.sender.value());
+    };
+    function onThemeColorSelectionChange(e) {
+        var fab = $("#fab").getKendoFloatingActionButton();
+
+        fab.themeColor(e.sender.value());
+    };
+    function onSizeSelectionChange(e) {
+        var fab = $("#fab").getKendoFloatingActionButton();
+
+        fab.setOptions({ size: e.sender.value() });
+    };
+
+    function onRoundedSelectionChange(e) {
+        var fab = $("#fab").getKendoFloatingActionButton();
+
+        fab.setOptions({ rounded: e.sender.value() });
+    };   
+</script>
+<style>
+    .configurator input {
+        padding: 6.5px 8px !important;
+    }
+</style>
+
+
+</body>
+</html>

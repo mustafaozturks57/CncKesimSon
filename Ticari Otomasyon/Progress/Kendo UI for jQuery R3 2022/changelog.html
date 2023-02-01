@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Changelog for Kendo UI Professional v2022.3.913 (Tue Sep 13 2022)</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font: .75em/1.5 Tahoma, sans-serif;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            font-size: normal;
+        }
+
+        h2 {
+            font-size: 2em;
+            font-weight: normal;
+            margin: 1.2em 0 .3em;
+            padding-bottom: .2em;
+        }
+
+        .breaking {
+            background-color: #e10c01;
+            color: #fff;
+            border-radius: 3px;
+            padding: 3px 4px;
+            display: inline-block;
+            font-size: 11px;
+            line-height: 1;
+            font-weight: bold;
+        }
+
+        #page {
+            width: 50em;
+            margin: 0 auto 2em;
+            border-radius: 0 0 1em 1em;
+            box-shadow: 0 0 10px #ccc;
+            padding: 1em 2em 2em;
+        }
+
+        .poBoxIcon {
+            float: left;
+            font-size: 2em;
+            margin: 1.2em .5em 0 0;
+        }
+
+        .poTopLine {
+            border-top: 2px solid #e1e1e1;
+            margin: 17px 0 40px 0;
+        }
+    </style>
+    <base href="https://www.telerik.com/support/whats-new/kendo-ui-web/release-history">
+</head>
+
+<body>
+    <div id="page">
+        <h1 class="title">Release notes</h1>
+        <div class="tClear poTopLine"></div>
+        <h1>Common</h1>
+        <div class="tClear poTopLine">
+            <div class="poBoxIconText">
+                <p><strong>What's new</strong></p>
+                <ul>
+                    <li>Fluent Theme Package <a href="https://github.com/telerik/kendo-themes/blob/master/packages/fluent/CHANGELOG.md#580-2022-09-12"> (v5.8.0) </a></li>
+                    <li>Support for jQuery 3.6.1</li>
+                    <li>Classic Theme Package <a href="https://github.com/telerik/kendo-themes/blob/master/packages/classic/CHANGELOG.md#580-2022-09-12"> (v5.8.0) </a></li>
+                    <li>Bootstrap Theme Package <a href="https://github.com/telerik/kendo-themes/blob/master/packages/bootstrap/CHANGELOG.md#580-2022-09-12"> (v5.8.0) </a></li>
+                    <li>Default Theme Package <a href="https://github.com/telerik/kendo-themes/blob/master/packages/default/CHANGELOG.md#580-2022-09-12"> (v5.8.0) </a></li>
+                    <li>Material Theme Package <a href="https://github.com/telerik/kendo-themes/blob/master/packages/material/CHANGELOG.md#580-2022-09-12"> (v5.8.0) </a></li>
+                </ul>
+                <p><strong>What's fixed</strong></p>
+                <ul>
+                    <li>The background-color of a selected Grid row disappears in the LESS themes <a href="https://github.com/telerik/kendo-ui-core/issues/6972">(#6972)</a></li>
+                </ul>
+            </div>
+        </div>
+        <h1>New components</h1>
+        <div class="tClear poTopLine">
+            <div class="poBoxIconText">
+                <h2>Signature Component</h2>
+            </div>
+        </div>
+        <h1>Features and Updates</h1>
+        <div class="tClear poTopLine">
+            <h2>Badge</h2>
+            <p><strong>What's changed</strong></p>
+            <ul>
+                <li><span class="breaking">Breaking</span> Unify Badge rendering across flavors</li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>ColorGradient</h2>
+            <p><strong>What's new</strong></p>
+            <ul>
+                <li>Add initialization from input to enable submitting form value</li>
+                <li>Enhance WAI ARIA attributes</li>
+                <li>Add ColorGradient, ColorPalette and FlatColorPicker to Form component editors</li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>ColorPalette</h2>
+            <p><strong>What's new</strong></p>
+            <ul>
+                <li>Add initialization from input to enable submitting form value</li>
+                <li>Enhance WAI ARIA attributes</li>
+                <li>Add ColorGradient, ColorPalette and FlatColorPicker to Form component editors</li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>ColorPicker</h2>
+            <p><strong>What's new</strong></p>
+            <ul>
+                <li>Enhance WAI ARIA attributes</li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>ComboBox</h2>
+            <p><strong>What's fixed</strong></p>
+            <ul>
+                <li>The text in disabled ComboBox is not selected properly <a href="https://github.com/telerik/kendo-ui-core/issues/6359">(#6359)</a></li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>DropDownList</h2>
+            <p><strong>What's fixed</strong></p>
+            <ul>
+                <li>Clicking on DropDownList when editing a Gantt TreeList field closes the cell instead of opening the DropDownList <a href="https://github.com/telerik/kendo-ui-core/issues/6931">(#6931)</a></li>
+                <li>DropDownList popup does not close when clicking on the arrow icon <a href="https://github.com/telerik/kendo-ui-core/issues/6891">(#6891)</a></li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>DropDownTree</h2>
+            <p><strong>What's fixed</strong></p>
+            <ul>
+                <li>DropDownTree change event is not triggered if the widget has autoClose: false, checkboxes: false and filtering enabled</li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>Editor</h2>
+            <p><strong>What's fixed</strong></p>
+            <ul>
+                <li>Editor is not displayed as expected on iPad in Safari desktop mode <a href="https://github.com/telerik/kendo-ui-core/issues/6791">(#6791)</a></li>
+                <li>Tables background color copied from word file is not pasted into Editor <a href="https://github.com/telerik/kendo-ui-core/issues/4094">(#4094)</a></li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>FlatColorPicker</h2>
+            <p><strong>What's new</strong></p>
+            <ul>
+                <li>Add initialization from input to enable submitting form value</li>
+                <li>Enhance WAI ARIA attributes</li>
+                <li>Add ColorGradient, ColorPalette and FlatColorPicker to Form component editors</li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>Form</h2>
+            <p><strong>What's new</strong></p>
+            <ul>
+                <li>Add ColorGradient, ColorPalette and FlatColorPicker to Form component editors</li>
+            </ul>
+            <p><strong>What's changed</strong></p>
+            <ul>
+                <li><span class="breaking">Breaking</span> Checkbox fields should be rendered with label on the right</li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>Gantt</h2>
+            <p><strong>What's fixed</strong></p>
+            <ul>
+                <li>Clicking on DropDownList when editing a Gantt TreeList field closes the cell instead of opening the DropDownList <a href="https://github.com/telerik/kendo-ui-core/issues/6931">(#6931)</a></li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>Grid</h2>
+            <p><strong>What's new</strong></p>
+            <ul>
+                <li>Hide column that is currently grouped</li>
+                <li>Update the Selectable widget events mechanism</li>
+                <li>Disable Column Menu via a configuration option</li>
+                <li>Grid WAI-ARIA improvements</li>
+            </ul>
+            <p><strong>What's fixed</strong></p>
+            <ul>
+                <li>In Hierarchical Grid scenario, roles are not assigned to detail row/cell</li>
+                <li>Filtered virtual Grid truncates records <a href="https://github.com/telerik/kendo-ui-core/issues/6962">(#6962)</a></li>
+                <li>Grid with Endless Scrolling, Server Grouping and Server Filtering throws an error <a href="https://github.com/telerik/kendo-ui-core/issues/6954">(#6954)</a></li>
+                <li>Js exception is thrown when exporting a Grid with aggregates to Excel with the exportSelectedToExcel method <a href="https://github.com/telerik/kendo-ui-core/issues/6903">(#6903)</a></li>
+                <li>Grid is not exported when multicolumn headers are configured and exportSelectedToExcel method is used <a href="https://github.com/telerik/kendo-ui-core/issues/6481">(#6481)</a></li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>PDFViewer</h2>
+            <p><strong>What's new</strong></p>
+            <ul>
+                <li>Separate ZoomInOut buttons tool and Zoom selection tool in PDFViewer's ToolBar</li>
+            </ul>
+            <p><strong>What's fixed</strong></p>
+            <ul>
+                <li>The zoom tool in the PDFViewer's toolbar is disabled when it is in the overflow menu <a href="https://github.com/telerik/kendo-ui-core/issues/6377">(#6377)</a></li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>PivotGridV2</h2>
+            <p><strong>What's fixed</strong></p>
+            <ul>
+                <li>Misalignment occurs in a scenario with horizontal scrolling</li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>PopOver</h2>
+            <p><strong>What's changed</strong></p>
+            <ul>
+                <li><span class="breaking">Breaking</span> Update Popover rendering</li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>Scheduler</h2>
+            <p><strong>What's fixed</strong></p>
+            <ul>
+                <li>Right-click to open ContextMenu is selecting first item of the scheduler agenda view <a href="https://github.com/telerik/kendo-ui-core/issues/6956">(#6956)</a></li>
+                <li>Scheduler scrolls top after editing an event <a href="https://github.com/telerik/kendo-ui-core/issues/6946">(#6946)</a></li>
+                <li>Cannot read property 'firstChild' of undefined error thrown in Scheduler Month view when resources datasource is empty <a href="https://github.com/telerik/kendo-ui-core/issues/6886">(#6886)</a></li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>TextBox</h2>
+            <p><strong>What's fixed</strong></p>
+            <ul>
+                <li>Duplicate label element on changing TextBox properties via setOptions</li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>ToolBar</h2>
+            <p><strong>What's new</strong></p>
+            <ul>
+                <li>Separate ToolBar tools navigation modes - only via Arrows or only via Tab</li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>TreeView</h2>
+            <p><strong>What's fixed</strong></p>
+            <ul>
+                <li>TreeView drag and drop not placing nodes at expected position after sorting</li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>Window</h2>
+            <p><strong>What's fixed</strong></p>
+            <ul>
+                <li>The restore event is missing in the Window typescript definition <a href="https://github.com/telerik/kendo-ui-core/issues/6877">(#6877)</a></li>
+            </ul>
+        </div>
+        <div class="tClear poTopLine">
+            <h2>Wizard</h2>
+            <p><strong>What's fixed</strong></p>
+            <ul>
+                <li>Wizard's stepper does not allow manual navigation when the select() method is used on the last step <a href="https://github.com/telerik/kendo-ui-core/issues/6940">(#6940)</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

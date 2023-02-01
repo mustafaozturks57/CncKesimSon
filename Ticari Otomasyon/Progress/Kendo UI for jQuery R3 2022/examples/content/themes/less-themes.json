@@ -1,0 +1,98 @@
+[
+  {
+    "name": "black",
+    "title": "Black",
+    "common": "common",
+    "palette": [ "#0167cc", "#4698e9", "#272727" ]
+  },
+  {
+    "name": "blueopal",
+    "title": "Blue Opal",
+    "common": "common",
+    "palette": [ "#076186", "#7ed3f6", "#94c0d2" ]
+  },
+  {
+    "name": "bootstrap",
+    "title": "Bootstrap v3",
+    "common": "common-bootstrap",
+    "palette": [ "#3276b1", "#67afe9", "#fff" ]
+  },
+  {
+    "name": "default",
+    "title": "Default",
+    "common": "common",
+    "palette": [ "#ef6f1c", "#e24b17", "#5a4b43" ]
+  },
+  {
+    "name": "fiori",
+    "title": "Fiori",
+    "common": "common-fiori",
+    "palette": [ "#007cc0", "#e6f2f9", "#f0f0f0" ]
+  },
+  {
+    "name": "flat",
+    "title": "Flat",
+    "common": "common",
+    "palette": [ "#363940", "#2eb3a6", "#fff" ]
+  },
+  {
+    "name": "highcontrast",
+    "title": "High Contrast",
+    "common": "common",
+    "palette": [ "#b11e9c", "#880275", "#1b141a" ]
+  },
+  {
+    "name": "material",
+    "title": "Material",
+    "common": "common-material",
+    "palette": [ "#3f51b5", "#283593", "#fff" ]
+  },
+  {
+    "name": "materialblack",
+    "title": "Material Black",
+    "common": "common-material",
+    "palette": [ "#3f51b5", "#1c1c1c", "#4d4d4d" ]
+  },
+  {
+    "name": "metro",
+    "title": "Metro",
+    "common": "common",
+    "palette": [ "#8ebc00", "#787878", "#fff" ]
+  },
+  {
+    "name": "metroblack",
+    "title": "Metro Black",
+    "common": "common",
+    "palette": [ "#00aba9", "#0e0e0e", "#565656" ]
+  },
+  {
+    "name": "moonlight",
+    "title": "Moonlight",
+    "common": "common",
+    "palette": [ "#ee9f05", "#40444f", "#212a33" ]
+  },
+  {
+    "name": "nova",
+    "title": "Nova",
+    "common": "common-nova",
+    "palette": [ "#ff4350", "#00acc1", "#303553" ]
+  },
+  {
+    "name": "office365",
+    "title": "Office 365",
+    "common": "common-office365",
+    "palette": [ "#0072c6", "#cde6f7", "#fff" ]
+  },
+  {
+    "name": "silver",
+    "title": "Silver",
+    "common": "common",
+    "palette": [ "#298bc8", "#515967", "#eaeaec" ]
+  },
+  {
+    "name": "uniform",
+    "title": "Uniform",
+    "common": "common",
+    "palette": [ "#666", "#ccc", "#fff" ]
+  }
+]

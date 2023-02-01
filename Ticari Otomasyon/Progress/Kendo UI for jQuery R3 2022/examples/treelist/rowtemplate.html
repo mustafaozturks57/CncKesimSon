@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Row template</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div id="treelist"></div>
+<script id="template" type="text/x-kendo-template">
+    <tr data-uid="#= data.model.uid #" >
+        <td>
+            #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+                <span class="k-icon k-i-none"></span>
+            #}#
+            #if(data.hasChildren){#
+                <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+            #}#
+        <div class='employee-photo'
+             style='background-image: url(@Url.Content("~/content/shared/images/employees")/#: data.model.id #.png);'></div>
+        <div class='employee-name'>#: data.model.Employee #<span class = 'employee-position'>#: data.model.Position #</span></div>
+        </td>
+         <td>
+                <img class= "county-flag" src="../content/web/country-flags/#: data.model.CountryFlag #.png"   />
+        </td>
+        <td>
+                <span id='#: data.model.id #' class='badgeTemplate'>#: data.model.lengthOfService #</span>
+        </td>
+    </tr>
+</script>
+
+<script id="altRowTemplate" type="text/x-kendo-template">
+    <tr data-uid="#= data.model.uid #" class="k-alt">
+        <td>
+            #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+                <span class="k-icon k-i-none"></span>
+            #}#
+            #if(data.hasChildren){#
+                <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+            #}#
+        <div class='employee-photo'
+             style='background-image: url(@Url.Content("~/content/shared/images/employees")/#: data.model.id #.png);'></div>
+        <div class='employee-name'>#: data.model.Employee #<span class = 'employee-position'>#: data.model.Position #</span></div>
+        </td>
+         <td>
+                <img class= "county-flag" src="../content/web/country-flags/#: data.model.CountryFlag #.png"   />
+        </td>
+        <td>
+                <span id='#: data.model.id #' class='badgeTemplate'>#: data.model.lengthOfService #</span>
+        </td>
+    </tr>
+</script>
+
+<script>
+    $("#treelist").kendoTreeList({
+        rowTemplate: kendo.template($("#template").html()),
+        altRowTemplate: kendo.template($("#altRowTemplate").html()),
+        columns: [
+            { field: "Employee", width: "450px" },
+            { field: "Country", width: "130px" },
+            { field: "Length of Service", width: "185px" }
+        ],
+        dataSource: {
+            data: [
+                { id: 1, parentId: null, Employee: "Daryl Sweeney", Position: "CEO", CountryFlag: "us", lengthOfService: 10 },
+                { id: 2, parentId: 1, Employee: "Ann Green", Position: "VP, Engineering", CountryFlag: "fr", lengthOfService: 5 },
+                { id: 3, parentId: 1, Employee: "Kate Webber", Position: "Director, Engineering", CountryFlag: "bg", lengthOfService: 6 },
+                { id: 4, parentId: null, Employee: "Guy Wooten", Position: "Chief Technical Officer", CountryFlag: "it", lengthOfService: 12 },
+                { id: 5, parentId: 4, Employee: "Rinah Simon", Position: "Software Developer", CountryFlag: "gb", lengthOfService: 7 },
+                { id: 6, parentId: 4, Employee: "Lillian Bradshaw", Position: "Software Developer", CountryFlag: "in", lengthOfService: 3 }
+
+            ],
+            schema: {
+                model: {
+                    id: "id",
+                    expanded: true
+                }
+            }
+        },
+        dataBound: function (e) {
+            var grid = this;
+            grid.table.find("tr").each(function () {
+                var dataItem = grid.dataItem(this);
+                var additionalClass = getAdditionalClass(dataItem.id);
+
+                $(this).find(".badgeTemplate").kendoBadge({
+                    shape: 'pill',
+                    fill: "outline",
+                    size: "large",
+                    themeColor: "inherit"
+                }).addClass(additionalClass);;
+
+                kendo.bind($(this), dataItem);
+            });
+        }
+    });
+
+    function getAdditionalClass(employeeId) {
+        if (employeeId % 3 == 0) {
+            return 'lengthOfServiceBlue';
+        }
+        else if (employeeId % 3 == 1) {
+            return "lengthOfServiceGreen";
+        }
+        else {
+            return "lengthOfServicePurple";
+        }
+    }
+</script>
+
+<script>
+
+
+</script>
+
+<style>
+    .employee-photo {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-size: 32px 35px;
+        background-position: center center;
+        vertical-align: middle;
+        line-height: 32px;
+        box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+        margin-left: 5px;
+    }
+
+    .employee-name {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 22px;
+        padding-left: 3px;
+    }
+
+    .employee-position {
+        text-align: left;
+        letter-spacing: 0px;
+        opacity: 1;
+        font-size: 9px;
+        display: block
+    }
+
+    .county-flag {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 25%;
+    }
+
+    .lengthOfServicePurple {
+        background: #6153CB26 0% 0% no-repeat padding-box;
+        border: 1px solid #6153CB;
+        color: #6153CB;
+        width: 85px;
+        height: 22px;
+        margin-left: 35%;
+    }
+
+    .lengthOfServiceBlue {
+        background: #537DCB26 0% 0% no-repeat padding-box;
+        border: 1px solid #537DCB;
+        color: #537DCB;
+        width: 85px;
+        height: 22px;
+        margin-left: 35%;
+    }
+
+    .lengthOfServiceGreen {
+        background: #53CBAB26 0% 0% no-repeat padding-box;
+        border: 1px solid #53CBAB;
+        color: #53CBAB;
+        width: 85px;
+        height: 22px;
+        margin-left: 35%;
+    }
+</style>
+</body>
+</html>

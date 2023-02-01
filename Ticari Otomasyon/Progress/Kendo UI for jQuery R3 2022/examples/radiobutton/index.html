@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Basic Usage</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div id="example">
+    <div class="demo-section">
+        <h4>Select Car Engine</h4>
+        <ul class="fieldlist">
+            <li>
+                <input type="radio" name="engine" id="engine1" />
+            </li>
+            <li>
+                <input type="radio" name="engine" id="engine2" />
+            </li>
+            <li>
+                <input type="radio" name="engine" id="engine3" />
+            </li>
+            <li>
+                <input type="radio" name="engine" id="engine4" />
+            </li>
+            <li>
+                <input type="radio" name="engine" id="engine5" />
+            </li>
+            <li>
+                <input type="radio" name="engine" id="engine6" />
+            </li>
+            <li>
+                <input type="radio" name="engine" id="engine7" />
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        $('#engine1').kendoRadioButton({
+            label: "1.4 Petrol, 92kW",
+            checked: true
+        })
+        $('#engine2').kendoRadioButton({
+            label: "1.8 Petrol, 118kW"
+        })
+        $('#engine3').kendoRadioButton({
+            label: "2.0 Petrol, 147kW"
+        })
+        $('#engine4').kendoRadioButton({
+            label: "3.6 Petrol, 191kW",
+            enabled: false
+        })
+        $('#engine5').kendoRadioButton({
+            label: "1.6 Diesel, 77kW"
+        })
+        $('#engine6').kendoRadioButton({
+            label: "2.0 Diesel, 103kW"
+        })
+        $('#engine7').kendoRadioButton({
+            label: "2.0 Petrol, 125kW",
+            enabled: false
+        })
+    </script>
+    <style>
+        .fieldlist {
+            margin: 0 0 -1em;
+            padding: 0;
+        }
+
+            .fieldlist li {
+                list-style: none;
+                padding-bottom: 1em;
+            }
+    </style>
+</div>
+</body>
+</html>

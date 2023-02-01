@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Apperance</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div class="configurator">
+    <div class="header">Configurator</div>
+    <div class="box-col">
+        <h4>SIZE</h4>
+        <ul class="options">
+            <li>
+                <input id="size" />
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <h4>BORDER RADIUS</h4>
+        <ul class="options">
+            <li>
+                <input id="rounded" />
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <h4>FILL MODE</h4>
+        <ul class="options">
+            <li>
+                <input id="fillMode" />
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <h4>Brush Color</h4>
+        <ul class="options">
+            <li>
+                <input id='colorpicker' />
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <h4>Background Color</h4>
+        <ul class="options">
+            <li>
+                <input id='background' />
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <h4>Brush Size</h4>
+        <ul class="options">
+            <li>
+                <input id='brush-size' />
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="k-d-flex k-justify-content-center">
+    <div id="signature"></div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        var signature = $("#signature").kendoSignature({
+            maximizable: true,
+            hideLine: false,
+        }).getKendoSignature();
+
+        $("#colorpicker").kendoColorPicker({
+            view: "gradient",
+            views: ["gradient", "palette"],
+            value: "#000000",
+            change: function(e) {
+                signature.setOptions({
+                    color: e.value
+                });
+            },
+            buttons: false
+        });
+
+        $("#background").kendoColorPicker({
+            view: "gradient",
+            views: ["gradient", "palette"],
+            change: function(e) {
+                signature.setOptions({
+                    backgroundColor: e.value
+                });
+            },
+            buttons: false
+        });
+
+        $("#brush-size").kendoSlider({
+            min: 1,
+            max: 5,
+            change: function(e) {
+                let value = this.value();
+                signature.setOptions({
+                    strokeWidth: value
+                });
+            }
+        });
+
+        $("#size").kendoDropDownList({
+            dataSource: ["small", "medium", "large", "none"],
+            value: "medium",
+            change: function() {
+                let value = this.value();
+                signature.setOptions({ size: value });
+            }
+        });
+
+        $("#rounded").kendoDropDownList({
+            dataSource: ["small", "medium", "large", "none"],
+            value: "medium",
+            change: function() {
+                let value = this.value();
+                signature.setOptions({ rounded: value });
+            }
+        });
+
+        $("#fillMode").kendoDropDownList({
+            dataSource: ["solid", "flat", "outline", "none"],
+            value: "solid",
+            change: function() {
+                let value = this.value();
+                signature.setOptions({ fillMode: value });
+            }
+        });
+    });
+</script>
+
+<style>
+    .k-picker {
+        width: 140px;
+    }
+</style>
+</body>
+</html>

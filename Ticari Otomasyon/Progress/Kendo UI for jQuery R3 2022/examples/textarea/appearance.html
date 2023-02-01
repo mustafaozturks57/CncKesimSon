@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Appearance</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div id="example">
+    <div class="configurator">
+        <div class="header">Configurator</div>
+        <div class="box-col">
+            <h4>SIZE</h4>
+            <ul class="options">
+                <li>
+                    <input id="size" />
+                </li>
+            </ul>
+        </div>
+        <div class="box-col">
+            <h4>BORDER RADIUS</h4>
+            <ul class="options">
+                <li>
+                    <input id="rounded" />
+                </li>
+            </ul>
+        </div>
+        <div class="box-col">
+            <h4>FILL MODE</h4>
+            <ul class="options">
+                <li>
+                    <input id="fillMode" />
+                </li>
+            </ul>
+        </div>
+        <div class="box-col">
+            <h4>OVERFLOW</h4>
+            <ul class="options">
+                <li>
+                    <input id="overflow" />
+                </li>
+            </ul>
+        </div>
+        <div class="box-col">
+            <h4>RESIZE ORIENTATION</h4>
+            <ul class="options">
+                <li>
+                    <input id="resize" />
+                </li>
+            </ul>
+        </div>
+    </div>
+
+	<div class="k-d-flex k-justify-content-center" style="padding-top: 54px;">
+		<div class="k-w-300">
+			<textarea id="description"></textarea>
+		</div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var textarea = $("#description").kendoTextArea({
+				label: "Set value",
+                value: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
+                        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
+                    "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+                rows: 3
+            }).data('kendoTextArea');
+
+            $("#size").kendoDropDownList({
+                dataSource: ["small", "medium", "large", "none"],
+                value: "medium",
+                change: function () {
+                    let value = this.value();
+                    textarea.setOptions({ size: value });
+                }
+            });
+
+            $("#rounded").kendoDropDownList({
+                dataSource: ["small", "medium", "large", "full", "none"],
+                value: "medium",
+                change: function () {
+                    let value = this.value();
+                    textarea.setOptions({ rounded: value });
+                }
+            });
+
+            $("#fillMode").kendoDropDownList({
+                dataSource: ["solid", "flat", "outline", "none"],
+                value: "solid",
+                change: function () {
+                    let value = this.value();
+                    textarea.setOptions({ fillMode: value });
+                }
+            });
+
+            $("#overflow").kendoDropDownList({
+                dataSource: ["auto", "hidden", "visible", "scroll", "clip", "none"],
+                value: "auto",
+                change: function () {
+                    let value = this.value();
+                    textarea.setOptions({ overflow: value });
+                }
+            });
+
+            $("#resize").kendoDropDownList({
+                dataSource: ["both", "horizontal", "vertical", "none"],
+                value: "none",
+                change: function () {
+                    let value = this.value();
+                    textarea.setOptions({ resize: value });
+                }
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

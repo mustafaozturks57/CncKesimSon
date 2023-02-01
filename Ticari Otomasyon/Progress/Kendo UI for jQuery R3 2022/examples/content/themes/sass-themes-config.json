@@ -1,0 +1,58 @@
+[
+  {
+    "name": "default",
+    "title": "Default",
+    "primary": "#ff6358",
+    "swatches": [
+      { "name": "default-ocean-blue", "icon": "eye" },
+      { "name": "default-main" },
+      { "name": "default-main-dark", "icon": "moon" },
+      { "name": "default-purple" },
+      { "name": "default-turquoise" },
+      { "name": "default-nordic" }
+    ]
+  },
+  {
+    "name": "bootstrap",
+    "title": "Bootstrap",
+    "primary": "#0d6efd",
+    "swatches": [
+      { "name": "bootstrap-main" },
+      { "name": "bootstrap-main-dark", "icon": "moon" },
+      { "name": "bootstrap-urban" },
+      { "name": "bootstrap-nordic" },
+      { "name": "bootstrap-vintage" }
+    ]
+  },
+  {
+    "name": "material",
+    "title": "Material",
+    "primary": "#3f51b5",
+    "swatches": [
+      { "name": "material-main" },
+      { "name": "material-main-dark", "icon": "moon" },
+      { "name": "material-lime-dark" },
+      { "name": "material-nova" },
+      { "name": "material-arctic" }
+    ]
+  },
+  {
+    "name": "classic",
+    "title": "Classic",
+    "primary": "#f35800",
+    "swatches": [
+      { "name": "classic-main" },
+      { "name": "classic-main-dark", "icon": "moon" },
+      { "name": "classic-silver" },
+      { "name": "classic-opal" }
+    ]
+  },
+  {
+    "name": "fluent",
+    "title": "Fluent",
+    "primary": "#0078d4",
+    "swatches": [
+      { "name": "fluent-main" }
+    ]
+  }
+]

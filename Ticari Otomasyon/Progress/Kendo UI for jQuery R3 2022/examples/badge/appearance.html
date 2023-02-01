@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Appearance</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div class="configurator">
+    <div class="header">Configurator</div>
+    <div class="box-col">
+        <ul class="options">
+            <li>
+                <label for="rounded">Rounded:</label>
+                <input id="rounded" />              
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <ul class="options">
+            <li>
+                <label for="size">Size:</label>
+                <input id="size" />
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <ul class="options">
+            <li>
+                <label for="themeColor">Theme color:</label>
+                <input id="themeColor"/>
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <ul class="options">
+            <li>
+                <label for="fill">FillMode:</label>
+                <input id='fill'/>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div>
+    <div class="cards-container">
+        <div class="k-card">
+            <div class="k-card-header">
+                <h5 class="k-card-title">Rome</h5>
+                <h6 class="k-card-subtitle">Capital of Italy</h6>
+            </div>
+            <img class="k-card-image" src="~/content/web/cards/rome.jpg" />
+            <div class="k-card-body">
+                <span id="badgeBarcelona">New</span>
+                <p>Rome is a sprawling, cosmopolitan city with nearly 3,000 years of globally influential art, architecture and culture on display.</p>
+            </div>
+        </div>
+
+        <div class="k-card">
+            <div class="k-card-header">
+                <h5 class="k-card-title">Barcelona</h5>
+                <h6 class="k-card-subtitle">Beauty</h6>
+            </div>
+            <img class="k-card-image" src="~/content/web/cards/barcelona.jpg" />
+            <div class="k-card-body">
+                <p>Barcelona, the cosmopolitan capital of Spain's Catalonia region, is known for its art and architecture.</p>
+            </div>
+        </div>
+
+        <div class="k-card">
+            <div class="k-card-header">
+                <h5 class="k-card-title">San Francisco</h5>
+                <h6 class="k-card-subtitle">City in California</h6>
+            </div>
+            <img class="k-card-image" src="~/content/web/cards/sanfran.jpg" />
+            <div class="k-card-body">
+                <span id="badgeSanFrancisco">Most Popular</span>
+                <p>San Francisco, officially City and County of San Francisco and colloquially known as SF, San Fran or "The City", is the cultural, commercial, and financial center of Northern California.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            function changeRounded(e) {
+                $("#badgeBarcelona, #badgeSanFrancisco").each(function () {
+                    $(this).data().kendoBadge.setOptions({
+                        rounded: e.sender.text()
+                    });
+                });
+            }
+            function changeSize(e) {
+                $("#badgeBarcelona, #badgeSanFrancisco").each(function () {
+                    $(this).data().kendoBadge.setOptions({
+                        size: e.sender.text()
+                    });
+                });
+            }
+            function changeThemeColor(e) {
+                $("#badgeBarcelona, #badgeSanFrancisco").each(function () {
+                    $(this).data().kendoBadge.setOptions({
+                        themeColor: e.sender.text()
+                    });
+                });
+            }
+            function changeFill(e) {
+                $("#badgeBarcelona, #badgeSanFrancisco").each(function () {
+                    $(this).data().kendoBadge.setOptions({
+                        fill: e.sender.text()
+                    });
+                });
+            }
+
+            $("#rounded").kendoDropDownList({
+                dataTextField:"Text",
+                dataValueField:"Value",
+                dataSource:[
+                    { Text: "full", Value: 1},
+                    { Text: "small", Value: 2},
+                    { Text: "medium", Value: 3},
+                    { Text: "large", Value: 4},
+                    { Text: "none", Value: 5},
+                ],
+                value:"1",
+                change: changeRounded
+            })
+
+            $("#size").kendoDropDownList({
+                dataTextField:"Text",
+                dataValueField:"Value",
+                dataSource:[
+                    { Text: "small", Value: 1},
+                    { Text: "medium", Value: 2},
+                    { Text: "large", Value: 3},
+                    { Text: "none", Value: 4},
+                ],
+                value:"2",
+                change: changeSize
+            })
+
+            $("#themeColor").kendoDropDownList({
+                dataTextField:"Text",
+                dataValueField:"Value",
+                dataSource:[
+                    { Text: "primary", Value: "1" },
+                    { Text: "secondary", Value: "2" },
+                    { Text: "tertiary", Value: "3" },
+                    { Text: "inherit", Value: "4" },
+                    { Text: "info", Value: "5" },
+                    { Text: "success", Value: "6" },
+                    { Text: "warning", Value: "7" },
+                    { Text: "error", Value: "8" },
+                    { Text: "dark", Value: "9" },
+                    { Text: "light", Value: "10" },
+                    { Text: "inverse", Value: "11" } 
+                ],
+                value:"2",
+                change: changeThemeColor
+            })
+
+            $("#fill").kendoDropDownList({
+                dataTextField:"Text",
+                dataValueField:"Value",
+                dataSource:[
+                    { Text:"outline", Value: "1" },
+                    { Text:"solid", Value: "2" },
+                    { Text:"none", Value: "3" }
+                ],
+                value:"2",
+                change: changeFill
+            })
+
+            $("#badgeBarcelona").kendoBadge({
+                rounded:"large"
+            })
+
+            $("#badgeSanFrancisco").kendoBadge({
+                rounded:"large"
+            })
+        })
+    
+</script>
+    <style>
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .k-card {
+            width: 285px;
+            margin: 5%;
+        }
+        .k-card-footer {
+            text-align: center;
+        }
+        .k-badge {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+        }
+        
+    </style>
+</div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>API</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div id="example">
+    <div class="configurator">
+        <div class="header">Configurator</div>
+
+        <div class="box-col">
+            <h4>Change Color</h4>
+            <ul class="options">
+                <li>
+                    <input type="text" value="#4c2c92" id="newColor" placeholder="e.g. #4c2c92" style="height: 30px;"/>
+                    <button id="redraw">Redraw</button>
+                </li>
+            </ul>
+        </div>
+        <div class="box-col">
+            <h4>Value</h4>
+            <ul class="options">
+                <li>
+                    <input type="text" id="newValue" value="75" placeholder="e.g. 23" style="height: 30px; width: 187px"/>
+                    <button id="setProgressBarValue">Set value</button>
+                    <button id="getProgressBarValue">Get value</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="circular-container">
+        <div id="progressbar" style="width: 100%;"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var pb = $("#progressbar").kendoCircularProgressBar({
+                value: 25,
+                centerTemplate: '<span style="color: \\#2e8540;">#: value #%</span>'
+            }).data("kendoCircularProgressBar");
+
+            $("#setProgressBarValue").click(function () {
+                pb.value($("#newValue").val());
+            });
+
+            $("#getProgressBarValue").click(function () {
+                alert("Current ProgressBar value is: " + pb.value());
+            });
+
+            $("#redraw").click(function () {
+                pb.options.color = $("#newColor").val();
+                pb.redraw();
+            });
+
+            $("#newValue").kendoNumericTextBox({
+                min: 0
+            });
+        });
+    </script>
+</div>
+
+<style>
+    .circular-container {
+        padding: 3em;
+    }
+</style>
+</body>
+</html>

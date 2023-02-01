@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Templates</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div id="example">
+    <div class="demo-section wide">
+
+        <script id="column-template" type="text/x-kendo-template">
+            <div class="column-template-container">
+                <div>
+                    <img src="#= Image #" style="height:50px; width: 50px;">
+                </div>
+                <div>
+                    <h3>#: CategoryName #</h3>
+                </div>
+            </div>
+        </script>
+
+        <script id="card-template" type="text/x-kendo-template">
+            <div class="template-container">
+                <div class="template-header">
+                    <p><a class="k-card-title k-link" href="" data-command="SelectCardCommand">#: title #</a></p>
+                </div>
+                <p>#: description#</p>
+                <p>#: kendo.toString( start, "MMMM dd")#</p>
+            </div>
+        </script>
+
+        <script id="previewPane-header-template" type="text/x-kendo-template">
+            <div class="k-taskboard-pane-header">
+                <h3 class="k-taskboard-pane-header-text">#: title #</h3>
+                <span class="k-spacer"></span>
+                <div class="k-taskboard-pane-header-actions">
+                    <button class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md" title="Close" data-command="ClosePaneCommand">
+                        <span class="k-button-icon k-icon k-i-close"></span>
+                    </button>
+                </div>
+            </div>
+        </script>
+
+        <script id="previewPane-content-template" type="text/x-kendo-template">
+            <div class="k-taskboard-pane-content">
+                <p>#: description #</p>
+                <p>#: kendo.toString(start, "MMMM dd, h:mm tt")# - #:kendo.toString(end, "MMMM dd, h:mm tt")#</p>
+            </div>
+            <div class="k-taskboard-pane-actions k-action-buttons k-actions-end">
+                <button class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" title="Delete" data-command="DeleteCardCommand" data-options="null">
+                    <span class="k-button-icon k-icon k-i-delete "></span>Delete
+                </button>
+                <button class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md" title="Edit" data-command="EditCardCommand" data-options="null">
+                    <span class="k-button-icon k-icon k-i-edit "></span>Edit
+                </button>
+            </div>
+        </script>
+
+        <script id="tooltip-template" type="text/x-kendo-template">
+            <div class="tooltip-template-container">
+                # var card = target.closest(".k-taskboard-card"); #
+
+                # var taskBoard = $("\\#taskBoard").data("kendoTaskBoard") #
+                # var item = taskBoard.dataItem(card);  #
+                <p>#: item.title#</p>
+                <p>#: item.description#</p>
+                <p>#: kendo.toString( item.start, "MMMM dd, h:mm tt")# - #:kendo.toString( item.end, "MMMM dd, h:mm tt")#</p>
+            </div>
+        </script>
+
+        <div id="taskBoard"></div>
+
+    </div>
+</div>
+
+<script>
+    var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+
+    $("#taskBoard").kendoTaskBoard({
+        columnSettings: {
+            template: kendo.template($("#column-template").html()),
+            dataTextField: "CategoryName",
+            dataStatusField: "CategoryID",
+        },
+        columns: {
+            data: [
+                { CategoryName: "Alex Bennett", CategoryID: 1, Image: "../content/web/Employees/9.jpg" },
+                { CategoryName: "Bob McKenna", CategoryID: 2, Image: "../content/web/Employees/6.jpg" },
+                { CategoryName: "Charlie Ashworth", CategoryID: 3, Image: "../content/web/Employees/5.jpg" },
+            ],
+            schema: {
+                model: {
+                    id: "CategoryID",
+                    fields: {
+                        CategoryID: { type: "number" },
+                        CategoryName: { type: "string" },
+                        Image: { type: "string" }
+                    }
+                }
+            },
+        },
+        dataDescriptionField: "description",
+        dataTitleField: "title",
+        dataStatusField: "ownerId",
+        dataSource: {
+            transport: {
+                read: {
+                    url: crudServiceBaseUrl + "/tasks",
+                    dataType: "jsonp"
+                },
+                update: {
+                    url: crudServiceBaseUrl + "/tasks/update",
+                    dataType: "jsonp"
+                },
+                parameterMap: function (options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return { models: kendo.stringify(options.models) };
+                    }
+                }
+            },
+            schema: {
+                model: {
+                    id: "taskId",
+                    fields: {
+                        taskId: { from: "TaskID", type: "number" },
+                        title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                        start: { type: "date", from: "Start" },
+                        end: { type: "date", from: "End" },
+                        description: { from: "Description" },
+                        ownerId: { from: "OwnerID", defaultValue: 1 },
+                    }
+                }
+            }
+        },
+        template: kendo.template($("#card-template").html()),
+        previewPane: {
+            template: $("#previewPane-content-template").html(),
+            headerTemplate: $("#previewPane-header-template").html()
+        },
+        editable: false,
+        height: 500,
+        dataBound: onDataBound,
+        execute: onExecute
+    });
+
+    function onDataBound(e) {
+        var tooltip = $("#taskBoard").data("kendoTooltip");
+
+        if (!tooltip) {
+            $("#taskBoard").kendoTooltip({
+                filter: ".k-taskboard-card",
+                content: kendo.template($("#tooltip-template").html()),
+                position: "right"
+            });
+        }
+    }
+
+    function onExecute(e) {
+        if (e.command === "MoveCardCommand") {
+            e.preventDefault();
+        }
+    }
+</script>
+
+<style>
+    .demo-section.wide {
+        max-width: 1025px;
+    }
+
+    .template-container {
+        padding-top: 10px;
+        padding-left: 12px;
+    }
+
+    .template-container img {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: -10px;
+    }
+
+    .template-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .column-status {
+        padding-top: 5px;
+    }
+
+    .column-text {
+        padding-left: 10px;
+    }
+
+    .column-template-container {
+        width: 100%;
+        display: flex;
+        margin-left: 5px;
+    }
+
+    .column-template-container h3 {
+        padding-left: 10px;
+    }
+
+    .template-title {
+        color: red;
+        word-wrap: break-word;
+    }
+
+    .k-taskboard-drag-hint {
+        font: 400 14px Arial,Helvetica,sans-serif;
+    }
+</style>
+</body>
+</html>

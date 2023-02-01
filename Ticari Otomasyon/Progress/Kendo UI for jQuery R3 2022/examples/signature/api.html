@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>API</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div class="configurator">
+    <div class="header">Configurator</div>
+
+    <div class="box-col">
+        <h4>Open the popup</h4>
+        <ul class="options">
+            <li>
+                <button id="open">Open</button>
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <h4>Toggle Readonly</h4>
+        <ul class="options">
+            <li>
+                <input id="readonly" />
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <h4>Toggle Enabled</h4>
+        <ul class="options">
+            <li>
+                <input id="enable" />
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <h4>Toggle Line Smoothing</h4>
+        <ul class="options">
+            <li>
+                <input id="smooth" />
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <h4>Toggle Dotted Line</h4>
+        <ul class="options">
+            <li>
+                <input id="hide-line" />
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <h4>Clear the value</h4>
+        <ul class="options">
+            <li>
+                <button id="clearValue">Clear value</button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="k-d-flex k-justify-content-center">
+    <div class="signature-container">
+        <div class="signature-wrapper">
+            <div id="signature"></div>
+        </div>
+        <div class="notes">
+            By using the Kendo UI for jQuery signature component,
+            you can enable your end-users to draw handwritten signatures
+            using touch or pointer devices.
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            let signature = $("#signature").kendoSignature().data("kendoSignature");
+
+            $("#open").kendoButton({
+                click: function() {
+                    signature.open();
+                }
+            });
+
+            $("#enable").kendoSwitch({
+                checked: true,
+                change: function() {
+                    let value = this.value();
+                    signature.enable(value);
+                }
+            });
+
+            $("#readonly").kendoSwitch({
+                checked: false,
+                change: function() {
+                    let value = this.value();
+                    signature.readonly(value);
+                }
+            });
+
+            $("#smooth").kendoSwitch({
+                checked: true,
+                change: function() {
+                    let value = this.value();
+                    signature.setOptions({
+                        smooth: value
+                    });
+                }
+            });
+
+            $("#hide-line").kendoSwitch({
+                checked: true,
+                change: function() {
+                    let value = this.value();
+                    signature.setOptions({
+                        hideLine: !value
+                    });
+                }
+            });
+
+            $("#clearValue").kendoButton({
+                click: function() {
+                    signature.reset();
+                }
+            });
+        });
+    </script>
+</div>
+
+<style>
+    .signature-container {
+        width: 600px;
+    }
+
+    .signature-wrapper {
+        height: 270px;
+    }
+
+    .signature-wrapper .k-signature {
+        width: 100%;
+        height: 100%;
+    }
+
+    div.notes {
+        font-style: italic;
+        border-width: 1px;
+        border-style: solid;
+        padding: 1em;
+    }
+
+    .k-signature, .notes {
+        border-color: rgba(0, 0, 0, 0.08);
+        border-width: 1px 1px 0 1px;
+        border-radius: 0;
+    }
+</style>
+</body>
+</html>

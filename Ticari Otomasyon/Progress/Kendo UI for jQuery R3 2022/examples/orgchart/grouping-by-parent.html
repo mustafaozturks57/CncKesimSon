@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Grouping by Parent</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div id="example">
+
+    <div id="orgchart"></div>
+
+    <script>
+        var data = [
+            { id: 1, name: "Gevin Bell", position: "CEO Team", expanded: true, avatar: "../content/web/treelist/people/1.jpg" },
+            { id: 2, name: "Clevey Thrustfield", position: "CEO Team", expanded: true, avatar: "../content/web/treelist/people/2.jpg" },
+            { id: 3, name: "Carol Baker", position: "Manager", expanded: true, parentId: 1, avatar: "../content/web/treelist/people/3.jpg" },
+            { id: 4, name: "Kendra Howell", position: "Manager", expanded: false, parentId: 1, avatar: "../content/web/treelist/people/4.jpg" },
+            { id: 5, name: "Sean Rusell", position: "Financial Manager", expanded: true, parentId: 1, avatar: "../content/web/treelist/people/5.jpg" },
+            { id: 6, name: "Andrew Berry", position: "Manager", parentId: 1, avatar: "../content/web/treelist/people/8.jpg" },
+            { id: 7, name: "Jake Miller", position: "Junior Accountant", parentId: 3, avatar: "../content/web/treelist/people/9.jpg" },
+            { id: 8, name: "Austin Piper", position: "Accountant", parentId: 5, avatar: "../content/web/treelist/people/10.jpg" },
+            { id: 9, name: "Dilyana Newman", position: "Accountant", parentId: 5, avatar: "../content/web/treelist/people/11.jpg" },
+            { id: 10, name: "Eva Andrews", position: "Operations Manager", parentId: 4, avatar: "../content/web/treelist/people/12.jpg" }
+        ];
+
+        var orgchart = $("#orgchart").kendoOrgChart({
+            editable: false,
+            groupField: "parentId",
+            groupHeaderTemplate: function (e) {
+                var org = $('#orgchart').data('kendoOrgChart')
+                var ds = org.dataSource
+                var parent = ds.get(e.value)
+                var result = ''
+                
+                if (!parent) {
+                    result = '<span>&nbsp</span>'
+                } else {
+                    result = '<span>Reports To: <strong>' + parent.name +'</strong></span>'
+                }
+                return result;
+            },
+            dataSource: data
+        }).data('kendoOrgChart');
+    </script>    
+</div>
+
+</body>
+</html>

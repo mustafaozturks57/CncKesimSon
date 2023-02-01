@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MVVM</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div id="demo" style="text-align:center; margin-top: 54px"> 
+            <label style="display: block">Choose a color</label>
+            <input data-role="colorpicker"
+                   data-preview="false"
+                   data-views="['gradient']"
+                   data-bind="visible: isVisible,
+                              enabled: isEnabled,
+                              value: selectedColor,
+                              events: { change: onChange }">
+</div>
+
+<script>
+    var viewModel = kendo.observable({
+        selectedColor: null,
+        isVisible: true,
+        isEnabled: true,
+        onChange: function() {
+            kendoConsole.log("event :: change (" + this.get("selectedColor") + ")");
+        }
+    });
+    kendo.bind($("#demo"), viewModel);
+</script>
+
+</body>
+</html>

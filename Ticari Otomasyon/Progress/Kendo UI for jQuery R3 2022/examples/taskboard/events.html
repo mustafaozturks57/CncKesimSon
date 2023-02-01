@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Events</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<script src="../content/shared/js/cardsData.js"></script>
+
+<div id="example">
+    <div class="demo-section wide">
+        <div id="taskBoard"></div>
+    </div>
+</div>
+
+<script>
+    $("#taskBoard").kendoTaskBoard({
+        columns: [
+            { text: "To-Do", status: "todo" },
+            { text: "In Progress", status: "inProgress" },
+            { text: "Done", status: "done" }
+        ],
+        dataSource: {
+            data: cardsData,
+            schema: {
+                model: {
+                    id: "id",
+                    fields: {
+                        id: { type: "number" },
+                        order: { type: "number" },
+                        title: { field: "title", defaultValue: "No title" },
+                        description: { field: "description", validation: { required: true } },
+                    }
+                }
+            }
+        },
+        dataOrderField: "order",
+        height: 750,
+        resources: [
+            {
+                field: "color",
+                dataSource: [
+                    { value: "orange", color: "#ffa500" },
+                    { value: "green", color: "#008000" },
+                    { value: "blue", color: "#0000ff" }
+                ]
+            }
+        ],
+        change: onChange,
+        columnsDataBinding: onColumnDataBinding,
+        columnsDataBound: onColumnDataBound,
+        dataBinding: onDataBinding,
+        dataBound: onDataBound,
+        deleteCard: onDeleteCard,
+        deleteColumn: onDeleteColumn,
+        editCard: onEditCard,
+        editColumn: onEditColumn,
+        move: onMove,
+        moveEnd: onMoveEnd,
+        moveStart: onMoveStart,
+        saveCard: onSaveCard,
+        saveColumn: onSaveColumn,
+        select: onSelect
+    });
+
+    function onChange(e) {
+        kendoConsole.log("event: Change");
+    }
+
+    function onColumnDataBinding(e) {
+        kendoConsole.log("event: ColumnDataBinding");
+    }
+
+    function onColumnDataBound(e) {
+        kendoConsole.log("event: ColumnDataBound");
+    }
+
+    function onDataBinding(e) {
+        kendoConsole.log("event: DataBinding");
+    }
+
+    function onDataBound(e) {
+        kendoConsole.log("event: DataBound");
+    }
+
+    function onDeleteCard(e) {
+        kendoConsole.log("event: DeleteCard");
+    }
+
+    function onDeleteColumn(e) {
+        kendoConsole.log("event: DeleteColumn");
+    }
+
+    function onEditCard(e) {
+        kendoConsole.log("event: EditCard");
+    }
+
+    function onEditColumn(e) {
+        kendoConsole.log("event: EditColumn");
+    }
+
+    function onMove(e) {
+        kendoConsole.log("event: Move");
+    }
+
+    function onMoveEnd(e) {
+        kendoConsole.log("event: MoveEnd");
+    }
+
+    function onMoveStart(e) {
+        kendoConsole.log("event: MoveStart");
+    }
+
+    function onSaveCard(e) {
+        kendoConsole.log("event: SaveCard");
+    }
+
+    function onSaveColumn(e) {
+        kendoConsole.log("event: SaveColumn");
+    }
+
+    function onSelect(e) {
+        kendoConsole.log("event: Select");
+    }
+</script>
+
+<style>
+    .demo-section.wide {
+        max-width: 1025px;
+    }
+
+    .k-taskboard-drag-hint {
+        font: 400 14px Arial,Helvetica,sans-serif;
+    }
+</style>
+</body>
+</html>

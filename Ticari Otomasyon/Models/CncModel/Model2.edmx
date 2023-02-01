@@ -47,6 +47,13 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IsyeriName" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="ItemProperties">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="300" />
+        </EntityType>
         <EntityType Name="Items">
           <Key>
             <PropertyRef Name="ID" />
@@ -73,6 +80,22 @@
           <Property Name="BIRIM" Type="nchar" MaxLength="10" />
           <Property Name="HEPSİ" Type="varchar" MaxLength="50" />
           <Property Name="KESİLEN" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CncTicariOtomasyon.dbo.ıtemstest' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ıtemstest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MODEL" Type="varchar" MaxLength="50" />
+          <Property Name="FIYATHG" Type="varchar" MaxLength="100" />
+          <Property Name="FIYATMAT" Type="varchar" MaxLength="100" />
+          <Property Name="CAM" Type="varchar" MaxLength="100" />
+          <Property Name="CAM2" Type="varchar" MaxLength="100" />
+          <Property Name="CAM4" Type="varchar" MaxLength="100" />
+          <Property Name="CAM6" Type="varchar" MaxLength="100" />
+          <Property Name="CAM8" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Orfiche">
           <Key>
@@ -199,11 +222,167 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CncTicariOtomasyon.dbo.Q_Sıpmasdet' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Q_Sıpmasdet">
+          <Key>
+            <PropertyRef Name="MalzemeKodu" />
+          </Key>
+          <Property Name="FisNo" Type="varchar" MaxLength="100" />
+          <Property Name="Fırma_Adı" Type="varchar" MaxLength="50" />
+          <Property Name="Tarih" Type="date" />
+          <Property Name="TerminTarihi" Type="date" />
+          <Property Name="BarkodNo" Type="varchar" MaxLength="100" />
+          <Property Name="SiparisSekli" Type="varchar" MaxLength="100" />
+          <Property Name="SiparisDurumu" Type="int" />
+          <Property Name="MalzemeKodu" Type="int" Nullable="false" />
+          <Property Name="Ozellik" Type="varchar" MaxLength="100" />
+          <Property Name="Fiyat" Type="float" />
+          <Property Name="M2FIYAT" Type="float" />
+          <Property Name="ToplamAdet" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CncTicariOtomasyon.dbo.SıparısAppPoolView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SıparısAppPoolView">
+          <Key>
+            <PropertyRef Name="Paket_fl" />
+          </Key>
+          <Property Name="SipID" Type="varchar" MaxLength="200" />
+          <Property Name="Onay_fl" Type="bit" />
+          <Property Name="Kesim_fl" Type="bit" />
+          <Property Name="PaletNo" Type="int" />
+          <Property Name="Palet_fl" Type="bit" />
+          <Property Name="Pres_fl" Type="bit" />
+          <Property Name="Paket_fl" Type="bit" Nullable="false" />
+          <Property Name="PaketSayı" Type="int" />
+          <Property Name="Teslim_fl" Type="bit" />
+          <Property Name="MusterıAdı" Type="varchar" MaxLength="50" />
+          <Property Name="SiparisDurumu" Type="varchar" MaxLength="100" />
+          <Property Name="Tarih" Type="date" />
+          <Property Name="TerminTarihi" Type="date" />
+          <Property Name="Aciklama" Type="varchar" MaxLength="100" />
+          <Property Name="StokAdı" Type="varchar" MaxLength="50" />
+          <Property Name="RenkAdı" Type="varchar" MaxLength="500" />
+          <Property Name="Adet" Type="int" />
+          <Property Name="Fiyat" Type="numeric" Precision="38" Scale="2" />
+          <Property Name="m2" Type="numeric" Precision="38" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'CncTicariOtomasyon.dbo.SiparisModuls' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SiparisModuls">
+          <Property Name="FisNo" Type="varchar" MaxLength="100" />
+          <Property Name="Müşteri_Adı" Type="varchar" MaxLength="50" />
+          <Property Name="Tarih" Type="date" />
+          <Property Name="Termin_Tarihi" Type="date" />
+          <Property Name="Sipariş_Şekli" Type="varchar" MaxLength="100" />
+          <Property Name="Sipariş_Durumu" Type="varchar" MaxLength="30" />
+          <Property Name="BID" Type="varchar" MaxLength="100" />
+          <Property Name="Belge_No" Type="varchar" MaxLength="100" />
+          <Property Name="Aciklama" Type="varchar" MaxLength="100" />
+          <Property Name="MalzemeKodu" Type="varchar" MaxLength="50" />
+          <Property Name="Model" Type="varchar" MaxLength="500" />
+          <Property Name="Ozellik" Type="varchar" MaxLength="100" />
+          <Property Name="Boy" Type="numeric" Precision="38" Scale="2" />
+          <Property Name="En" Type="numeric" Precision="38" Scale="2" />
+          <Property Name="Adet" Type="int" />
+          <Property Name="m2" Type="numeric" Precision="38" Scale="2" />
+          <Property Name="m2fiyat" Type="numeric" Precision="38" Scale="2" />
+          <Property Name="fiyat" Type="numeric" Precision="38" Scale="2" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'CncTicariOtomasyon.dbo.SiparişQListe' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SiparişQListe">
+          <Property Name="FisNo" Type="varchar" MaxLength="100" />
+          <Property Name="Müşteri_Adı" Type="varchar" MaxLength="50" />
+          <Property Name="Tarih" Type="date" />
+          <Property Name="Termin_Tarihi" Type="date" />
+          <Property Name="Sipariş_Şekli" Type="varchar" MaxLength="100" />
+          <Property Name="Sipariş_Durumu" Type="varchar" MaxLength="30" />
+          <Property Name="BID" Type="varchar" MaxLength="100" />
+          <Property Name="Belge_No" Type="varchar" MaxLength="100" />
+          <Property Name="Aciklama" Type="varchar" MaxLength="100" />
+          <Property Name="MalzemeKodu" Type="varchar" MaxLength="100" />
+          <Property Name="Model" Type="varchar" MaxLength="100" />
+          <Property Name="Ozellik" Type="varchar" MaxLength="100" />
+          <Property Name="Boy" Type="numeric" Precision="38" Scale="2" />
+          <Property Name="En" Type="numeric" Precision="38" Scale="2" />
+          <Property Name="Adet" Type="int" />
+          <Property Name="m2" Type="numeric" Precision="38" Scale="2" />
+          <Property Name="m2fiyat" Type="numeric" Precision="38" Scale="2" />
+          <Property Name="fiyat" Type="numeric" Precision="38" Scale="2" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CncTicariOtomasyon.dbo.SiparisViewModul' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SiparisViewModul">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="MusteriName" Type="varchar" MaxLength="50" />
+          <Property Name="Tarih" Type="date" />
+          <Property Name="TerminTarihi" Type="date" />
+          <Property Name="SipDurum" Type="varchar" MaxLength="100" />
+          <Property Name="FisNo" Type="varchar" MaxLength="100" />
+          <Property Name="BarkodNo" Type="varchar" MaxLength="100" />
+          <Property Name="SiparisSekli" Type="varchar" MaxLength="100" />
+          <Property Name="BID" Type="varchar" MaxLength="100" />
+          <Property Name="Aciklama" Type="varchar" MaxLength="100" />
+          <Property Name="StokAdı" Type="varchar" MaxLength="100" />
+          <Property Name="RenkAdı" Type="varchar" MaxLength="100" />
+          <Property Name="TasarimTutari" Type="float" />
+          <Property Name="Adet" Type="int" />
+          <Property Name="Fiyat" Type="numeric" Precision="38" Scale="2" />
+          <Property Name="BelgeNo" Type="varchar" MaxLength="100" />
+          <Property Name="OzelKod" Type="int" />
+          <Property Name="Bölüm" Type="int" />
+          <Property Name="Departman" Type="int" />
+          <Property Name="Isyeri" Type="int" />
+        </EntityType>
+        <Function Name="AnasayfaIslemler" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pTranType" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="GetFarklıRenklerProc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sipno" Type="varchar" Mode="In" />
+          <Parameter Name="pTranType" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetToplam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="CncTicariOtomasyonModelStoreContainer">
           <EntitySet Name="Bolumler" EntityType="Self.Bolumler" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Isyeri" EntityType="Self.Isyeri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemProperties" EntityType="Self.ItemProperties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemsColor" EntityType="Self.ItemsColor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orfiche" EntityType="Self.Orfiche" Schema="dbo" store:Type="Tables" />
@@ -215,6 +394,82 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WareHouses" EntityType="Self.WareHouses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkPlaces" EntityType="Self.WorkPlaces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ıtemstest" EntityType="Self.ıtemstest" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ıtemstest].[ID] AS [ID], 
+    [ıtemstest].[MODEL] AS [MODEL], 
+    [ıtemstest].[FIYATHG] AS [FIYATHG], 
+    [ıtemstest].[FIYATMAT] AS [FIYATMAT], 
+    [ıtemstest].[CAM] AS [CAM], 
+    [ıtemstest].[CAM2] AS [CAM2], 
+    [ıtemstest].[CAM4] AS [CAM4], 
+    [ıtemstest].[CAM6] AS [CAM6], 
+    [ıtemstest].[CAM8] AS [CAM8]
+    FROM [dbo].[ıtemstest] AS [ıtemstest]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Q_Sıpmasdet" EntityType="Self.Q_Sıpmasdet" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Q_Sıpmasdet].[FisNo] AS [FisNo], 
+    [Q_Sıpmasdet].[Fırma_Adı] AS [Fırma_Adı], 
+    [Q_Sıpmasdet].[Tarih] AS [Tarih], 
+    [Q_Sıpmasdet].[TerminTarihi] AS [TerminTarihi], 
+    [Q_Sıpmasdet].[BarkodNo] AS [BarkodNo], 
+    [Q_Sıpmasdet].[SiparisSekli] AS [SiparisSekli], 
+    [Q_Sıpmasdet].[SiparisDurumu] AS [SiparisDurumu], 
+    [Q_Sıpmasdet].[MalzemeKodu] AS [MalzemeKodu], 
+    [Q_Sıpmasdet].[Ozellik] AS [Ozellik], 
+    [Q_Sıpmasdet].[Fiyat] AS [Fiyat], 
+    [Q_Sıpmasdet].[M2FIYAT] AS [M2FIYAT], 
+    [Q_Sıpmasdet].[ToplamAdet] AS [ToplamAdet]
+    FROM [dbo].[Q_Sıpmasdet] AS [Q_Sıpmasdet]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SıparısAppPoolView" EntityType="Self.SıparısAppPoolView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SıparısAppPoolView].[SipID] AS [SipID], 
+    [SıparısAppPoolView].[Onay_fl] AS [Onay_fl], 
+    [SıparısAppPoolView].[Kesim_fl] AS [Kesim_fl], 
+    [SıparısAppPoolView].[PaletNo] AS [PaletNo], 
+    [SıparısAppPoolView].[Palet_fl] AS [Palet_fl], 
+    [SıparısAppPoolView].[Pres_fl] AS [Pres_fl], 
+    [SıparısAppPoolView].[Paket_fl] AS [Paket_fl], 
+    [SıparısAppPoolView].[PaketSayı] AS [PaketSayı], 
+    [SıparısAppPoolView].[Teslim_fl] AS [Teslim_fl], 
+    [SıparısAppPoolView].[MusterıAdı] AS [MusterıAdı], 
+    [SıparısAppPoolView].[SiparisDurumu] AS [SiparisDurumu], 
+    [SıparısAppPoolView].[Tarih] AS [Tarih], 
+    [SıparısAppPoolView].[TerminTarihi] AS [TerminTarihi], 
+    [SıparısAppPoolView].[Aciklama] AS [Aciklama], 
+    [SıparısAppPoolView].[StokAdı] AS [StokAdı], 
+    [SıparısAppPoolView].[RenkAdı] AS [RenkAdı], 
+    [SıparısAppPoolView].[Adet] AS [Adet], 
+    [SıparısAppPoolView].[Fiyat] AS [Fiyat], 
+    [SıparısAppPoolView].[m2] AS [m2]
+    FROM [dbo].[SıparısAppPoolView] AS [SıparısAppPoolView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SiparisViewModul" EntityType="Self.SiparisViewModul" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SiparisViewModul].[Id] AS [Id], 
+    [SiparisViewModul].[MusteriName] AS [MusteriName], 
+    [SiparisViewModul].[Tarih] AS [Tarih], 
+    [SiparisViewModul].[TerminTarihi] AS [TerminTarihi], 
+    [SiparisViewModul].[SipDurum] AS [SipDurum], 
+    [SiparisViewModul].[FisNo] AS [FisNo], 
+    [SiparisViewModul].[BarkodNo] AS [BarkodNo], 
+    [SiparisViewModul].[SiparisSekli] AS [SiparisSekli], 
+    [SiparisViewModul].[BID] AS [BID], 
+    [SiparisViewModul].[Aciklama] AS [Aciklama], 
+    [SiparisViewModul].[StokAdı] AS [StokAdı], 
+    [SiparisViewModul].[RenkAdı] AS [RenkAdı], 
+    [SiparisViewModul].[TasarimTutari] AS [TasarimTutari], 
+    [SiparisViewModul].[Adet] AS [Adet], 
+    [SiparisViewModul].[Fiyat] AS [Fiyat], 
+    [SiparisViewModul].[BelgeNo] AS [BelgeNo], 
+    [SiparisViewModul].[OzelKod] AS [OzelKod], 
+    [SiparisViewModul].[Bölüm] AS [Bölüm], 
+    [SiparisViewModul].[Departman] AS [Departman], 
+    [SiparisViewModul].[Isyeri] AS [Isyeri]
+    FROM [dbo].[SiparisViewModul] AS [SiparisViewModul]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -236,6 +491,49 @@
           <EntitySet Name="Items" EntityType="CncTicariOtomasyonModel.Item" />
           <EntitySet Name="ItemsColors" EntityType="CncTicariOtomasyonModel.ItemsColor" />
           <EntitySet Name="SıparısAppPool" EntityType="CncTicariOtomasyonModel.SıparısAppPool" />
+          <EntitySet Name="ItemProperties" EntityType="CncTicariOtomasyonModel.ItemProperty" />
+          <EntitySet Name="ıtemstest" EntityType="CncTicariOtomasyonModel.ıtemstest" />
+          <EntitySet Name="Q_Sıpmasdet" EntityType="CncTicariOtomasyonModel.Q_Sıpmasdet" />
+          <EntitySet Name="SıparısAppPoolView" EntityType="CncTicariOtomasyonModel.SıparısAppPoolView" />
+          <EntitySet Name="SiparisViewModuls" EntityType="CncTicariOtomasyonModel.SiparisViewModul" />
+          <FunctionImport Name="AnasayfaIslemler">
+            <Parameter Name="pTranType" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetFarklıRenklerProc">
+            <Parameter Name="sipno" Mode="In" Type="String" />
+            <Parameter Name="pTranType" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetToplam" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(CncTicariOtomasyonModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(CncTicariOtomasyonModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
         <EntityType Name="Satıslar">
           <Key>
@@ -431,6 +729,104 @@
           <Property Name="Teslim_fl" Type="Boolean" />
           <Property Name="Onay_fl" Type="Boolean" />
         </EntityType>
+        <EntityType Name="ItemProperty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ıtemstest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MODEL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FIYATHG" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FIYATMAT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CAM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CAM2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CAM4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CAM6" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CAM8" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Q_Sıpmasdet">
+          <Key>
+            <PropertyRef Name="MalzemeKodu" />
+          </Key>
+          <Property Name="FisNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fırma_Adı" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tarih" Type="DateTime" Precision="0" />
+          <Property Name="TerminTarihi" Type="DateTime" Precision="0" />
+          <Property Name="BarkodNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SiparisSekli" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SiparisDurumu" Type="Int32" />
+          <Property Name="MalzemeKodu" Type="Int32" Nullable="false" />
+          <Property Name="Ozellik" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fiyat" Type="Double" />
+          <Property Name="M2FIYAT" Type="Double" />
+          <Property Name="ToplamAdet" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SıparısAppPoolView">
+          <Key>
+            <PropertyRef Name="Paket_fl" />
+          </Key>
+          <Property Name="SipID" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Onay_fl" Type="Boolean" />
+          <Property Name="Kesim_fl" Type="Boolean" />
+          <Property Name="PaletNo" Type="Int32" />
+          <Property Name="Palet_fl" Type="Boolean" />
+          <Property Name="Pres_fl" Type="Boolean" />
+          <Property Name="Paket_fl" Type="Boolean" Nullable="false" />
+          <Property Name="PaketSayı" Type="Int32" />
+          <Property Name="Teslim_fl" Type="Boolean" />
+          <Property Name="MusterıAdı" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SiparisDurumu" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tarih" Type="DateTime" Precision="0" />
+          <Property Name="TerminTarihi" Type="DateTime" Precision="0" />
+          <Property Name="Aciklama" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StokAdı" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RenkAdı" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Adet" Type="Int32" />
+          <Property Name="Fiyat" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="m2" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <EntityType Name="SiparisViewModul">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="MusteriName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tarih" Type="DateTime" Precision="0" />
+          <Property Name="TerminTarihi" Type="DateTime" Precision="0" />
+          <Property Name="SipDurum" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FisNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BarkodNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SiparisSekli" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Aciklama" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StokAdı" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RenkAdı" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TasarimTutari" Type="Double" />
+          <Property Name="Adet" Type="Int32" />
+          <Property Name="Fiyat" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="BelgeNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="OzelKod" Type="Int32" />
+          <Property Name="Bölüm" Type="Int32" />
+          <Property Name="Departman" Type="Int32" />
+          <Property Name="Isyeri" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -646,6 +1042,125 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ItemProperties">
+            <EntityTypeMapping TypeName="CncTicariOtomasyonModel.ItemProperty">
+              <MappingFragment StoreEntitySet="ItemProperties">
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ıtemstest">
+            <EntityTypeMapping TypeName="CncTicariOtomasyonModel.ıtemstest">
+              <MappingFragment StoreEntitySet="ıtemstest">
+                <ScalarProperty Name="CAM8" ColumnName="CAM8" />
+                <ScalarProperty Name="CAM6" ColumnName="CAM6" />
+                <ScalarProperty Name="CAM4" ColumnName="CAM4" />
+                <ScalarProperty Name="CAM2" ColumnName="CAM2" />
+                <ScalarProperty Name="CAM" ColumnName="CAM" />
+                <ScalarProperty Name="FIYATMAT" ColumnName="FIYATMAT" />
+                <ScalarProperty Name="FIYATHG" ColumnName="FIYATHG" />
+                <ScalarProperty Name="MODEL" ColumnName="MODEL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Q_Sıpmasdet">
+            <EntityTypeMapping TypeName="CncTicariOtomasyonModel.Q_Sıpmasdet">
+              <MappingFragment StoreEntitySet="Q_Sıpmasdet">
+                <ScalarProperty Name="ToplamAdet" ColumnName="ToplamAdet" />
+                <ScalarProperty Name="M2FIYAT" ColumnName="M2FIYAT" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Ozellik" ColumnName="Ozellik" />
+                <ScalarProperty Name="MalzemeKodu" ColumnName="MalzemeKodu" />
+                <ScalarProperty Name="SiparisDurumu" ColumnName="SiparisDurumu" />
+                <ScalarProperty Name="SiparisSekli" ColumnName="SiparisSekli" />
+                <ScalarProperty Name="BarkodNo" ColumnName="BarkodNo" />
+                <ScalarProperty Name="TerminTarihi" ColumnName="TerminTarihi" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Fırma_Adı" ColumnName="Fırma_Adı" />
+                <ScalarProperty Name="FisNo" ColumnName="FisNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SıparısAppPoolView">
+            <EntityTypeMapping TypeName="CncTicariOtomasyonModel.SıparısAppPoolView">
+              <MappingFragment StoreEntitySet="SıparısAppPoolView">
+                <ScalarProperty Name="m2" ColumnName="m2" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Adet" ColumnName="Adet" />
+                <ScalarProperty Name="RenkAdı" ColumnName="RenkAdı" />
+                <ScalarProperty Name="StokAdı" ColumnName="StokAdı" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="TerminTarihi" ColumnName="TerminTarihi" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="SiparisDurumu" ColumnName="SiparisDurumu" />
+                <ScalarProperty Name="MusterıAdı" ColumnName="MusterıAdı" />
+                <ScalarProperty Name="Teslim_fl" ColumnName="Teslim_fl" />
+                <ScalarProperty Name="PaketSayı" ColumnName="PaketSayı" />
+                <ScalarProperty Name="Paket_fl" ColumnName="Paket_fl" />
+                <ScalarProperty Name="Pres_fl" ColumnName="Pres_fl" />
+                <ScalarProperty Name="Palet_fl" ColumnName="Palet_fl" />
+                <ScalarProperty Name="PaletNo" ColumnName="PaletNo" />
+                <ScalarProperty Name="Kesim_fl" ColumnName="Kesim_fl" />
+                <ScalarProperty Name="Onay_fl" ColumnName="Onay_fl" />
+                <ScalarProperty Name="SipID" ColumnName="SipID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiparisViewModuls">
+            <EntityTypeMapping TypeName="CncTicariOtomasyonModel.SiparisViewModul">
+              <MappingFragment StoreEntitySet="SiparisViewModul">
+                <ScalarProperty Name="Isyeri" ColumnName="Isyeri" />
+                <ScalarProperty Name="Departman" ColumnName="Departman" />
+                <ScalarProperty Name="Bölüm" ColumnName="Bölüm" />
+                <ScalarProperty Name="OzelKod" ColumnName="OzelKod" />
+                <ScalarProperty Name="BelgeNo" ColumnName="BelgeNo" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Adet" ColumnName="Adet" />
+                <ScalarProperty Name="TasarimTutari" ColumnName="TasarimTutari" />
+                <ScalarProperty Name="RenkAdı" ColumnName="RenkAdı" />
+                <ScalarProperty Name="StokAdı" ColumnName="StokAdı" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="BID" ColumnName="BID" />
+                <ScalarProperty Name="SiparisSekli" ColumnName="SiparisSekli" />
+                <ScalarProperty Name="BarkodNo" ColumnName="BarkodNo" />
+                <ScalarProperty Name="FisNo" ColumnName="FisNo" />
+                <ScalarProperty Name="SipDurum" ColumnName="SipDurum" />
+                <ScalarProperty Name="TerminTarihi" ColumnName="TerminTarihi" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="MusteriName" ColumnName="MusteriName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AnasayfaIslemler" FunctionName="CncTicariOtomasyonModel.Store.AnasayfaIslemler" />
+          <FunctionImportMapping FunctionImportName="GetFarklıRenklerProc" FunctionName="CncTicariOtomasyonModel.Store.GetFarklıRenklerProc" />
+          <FunctionImportMapping FunctionImportName="GetToplam" FunctionName="CncTicariOtomasyonModel.Store.GetToplam" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="CncTicariOtomasyonModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="CncTicariOtomasyonModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="CncTicariOtomasyonModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="CncTicariOtomasyonModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CncTicariOtomasyonModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="CncTicariOtomasyonModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CncTicariOtomasyonModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="CncTicariOtomasyonModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="CncTicariOtomasyonModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

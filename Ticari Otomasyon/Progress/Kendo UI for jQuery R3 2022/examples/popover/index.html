@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Overview</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div id="example" style="text-align: center;">
+    <h4>Select a colored date from the Calendar</h4>
+    <div id="calendar"></div>
+
+    <script id="body-template" type="text/x-kendo-template">
+        <div id="breakfast"><span>Starbuck Breakfast </span><span class="time">8:00</span></div>
+        <div id="updates">Software Updates <span class="time">9:00</span></div>
+        <div id="performance">Performance Review <span class="time">14:00</span></div>
+        <div id="lecture">HR Lecture <span class="time">19:00</span></div>
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var today = new Date(),
+                events = [
+                    +new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+                    +new Date(today.getFullYear(), today.getMonth(), 12),
+                    +new Date(today.getFullYear(), today.getMonth(), 24),
+                ];
+
+            $("#calendar").kendoCalendar({
+                componentType: "modern",
+                dates: events,
+                min: new Date(today.getFullYear(), today.getMonth(), 1),
+                max: new Date(today.getFullYear(), today.getMonth() + 1, 0),
+                month: {
+                    // template for dates in month view
+                    content: '# if ($.inArray(+data.date, data.dates) != -1) { #' +
+                        '<div class="' +
+                        "eventful" +
+                        '">#= data.value #</div>' +
+                        '# } else { #' +
+                        '#= data.value #' +
+                        '# } #'
+                }
+            });
+
+            createPopover();
+        });
+
+        function createPopover() {
+            $(".k-calendar-td:has(.eventful) a").removeAttr("href");
+
+            $("#calendar").kendoPopover({
+                showOn: "click",
+                filter: ".k-calendar-td:has(.eventful)",
+                width: "300px",
+                height: "208px",
+                position: "right",
+                header: function (e) {
+                    var dateString = $("a.k-calendar-title").text();
+                    return dateString.substr(0, dateString.indexOf(' ')) + " " + e.target.text();
+                },
+                body: kendo.template($("#body-template").html())
+            });
+        }
+    </script>
+
+    <style>
+        .k-prev-view, .k-next-view {
+            display: none;
+        }
+
+        .k-nav-today {
+            padding-right: 17px;
+        }
+
+        .k-calendar-header {
+            margin-top: 8px;
+        }
+
+        .k-calendar-title {
+            margin-left: 8px;
+        }
+
+        .eventful {
+            color: #FF6358;
+            font-weight: bold;
+        }
+
+        .k-selected .eventful {
+            color: white;
+        }
+
+        .k-popover-header {
+            padding: 16px;
+            text-align: center;
+            font-size: 18px;
+            line-height: 20px;
+            color: #424242;
+        }
+
+        .time {
+            float: right;
+            padding-right: 8px;
+        }
+
+        #breakfast {
+            height: 25px;
+            margin-bottom: 8px;
+            padding: 4px 4px 4px 7px;
+            color: #FFFFFF;
+            background-color: #FF6358;
+            box-sizing: border-box;
+            border-radius: 2px;
+            border: 1px solid #FF6358;
+        }
+
+        #updates {
+            height: 25px;
+            margin-bottom: 8px;
+            padding: 4px 4px 4px 7px;
+            background-color: #FFD246;
+            box-sizing: border-box;
+            border-radius: 2px;
+            border: 1px solid #FF6358;
+        }
+
+        #performance {
+            height: 25px;
+            margin-bottom: 8px;
+            padding: 4px 4px 4px 7px;
+            color: #FFFFFF;
+            background-color: #6610F2;
+            box-sizing: border-box;
+            border-radius: 2px;
+            border: 1px solid #6610F2;
+        }
+
+        #lecture {
+            height: 25px;
+            padding: 4px 4px 4px 7px;
+            background-color: #FFD246;
+            box-sizing: border-box;
+            border-radius: 2px;
+            border: 1px solid #FF6358;
+        }
+    </style>
+</div>
+
+</body>
+</html>

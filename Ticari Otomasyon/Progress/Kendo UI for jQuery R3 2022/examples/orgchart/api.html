@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>API</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div id="example">
+
+    <div class="configurator">
+        <div class="header">Configurator</div>
+
+        <div class="box-col">
+            <h4>Expand/ Collapse OrgChart node</h4>
+            <ul class="options">
+                <li>
+                    <input type="number" value="0" id="expandNodeIndex" /> <button type="button" id="expandItem">Expand node at index</button>
+                </li>
+                <li>
+                    <input type="number" value="0" id="collapseNodeIndex" /> <button type="button" id="collapseItem">Collapse node at index</button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="box-col">
+            <h4>Edit/select node</h4>
+            <ul class="options">
+                <li>
+                    <input type="number" value="0" id="editNodeIndex" /><button id="editNode" type="button">Edit node at index</button>
+                </li>
+                <li>
+                    <input type="number" value="0" id="selectNodeIndex" /><button id="selectNode" type="button">Select node at index</button>
+                </li>
+            </ul>
+        </div>
+        <div class="box-col">
+            <h4>Append/Delete node</h4>
+            <ul class="options">
+                <li>
+                    <input id="appendNode" value="Node" />
+                    <button id="appendNodeToSelected">Append node</button>
+                </li>
+                <li>
+                    <button id="removeNode">Remove node</button>
+                </li>
+            </ul>
+        </div>
+        <div class="box-col">
+            <h4>Get data</h4>
+            <ul class="options">
+                <li>
+                    <button id="getCollapsedNodes" type="button">Get Collapsed</button>
+                </li>
+                <li>
+                    <button id="getParentNode" type="button">Get Parent</button>
+                    <button id="getAllNodes" type="button">Get All</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div>
+        <div id="dialog"></div>
+        <div id="orgchart"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var data = [
+                { id: 1, name: "Gevin Bell", title: "CEO", expanded: true, avatar: "../content/web/treelist/people/1.jpg" },
+                { id: 2, name: "Clevey Thrustfield", title: "COO", expanded: false, parentId: 1, avatar: "../content/web/treelist/people/2.jpg" },
+                { id: 3, name: "Carol Baker", title: "CFO", expanded: false, parentId: 1, avatar: "../content/web/treelist/people/3.jpg" },
+                { id: 4, name: "Kendra Howell", title: "CMO", expanded: false, parentId: 1, avatar: "../content/web/treelist/people/4.jpg" },
+                { id: 5, name: "Sean Rusell", title: "Financial Manager", expanded: false, parentId: 3, avatar: "../content/web/treelist/people/5.jpg" },
+                { id: 6, name: "Steven North", title: "Senior Manager", expanded: false, parentId: 3, avatar: "../content/web/treelist/people/6.jpg" },
+                { id: 7, name: "Michelle Hudson", title: "Operations Manager", expanded: true, parentId: 2, avatar: "../content/web/treelist/people/7.jpg" },
+                { id: 8, name: "Andrew Berry", title: "Team Lead", parentId: 5, avatar: "../content/web/treelist/people/8.jpg" },
+                { id: 9, name: "Jake Miller", title: "Junior Accountant", parentId: 5, avatar: "../content/web/treelist/people/9.jpg" },
+                { id: 10, name: "Austin Piper", title: "Accountant", parentId: 5, avatar: "../content/web/treelist/people/10.jpg" },
+                { id: 11, name: "Dilyana Newman", title: "Accountant", parentId: 5, avatar: "../content/web/treelist/people/11.jpg" },
+                { id: 12, name: "Eva Andrews", title: "Team Lead", parentId: 6, avatar: "../content/web/treelist/people/12.jpg" },
+                { id: 13, name: "Kaya Nilsen", title: "Financial Specialist", parentId: 6, avatar: "../content/web/treelist/people/13.jpg" },
+                { id: 14, name: "Elena Austin", title: "Team Lead", parentId: 4, avatar: "../content/web/treelist/people/14.jpg" },
+                { id: 15, name: "Lora Samuels", title: "Lawyer", parentId: 4, avatar: "../content/web/treelist/people/15.jpg" },
+                { id: 16, name: "Lillian Carr", title: "Operator", parentId: 7, avatar: "../content/web/treelist/people/17.jpg" },
+                { id: 17, name: "David Henderson", title: "Team Lead", parentId: 7, avatar: "../content/web/treelist/people/16.jpg" }
+            ];
+
+            var orgChart = $("#orgchart").kendoOrgChart({
+                dataSource: data
+            }).data('kendoOrgChart');
+
+            var dialog = $("#dialog").kendoDialog({
+                visible: false,
+                modal: false,
+                width: "400px",
+                content: ""
+            }).data("kendoDialog");
+
+            $("#expandNodeIndex").kendoNumericTextBox({
+                min: 0,
+                decimal: 0,
+                format: "n0",
+                value: 0
+            });
+
+            $("#collapseNodeIndex").kendoNumericTextBox({
+                min: 0,
+                decimal: 0,
+                format: "n0",
+                value: 0
+            });
+
+            $("#editNodeIndex").kendoNumericTextBox({
+                min: 0,
+                decimal: 0,
+                format: "n0",
+                value: 0
+            });
+
+            $("#selectNodeIndex").kendoNumericTextBox({
+                min: 0,
+                decimal: 0,
+                format: "n0",
+                value: 0
+            });
+
+            $("#removeNode").click(function () {
+                var selected = $('[role="treeitem"][tabindex="0"]');
+                orgChart.delete(selected);
+            });
+
+            $("#appendNodeToSelected").click(function () {
+                var text = $('#appendNode').val();
+
+                var newId = orgChart.dataSource.data().length + 1;
+                var parent = $('[role="treeitem"][tabindex="0"]')
+                var parentDataItem = orgChart.dataItem(parent);
+
+                orgChart.append({
+                    id: newId,
+                    parentId: parentDataItem.id,
+                    name: text,
+                    title: text + " title"
+                }, parent);
+            });
+
+            $("#expandItem").click(function () {
+                var items = orgChart.items()
+                var index = $('#expandNodeIndex').val()
+
+                if (!items[index]) {
+                    kendo.alert('No such index')
+                } else if (items[index] && $(items[index]).attr('aria-expanded') == "true") {
+                    kendo.alert('Node is already expanded')
+                } else {
+                    orgChart.expand(items[index]);
+                }
+            });
+
+            $("#collapseItem").click(function () {
+                var items = orgChart.items()
+                var index = $('#collapseNodeIndex').val()
+
+                if (!items[index]) {
+                    kendo.alert('Node with such index is not rendered')
+                } else if (items[index] && $(items[index]).attr('aria-expanded') == "false") {
+                    kendo.alert('Node is already collapsed')
+                } else {
+                    orgChart.collapse(items[index]);
+                }
+            });
+
+            $("#editNode").click(function () {
+                var items = orgChart.items()
+                var index = $('#editNodeIndex').val()
+
+                if (!items[index]) {
+                    kendo.alert('Node with such index is not rendered')
+                } else {
+                    orgChart.edit(items[index]);
+                }
+            });
+
+            $("#selectNode").click(function () {
+                var items = orgChart.items()
+                var index = $('#selectNodeIndex').val()
+
+                if (!items[index]) {
+                    kendo.alert('Node with such index is not rendered')
+                } else {
+                    orgChart.select(items[index]);
+                }
+            });
+
+            $("#getCollapsedNodes").click(function () {
+                var collapsed = orgChart.getCollapsedNodes()
+                var collapsedTitles = []
+                for (var i = 0; i < collapsed.length; i++) {
+                    var current = $(collapsed[i]).find('.k-card-title').text()
+                    collapsedTitles.push(current)
+                }
+                dialog.content("<strong>OrgChart collapsed nodes titles:</strong> " + collapsedTitles.join());
+                dialog.open();
+            });
+
+            $("#getParentNode").click(function () {
+                var selected = $('[role="treeitem"][tabindex="0"]');
+
+                var parent = orgChart.parent(selected);
+                var parentTitle = $(parent).find('.k-card-title').text()
+
+                dialog.content("<strong>OrgChart parent node title:</strong> " + parentTitle);
+                dialog.open();
+            });
+
+            $("#getAllNodes").click(function () {
+                var items = orgChart.items()
+                var itemsTitles = []
+                for (var i = 0; i < items.length; i++) {
+                    var current = $(items[i]).find('.k-card-title').text()
+                    itemsTitles.push(current)
+                }
+                dialog.content("<strong>OrgChart nodes titles:</strong> " + itemsTitles.join());
+                dialog.open();
+            });
+        })
+    </script>    
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Checkboxes</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+
+	<div class="k-d-flex k-justify-content-center" style="padding-top: 54px;">
+		<div class="k-w-300">
+			<label for="dropdowntree">Select one or more items</label>
+			<input id="dropdowntree" />
+		</div>
+	</div>
+    <script>
+        $(document).ready(function () {
+
+            // create kendoDropDownTree from input HTML element
+            $("#dropdowntree").kendoDropDownTree({
+                placeholder: "Select ...",
+                checkboxes: true,
+                checkAll: true,
+                autoClose: false,
+                dataSource: [
+                    {
+                        text: "Furniture", expanded: true, items: [
+                            { text: "Tables & Chairs" },
+                            { text: "Sofas" },
+                            { text: "Occasional Furniture" }
+                        ]
+                    },
+                    {
+                        text: "Decor", items: [
+                            { text: "Bed Linen" },
+                            { text: "Curtains & Blinds" },
+                            { text: "Carpets" }
+                        ]
+                    }
+                ]
+            });
+        });
+    </script>
+
+</body>
+</html>

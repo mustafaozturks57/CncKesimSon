@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Load on Demand</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div id="example">
+    <div id="orgchart"></div>
+
+    <script>
+         var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+
+        $("#orgchart").kendoOrgChart({
+            editable: false,
+            dataSource: {
+                transport: {
+                    read: {
+                        url: crudServiceBaseUrl + "/EmployeesOrgChart/LoadOnDemand",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "Id",
+                        parentId: "ParentId",
+                        fields: {
+                            Id: { type: "number", editable: false, nullable: false },
+                            ParentId: { field: "ParentId", nullable: true },
+                            hasChildren: { field: "HasChildren", nullable: true },
+                            expanded: { field: "Expanded", nullable: true },
+                            title: { field: "Position", nullable: true },
+                            avatar: { field: "Avatar", nullable: true },
+                            name: { field: "FullName" }
+                        }
+                    }
+                }
+            }
+        });
+    </script>   
+</div>
+
+</body>
+</html>

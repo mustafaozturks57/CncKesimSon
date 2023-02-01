@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Overview</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<script src="../content/shared/js/cardsData.js"></script>
+
+<div id="example">
+    <div class="demo-section auto">
+        <script id="column-template" type="text/x-kendo-template">
+            <span class="column-template-container">
+                <span class="column-status">
+                    # if (status == "todo" || status == "inProgress" || status == "done") { #
+                    <span class="column-badge" id="badge-#= status #">0</span>
+                    # } else { #
+                    <span class="column-badge">0</span>
+                    # } #
+                    <span class="column-text">#: text #</span>
+                </span>
+                <span class="column-buttons">#= buttons #</span>
+            </span>
+        </script>
+
+        <script id="card-template" type="text/x-kendo-template">
+            <div class="template-container">
+                <span class="template-header">
+                    <span class="template-title">#: description #</span>
+                    <span class="template-menu">#=cardMenuButton#</span>
+                </span>
+                # if (image != "") { #
+                <img src="#= image #" style="height:135px; width: 270px;">
+                # } #
+            </div>
+        </script>
+
+        <div id="taskBoard"></div>
+
+        <script>
+        $("#taskBoard").kendoTaskBoard({
+            columnSettings: {
+                template: kendo.template($("#column-template").html()),
+                buttons: ["editColumn", "addCard", "deleteColumn"],
+                width: 320
+            },
+            columns: {
+                data: [
+                    { id: 1, text: "To-Do", status: "todo" },
+                    { id: 2, text: "In Progress", status: "inProgress" },
+                    { id: 3, text: "Done", status: "done" }
+                ],
+                schema: {
+                    model: {
+                        id: "id",
+                        fields: {
+                            id: { type: "number" },
+                            text: { field: "text", defaultValue: "" },
+                            status: {
+                                field: "status", defaultValue: function () {
+                                    return kendo.guid();
+                                }
+                            }
+                        }
+                    }
+                },
+            },
+            dataSource: {
+                data: cardsData,
+                schema: {
+                    model: {
+                        id: "id",
+                        fields: {
+                            id: { type: "number" },
+                            order: { type: "number" },
+                            title: { field: "title", defaultValue: "No title" },
+                            description: { field: "description", validation: { required: true } },
+                            image: { from: "image", defaultValue: "" },
+                        }
+                    }
+                }
+            },
+            dataOrderField: "order",
+            template: kendo.template($("#card-template").html()),
+            height: 970,
+            dataBound: onDataBound,
+            columnsDataBound: onColumnDataBound
+        });
+
+        function onDataBound(e) {
+            setBadgeText()
+        }
+
+        function onColumnDataBound(e) {
+            setBadgeText()
+        }
+
+        function setBadgeText() {
+            var taskBoard = $("#taskBoard").data("kendoTaskBoard");
+
+            for (var i = 0; i < taskBoard.columns().length; i++) {
+                var status = taskBoard.columnDataItem(taskBoard.columns()[i]).status;
+
+                if (status == "todo") {
+                    var totalToDo = taskBoard.itemsByStatus("todo").length;
+
+                    initBadge("todo", "warning", totalToDo);
+                }
+                else if (status == "inProgress") {
+                    var totalInProgress = taskBoard.itemsByStatus("inProgress").length;
+
+                    initBadge("inProgress", "info", totalInProgress);
+                }
+                else if (status == "done") {
+                    var totalDone = taskBoard.itemsByStatus("done").length;
+
+                    initBadge("done", "success", totalDone);
+                }
+                else {
+                    var column = $(taskBoard.columns()[i]);
+                    var totalNoStatus = taskBoard.itemsByColumn(column).length;
+
+                    initNoStatusBadge(column, "light", totalNoStatus);
+                }
+            }
+        }
+
+        function initBadge(id, color, totalItems) {
+            $('#badge-' + id).kendoBadge({
+                themeColor: color,
+                shape: 'circle',
+                text: totalItems
+            });
+        }
+
+        function initNoStatusBadge(column, color, totalItems) {
+            var badgeElement = column.find(".column-badge");
+
+            $(badgeElement).kendoBadge({
+                themeColor: color,
+                shape: 'circle',
+                text: totalItems
+            });
+        }
+        </script>
+    </div>
+</div>
+
+<style>
+    .template-container {
+        padding: 10px 10px 0px 10px;
+    }
+
+    .template-container img {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: -10px;
+    }
+
+    .column-status {
+        padding-top: 5px;
+    }
+
+    .column-text {
+        padding-left: 10px;
+    }
+
+    .column-template-container,
+    .template-header {
+        width: 100%;
+        display: flex;
+    }
+
+    .column-buttons {
+        margin-left: auto;
+        margin-right: 0;
+        padding-right: 5px;
+    }
+
+    .template-menu {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .template-title {
+        color: red;
+        word-wrap: break-word;
+    }
+
+    .k-taskboard-drag-hint {
+        font: 400 14px Arial,Helvetica,sans-serif;
+    }
+</style>
+
+</body>
+</html>

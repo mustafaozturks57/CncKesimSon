@@ -1,0 +1,280 @@
+[
+  {
+    "name": "default",
+    "title": "Default",
+    "primary": "#ff6358",
+    "swatches": [
+      {
+        "name": "default-ocean-blue",
+        "title": "Ocean Blue",
+        "icon": "eye",
+        "palette": [
+          "#ffffff",
+          "#f5f5f5",
+          "#1274AC",
+          "#0f6190",
+          "#424242"
+        ]
+      },
+      {
+        "name": "default-main",
+        "title": "Main",
+        "palette": [
+          "#ffffff",
+          "#f5f5f5",
+          "#ff6358",
+          "#d6534a",
+          "#424242"
+        ]
+      },
+      {
+        "name": "default-main-dark",
+        "title": "Main Dark",
+        "icon": "moon",
+        "palette": [
+          "#000000",
+          "#151515",
+          "#ff6358",
+          "#eb5b51",
+          "#ffffff"
+        ]
+      },
+      {
+        "name": "default-purple",
+        "title": "Purple",
+        "palette": [
+          "#ffffff",
+          "#f5f5f5",
+          "#bf70cc",
+          "#a05eab",
+          "#424242"
+        ]
+      },
+      {
+        "name": "default-turquoise",
+        "title": "Turquoise",
+        "palette": [
+          "#ffffff",
+          "#f5f5f5",
+          "#28bfba",
+          "#22a09c",
+          "#424242"
+        ]
+      },
+      {
+        "name": "default-nordic",
+        "title": "Nordic",
+        "palette": [
+          "#ffffff",
+          "#50686e",
+          "#01a8c1",
+          "#006989",
+          "#e7607b"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "bootstrap",
+    "title": "Bootstrap",
+    "primary": "#0d6efd",
+    "swatches": [
+      {
+        "name": "bootstrap-main",
+        "title": "Main",
+        "palette": [
+          "#ffffff",
+          "#f8f9fa",
+          "#0d6efd",
+          "#0a58ca",
+          "#212529"
+        ]
+      },
+      {
+        "name": "bootstrap-main-dark",
+        "title": "Main Dark",
+        "icon": "moon",
+        "palette": [
+          "#000000",
+          "#212529",
+          "#0d6efd",
+          "#0a58ca",
+          "#ffffff"
+        ]
+      },
+      {
+        "name": "bootstrap-urban",
+        "title": "Urban",
+        "palette": [
+          "#ffffff",
+          "#e3eef4",
+          "#ff5c1a",
+          "#e65317",
+          "#000000"
+        ]
+      },
+      {
+        "name": "bootstrap-nordic",
+        "title": "Nordic",
+        "palette": [
+          "#ffffff",
+          "#f8f9fa",
+          "#e7607b",
+          "#da2146",
+          "#50686e"
+        ]
+      },
+      {
+        "name": "bootstrap-vintage",
+        "title": "Vintage",
+        "palette": [
+          "#ffffff",
+          "#f2efe8",
+          "#744662",
+          "#44293a",
+          "#494138"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "material",
+    "title": "Material",
+    "primary": "#3f51b5",
+    "swatches": [
+      {
+        "name": "material-main",
+        "title": "Main",
+        "palette": [
+          "#ffffff",
+          "#e0e0e0",
+          "#3f51b5",
+          "#e91e63",
+          "#252525"
+        ]
+      },
+      {
+        "name": "material-main-dark",
+        "title": "Main Dark",
+        "icon": "moon",
+        "palette": [
+          "#121212",
+          "#212121",
+          "#3f51b5",
+          "#e91e63",
+          "#ffffff"
+        ]
+      },
+      {
+        "name": "material-lime-dark",
+        "title": "Lime Dark",
+        "palette": [
+          "#121212",
+          "#212121",
+          "#cddc39",
+          "#03a9f4",
+          "#ffffff"
+        ]
+      },
+      {
+        "name": "material-nova",
+        "title": "Nova",
+        "palette": [
+          "#ffffff",
+          "#e0e0e0",
+          "#e91e63",
+          "#03a9f4",
+          "#252525"
+        ]
+      },
+      {
+        "name": "material-arctic",
+        "title": "Arctic",
+        "palette": [
+          "#ffffff",
+          "#e0e0e0",
+          "#2196f3",
+          "#009688",
+          "#252525"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "classic",
+    "title": "Classic",
+    "primary": "#f35800",
+    "swatches": [
+      {
+        "name": "classic-main",
+        "title": "Main",
+        "palette": [
+          "#ffffff",
+          "#f0f0f0",
+          "#f35800",
+          "#cc4a00",
+          "#272727"
+        ]
+      },
+      {
+        "name": "classic-main-dark",
+        "title": "Main Dark",
+        "icon": "moon",
+        "palette": [
+          "#000000",
+          "#101010",
+          "#f35800",
+          "#cc4a00",
+          "#ffffff"
+        ]
+      },
+      {
+        "name": "classic-silver",
+        "title": "Silver",
+        "palette": [
+          "#ffffff",
+          "#f3f3f4",
+          "#1984c8",
+          "#156fa8",
+          "#515967"
+        ]
+      },
+      {
+        "name": "classic-opal",
+        "title": "Opal",
+        "palette": [
+          "#ffffff",
+          "#def4fd",
+          "#7bd2f6",
+          "#2e4e5c",
+          "#003f59"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "fluent",
+    "title": "Fluent",
+    "primary": "#0078d4",
+    "palette": [
+      "#FFFFFF",
+      "#FFFFFF",
+      "#0078D4",
+      "#0078D4",
+      "#323130"
+    ],
+    "swatches": [
+      {
+        "name": "fluent-main",
+        "title": "Main",
+        "palette": [
+          "#FFFFFF",
+          "#FFFFFF",
+          "#0078D4",
+          "#0078D4",
+          "#323130"
+        ]
+      }
+    ]
+  }
+]

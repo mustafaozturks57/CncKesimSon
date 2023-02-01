@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>API</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div class="configurator">
+    <div class="header">Configurator</div>
+    <div class="box-col">
+        <h4>Set / Get Value</h4>
+        <ul class="options">
+            <li>
+                <input id="value" value="40" style="float:none" />
+                <button id="set">Set value</button>
+                <button id="get">Get value</button>
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <h4>Resizing and Settings</h4>
+        <ul class="options">
+            <li>
+                <input id="size" value="300" style="float:none" />
+                <button id="resize">Resize</button>
+                <input id="transitions" type="checkbox" style="float:none" />
+                <label for="transitions">Transitions</label>
+                <input id="opacity" type="checkbox" style="float:none" />
+                <label for="opacity">Lower Opacity</label>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="example">
+    <div class="demo-section">
+        <div id="gauge-container">
+            <div id="gauge"></div>
+        </div>
+    </div>
+
+    <script>
+        function createGauge() {
+            $("#gauge").kendoCircularGauge({
+                value: 40,
+                transitions: false,
+                scale: {
+                    min: 0,
+                    max: 100
+                },
+            });
+        }
+
+        $(document).ready(function () {
+            createGauge();
+
+            $(document).bind("kendo:skinChange", function (e) {
+                createGauge();
+            });
+
+            var gauge = $("#gauge").data("kendoCircularGauge");
+
+            var setValue = function () {
+                gauge.value($("#value").data("kendoNumericTextBox").value());
+            };
+
+            $("#resize").click(function () {
+                var newSize = $("#size").data().kendoNumericTextBox.value();
+                $("#gauge").css({ width: newSize + "px", height: newSize + "px" });
+                gauge.resize();
+            });
+
+            $("#value").kendoNumericTextBox({
+                min: 0,
+                max: 100
+            });
+
+            $("#size").kendoNumericTextBox({
+                min: 100,
+                max: 400,
+                format: "0px"
+            });
+
+            $("#set").click(setValue);
+
+            $("#get").click(function () {
+                alert(gauge.value());
+            });
+
+            $("#transitions").click(function () {
+                gauge.setOptions({ transitions: this.checked });
+            });
+
+            $("#opacity").click(function () {
+                gauge.setOptions({ opacity: this.checked ? 0.5 : 1 });
+            });
+        });
+    </script>
+    <style>
+        .box-col .k-numerictextbox {
+            max-width: 200px;
+        }
+
+        #gauge-container {
+            width: 300px;
+            text-align: center;
+            margin: 0 auto 30px auto;
+        }
+
+        .configurator label {
+            color: #656565;
+        }
+
+        .configurator input[type=checkbox] {
+            margin-left: 15px !important;
+        }
+    </style>
+</div>
+
+</body>
+</html>

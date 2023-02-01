@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Drag & Drop</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+<div id="example">
+    <div class="k-d-flex k-flex-wrap">
+        <div class="k-flex-grow">
+            <h4 class="mb-sm">Available Products</h4>
+            <div id="inStockProductsGrid"></div>
+        </div>
+        <div class="k-flex-grow">
+            <h4 class="mb-sm">Not Available Products</h4>
+            <div id="discontinuedGrid"></div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+            var inStockData = [],
+                discontinuedData = [];
+            $.ajax({
+                type: "READ",
+                url: crudServiceBaseUrl + "/Products",
+                dataType: "jsonp",
+                success: function (data) {
+                    data.forEach(function (item) {
+                        item.Discontinued === false ? inStockData.push(item) : discontinuedData.push(item);
+                    });
+                }
+            }).done(function () {
+                var inStockDS = new kendo.data.DataSource({
+                    data: inStockData,
+                    schema: {
+                        model: {
+                            id: "ProductID"
+                        }
+                    },
+                    pageSize: 10,
+                });
+
+                var discontinuedDS = new kendo.data.DataSource({
+                    data: discontinuedData,
+                    schema: {
+                        model: {
+                            id: "ProductID"
+                        }
+                    },
+                    pageSize: 10
+                });
+
+                $("#inStockProductsGrid").data("kendoGrid").setDataSource(inStockDS);
+                $("#discontinuedGrid").data("kendoGrid").setDataSource(discontinuedDS);
+            });
+
+
+            $("#inStockProductsGrid").kendoGrid({
+                pageable: true,
+                height: 400,
+                width: 550,
+                columns: [
+                    { draggable: true, width: "40px" },
+                    { field: "ProductName", title: "Product Name", width: "200px" },
+                    { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "140px" },
+                    {
+                        field: "Discontinued", title: "In Stock",
+                        template: "<span id='badge_#=ProductID#' class='badgeTemplate'></span>",
+                        attributes: { style: "text-align: center;" },
+                        width: "130px"
+                    }],
+                dataBound: onDataBound,
+                navigatable: true,
+                reorderable: {
+                    rows: true
+                },
+                rowReorder: onRowRordered
+            });
+
+            $("#discontinuedGrid").kendoGrid({
+                pageable: true,
+                height: 400,
+                width: 550,
+                columns: [
+                    { draggable: true, width: "40px" },
+                    { field: "ProductName", title: "Product Name", width: "200px" },
+                    { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "140px" },
+                    {
+                        field: "Discontinued", title: "In Stock",
+                        template: "<span id='badge_#=ProductID#' class='badgeTemplate'></span>",
+                        attributes: { style: "text-align: center;" },
+                        width: "130px"
+                    }],
+                dataBound: onDataBound,
+                navigatable: true,
+                reorderable: {
+                    rows: true
+                },
+                rowReorder: onRowRordered
+            });
+        });
+
+        function onDataBound(e) {
+            var grid = this;
+            grid.table.find("tr").each(function () {
+                var dataItem = grid.dataItem(this);
+                var themeColor = dataItem.Discontinued ? 'error' : 'success';
+                var text = dataItem.Discontinued ? 'not available' : 'available';
+
+                $(this).find(".badgeTemplate").kendoBadge({
+                    themeColor: themeColor,
+                    text: text,
+                });
+            })
+        }
+
+        function onRowRordered(ev) {
+            var grid = ev.sender,
+                dataSource = grid.dataSource,
+                externalGrid, externalDataItem;
+
+            if (ev.oldIndex === -1) { // Row dropped from external grid
+                ev.preventDefault();
+                externalGrid = ev.row.parents(".k-grid").data("kendoGrid");
+
+                externalDataItem = externalGrid.dataItem(ev.row);
+                externalDataItem.Discontinued === true ? externalDataItem.Discontinued = false : externalDataItem.Discontinued = true;
+
+                externalGrid.dataSource.remove(externalDataItem);
+                dataSource.insert(ev.newIndex, externalDataItem.toJSON());
+            }
+        }
+    </script>
+</div>
+
+</body>
+</html>

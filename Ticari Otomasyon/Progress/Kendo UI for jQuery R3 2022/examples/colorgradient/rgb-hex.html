@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>RGB and HEX</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+    <div class="k-d-inline-flex hidden-on-narrow wide">
+        <div class="column">
+            <label for="picker">Choose Your Color | RGB</label>
+            <div id="picker"> </div>
+        </div>
+        <div class="column"  style="margin:inherit">
+            <label for="no-inputs-picker">Choose Your Color | HEX</label>
+            <div id="no-inputs-picker"> </div>
+        </div>
+    </div>
+
+    <script>
+
+        $("#picker").kendoColorGradient({
+            value: "#ff0000",
+            format: "rgb",
+            formats:["rgb","hex"]
+        });
+        $("#no-inputs-picker").kendoColorGradient({
+            value: "#fff700",
+            format: "hex",
+            formats: ["rgb", "hex"]
+        });
+    </script>
+
+    <style>
+        .k-d-inline-flex {
+			width: 100%;
+			margin: 0 auto;
+			padding-top: 42px;
+        }
+
+        .column {
+            margin:auto;
+            text-align: center;
+        }
+    </style>
+
+</body>
+</html>

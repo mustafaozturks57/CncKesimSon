@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Overview</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+	<div class="k-d-flex k-justify-content-center" style="padding-top: 54px;">
+		<div class="k-w-300">
+			<textarea id="invitation"required data-required-msg="Please enter a text." data-max-msg="Enter value between 1 and 200" ></textarea>
+            <div class="k-form-footer">
+                <div class="k-counter-container"><span class="k-counter-value">0</span>/200</div>
+                <button class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Send</button>
+            </div>
+		</div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // create TextArea from input HTML element
+            $("#invitation").kendoTextArea({
+				label: "Send invitation:",
+                rows: 10,
+                maxLength:200,
+                placeholder: "Enter your text here."
+            });
+
+            $("#invitation").on('input', function (e) {
+                $('.k-counter-container .k-counter-value').html($(e.target).val().length);
+            });
+
+            $("#invitationForm").kendoValidator();
+
+            $("form").submit(function (event) {
+                event.preventDefault();
+            });
+        });
+    </script>
+
+    <style>
+        .k-floating-label-container {
+            width: 100%;
+        }
+
+        .k-form-footer{
+            display:flex;
+            flex-direction:column;
+        }
+
+        #example .k-button{
+            margin-top: 20px;
+            width:80px;
+            margin-left:auto;
+        }
+        #example .k-counter-container {
+            color: #9C9C9C;
+            font-size:13px;
+            margin-top: 5px;
+            margin-left:auto;
+        }
+    </style>
+</body>
+</html>

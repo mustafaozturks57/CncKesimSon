@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Basic usage</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+
+		<div class="k-d-flex k-justify-content-center" style="padding-top: 54px;">
+			<div class="k-w-300">
+				<label for="timepicker">Enter a date</label>
+				<input id="timepicker" value="10:00 AM" title="timepicker" />
+				</br>
+				</br>
+				<label for="textbox">Alarm description</label>
+				<span class="k-textbox k-input k-input-md k-rounded-md k-input-solid" style="width: 100%">
+                    <input id="textbox" type="text" value="Wake up" class="k-input-inner" />
+                </span>
+			</div>
+		</div>
+            <script>
+                $(document).ready(function () {
+                    // create TimePicker from input HTML element
+                    $("#timepicker").kendoTimePicker({
+                        dateInput: true
+                    });
+                });
+         </script>
+</body>
+</html>

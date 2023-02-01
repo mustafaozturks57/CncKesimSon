@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Events</title>
+    <meta charset="utf-8">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.min.css" rel="stylesheet">
+    <link href="../../styles/kendo.default.mobile.min.css" rel="stylesheet">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jszip.min.js"></script>
+    <script src="../../js/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
+    
+    
+</head>
+<body>
+    <a class="offline-button" href="../index.html">Back</a>
+
+    <div id="demo" style="margin-top: 54px;">
+		<label>FlatColorPicker:</label>
+		<div id="flatcolorpicker" data-role="flatcolorpicker" data-input="false" data-preview="false" data-views="['gradient']"></div>
+		</br>
+		</br>
+		<label>ColorPicker (palette):</label>
+		<input type="color" id="palette-picker" value="#cc2222" data-role="colorpicker" data-palette="basic" data-input="false" data-preview="false" data-views="['gradient']">
+		</br>
+		</br>
+		<label>ColorPicker (HSV):</label>
+		<input type="color" id="hsv-picker" value="#22cc22" data-role="colorpicker" data-input="false" data-preview="false" data-views="['gradient']">
+		</br>
+		</br>
+		<label>ColorPalette:</label>
+		<div id="palette" data-role="colorpalette"></div>        
+    </div>
+
+    <script>
+        // initialize widgets
+        kendo.init($("#demo"));
+
+        // log events
+        $("#palette-picker, #hsv-picker").each(function(){
+            var colorPicker = $(this).data("kendoColorPicker");
+
+            colorPicker.bind({
+                select: function(e) {
+                    kendoConsole.log("Select in picker #" + this.element.attr("id") + " :: " + e.value);
+                },
+                change: function(e) {
+                    kendoConsole.log("Change in picker #" + this.element.attr("id") + " :: " + e.value);
+                },
+                open: function() {
+                    kendoConsole.log("Open in picker #" + this.element.attr("id"));
+                },
+                close: function() {
+                    kendoConsole.log("Close in picker #" + this.element.attr("id"));
+                }
+            });
+        });
+
+        var colorPalette = $("#palette").data("kendoColorPalette");
+        colorPalette.bind("change", function(e) {
+            kendoConsole.log("Change in color palette :: " + e.value);
+        });
+
+        var flatColorPicker = $("#flatcolorpicker").data("kendoFlatColorPicker");
+        flatColorPicker.bind("change", function(e) {
+            kendoConsole.log("Change in flat color picker :: " + e.value);
+        });
+    </script>
+
+	<style>
+		label {
+			display: block;
+		}
+	</style>
+</body>
+</html>
