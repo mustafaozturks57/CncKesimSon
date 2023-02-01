@@ -23,6 +23,11 @@
 <link href="~/Content/MDB5-STANDARD-UI-KIT-Free-6.0.1/css/mdb.min.css" rel="stylesheet" />
 <script src="~/Content/MDB5-STANDARD-UI-KIT-Free-6.0.1/js/mdb.min.js"></script>
 
+<style>
+ 
+
+</style>
+
 <div class="form-group">
     <div class="form-group">
 
@@ -37,8 +42,8 @@
 
         <input type="submit" value="Kaydet" class="btn btn-success" data-target="successToast" id="saveOrder" />
         <input type="submit" value="Onayla" class="btn btn-warning" data-mdb-toggle="modal" onclick="Onay()" data-mdb-target="#exampleModal" />
-        <input style="background-color:blueviolet;color:white" type="submit" value="Muhtelif Formu Yazdır" class="btn btn-info" />
-        <input style="background-color:darkblue;color:white" type="submit" value="Muhtelif Formu Yazdır(Fabrika)" class="btn btn-info" />
+        <input style="background-color:blueviolet;color:white" onclick="MuhtelifForm(1)" value="Muhtelif Formu Yazdır" class="btn btn-info"  />
+        <input style="background-color:darkblue;color:white" onclick="MuhtelifForm(2)" type="submit" value="Muhtelif Formu Yazdır(Fabrika)" class="btn btn-info" />
         <input style="background-color:forestgreen;color:white" type="submit" value="Excelden İçeri Aktar" class="btn btn-info" />
 
 
@@ -342,7 +347,21 @@
 
     }
 
+
+    const MuhtelifForm = (a) => {
+
+        var parametres = a;
+        var UrlLink = $("#BarkodNo").val()
+     
+
+
+        $(window).attr('location', '@Url.Action("getPdf","Raporlar")?id=' + parametres + '&fisno=' + UrlLink + ''));
+    }
+
 </script>
+
+
+
 
 
 <script>
@@ -809,23 +828,23 @@
 
         e.preventDefault();
         count = count + 1;
-        var model = '<div class="input-group mb-0"><input type="text" name="model" class="form-control form-control-sm" id="model' + count + '"  style="width:100px"/><button class="btn btn-sm btn-primary" id="button1" onclick="ModelForm(' + count + ')"></button></div>';
+        var model = '<div class="input-group mb-0"><input type="text" name="model" class="form-control form-control-sm" id="model' + count + '"  style="width:100px"/><button class="btn btn-sm btn-primary" id="button1" onclick="ModelForm(' + count + ')">Model Seç</button></div>';
 
 
-        var malzeme = '<div class="input-group mb-0"><input type="text" name="malzeme" class="form-control form-control-sm" id="malzeme' + count + '"  style="width:100px"/><button class="btn btn-sm btn-primary" id="button2" onclick="MalzemeForm(' + count + ')"></button></div>';
+        var malzeme = '<div class="input-group mb-0"><input type="text" name="malzeme" class="form-control form-control-sm" id="malzeme' + count + '"  style="width:100px"/><button class="btn btn-sm btn-primary" id="button2" onclick="MalzemeForm(' + count + ')">Malzeme Seç</button></div>';
 
 
 
 
-        var ozellik = '<div class="input-group mb-0"><input type="text" name="ozellik" class="form-control form-control-sm" id="ozellik' + count + '"  style="width:100px"/><button class="btn btn-sm btn-primary" id="button3" onclick="OzellikForm(' + count + ')"></button></div>';
+        var ozellik = '<div class="input-group mb-0"><input type="text" name="ozellik" class="form-control form-control-sm" id="ozellik' + count + '"  style="width:100px"/><button class="btn btn-sm btn-primary"  id="button3" onclick="OzellikForm(' + count + ')"> Özellik Seç</button></div>';
 
 
-        var boy = '<input type="text" name="boy" class="small"  id="boy' + count + '" style="width:70px" />';
-        var en = '<input type="text" name="en" class="small"  id="en' + count + '" style="width:70px" />';
-        var adet = '<input type="text" name="m2" class="small"  id="adet' + count + '" style="width:70px" />';
-        var m2 = '<input type="text" name="adet" class="small"  id="m2' + count + '" style="width:70px" />';
-        var m2Fiyat = '<input type="text" name="m2Fiyat" class="small"  id="m2Fiyat' + count + '" style="width:70px" />';
-        var fiyat = '<input type="text" name="fiyat" class="small"  id="fiyat' + count + '" style="width:70px" />';
+        var boy = '<input type="text" name="boy"  class="form-control"   id="boy' + count + '" style="width:70px" />';
+        var en = '<input type="text" name="en" class="form-control"  id="en' + count + '" style="width:70px" />';
+        var adet = '<input type="text" name="m2" class="form-control"  id="adet' + count + '" style="width:70px" />';
+        var m2 = '<input type="text" name="adet" class="form-control"  id="m2' + count + '" style="width:70px" />';
+        var m2Fiyat = '<input type="text" name="m2Fiyat" class="form-control"  id="m2Fiyat' + count + '" style="width:70px" />';
+        var fiyat = '<input type="text" name="fiyat" class="form-control"  id="fiyat' + count + '" style="width:70px" />';
 
 
 
@@ -918,6 +937,34 @@
         }
 
 
+        function SatırToplamlar() {
+
+           
+
+            try {
+                var m2value = $(m2).val();
+                var fiyatvalue = $(fiyat).val();
+                var m2Fiyatvalue = $(m2Fiyat).val();
+                var boyvalue = $(boy).val();
+                var envalue = $(en).val();
+                var adetvalue = $(adet).val();
+
+                var deger = m2value * adetvalue;
+                var sonfıyat = m2Fiyatvalue * deger;
+
+                document.getElementById(m2getBy).value = deger;
+                document.getElementById(fiyatGetBy).value = sonfıyat;
+                setTimeout(MyGetToplam(), 5000);
+
+            } catch (e) {
+                alert("Bir Sorun Oluştu Sistem Yöneticinize Başvurun"+ e)
+            }
+
+
+        }
+
+
+
         $(model).change(function () {
 
             var MalzemeSelected = $(model).val();
@@ -939,26 +986,19 @@
 
         $(adet).change(function () {
 
-            var m2value = $(m2).val();
-            var fiyatvalue = $(fiyat).val();
-            var m2Fiyatvalue = $(m2Fiyat).val();
-            var boyvalue = $(boy).val();
-            var envalue = $(en).val();
-            var adetvalue = $(adet).val();
-
-            var deger = m2value * adetvalue;
-            var sonfıyat = m2Fiyatvalue * deger;
-
-            document.getElementById(m2getBy).value = deger;
-            document.getElementById(fiyatGetBy).value = sonfıyat;
-            setTimeout(MyGetToplam(),5000);
+            SatırToplamlar();
 
 
 
         })
 
 
-
+        $(m2).change(function () {
+            SatırToplamlar();
+        })
+        $(m2Fiyat).change(function () {
+            SatırToplamlar();
+        })
 
 
 
@@ -988,6 +1028,7 @@
 
 
             }
+            SatırToplamlar();
 
 
 

@@ -11792,6 +11792,8 @@
     <Content Include="Views\CncOrfiches\Excelİmport.cshtml" />
     <Content Include="Views\Raporlar\Index.cshtml" />
     <Content Include="Views\Raporlar\SiparisPdf.cshtml" />
+    <Content Include="Views\Raporlar\SiparisPdfFabrika.cshtml" />
+    <Content Include="Views\Raporlar\KargoPdf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

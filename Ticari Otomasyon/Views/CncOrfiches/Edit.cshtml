@@ -35,7 +35,9 @@
         <input style="background-color:blue" type="button" value="Kaydet Ve Onayla " class="btn btn-warning" data-mdb-toggle="modal" data-mdb-target="#exampleModal" />
         <input type="submit" value="Kaydet" class="btn btn-success" id="saveOrder" />
         <input type="submit" value="Onayla" class="btn btn-warning" data-mdb-toggle="modal" data-mdb-target="#exampleModal" />
-        <input type="submit" value="Yazdır" class="btn btn-info" />
+        <input style="background-color:blueviolet;color:white" onclick="MuhtelifForm(1)" value="Muhtelif Formu Yazdır" class="btn btn-info" />
+        <input style="background-color:darkblue;color:white" onclick="MuhtelifForm(2)" type="submit" value="Muhtelif Formu Yazdır(Fabrika)" class="btn btn-info" />
+        <input style="background-color:forestgreen;color:white" type="submit" value="Excelden İçeri Aktar" class="btn btn-info" />
 
 
         <button style="background-color:darkkhaki" type="button" value="LOG Göster" class="btn btn-close-white" onclick="myFunction()">Log Göster</button>
@@ -386,6 +388,16 @@
             x.hidden = true
         }
 
+    }
+
+    const MuhtelifForm = (a) => {
+
+        var parametres = a;
+        var UrlLink = $("#BarkodNo").val()
+
+
+
+        $(window).attr('location', '@Url.Action("getPdf","Raporlar")?id=' + parametres + '&fisno=' + UrlLink + ''));
     }
 
 </script>
