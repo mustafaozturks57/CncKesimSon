@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+ 
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -27,7 +28,11 @@ namespace Ticari_Otomasyon.Controllers
 
             if (id==null)
             {
+ 
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+ 
+                 
+ 
             }
             else
             {
@@ -53,6 +58,7 @@ namespace Ticari_Otomasyon.Controllers
 
         }
 
+ 
         public ActionResult SiparisPdfFabrika(string id)
         {
 
@@ -159,6 +165,21 @@ namespace Ticari_Otomasyon.Controllers
         }
             
 
+ 
+
+        public ActionResult getPdf(int id )
+        {
+            var report = new ActionAsPdf("Index", new {id= id })
+            {
+                PageOrientation = Rotativa.Options.Orientation.Landscape,
+                PageSize = Rotativa.Options.Size.A4
+
+            };
+
+            return report;
+        }
+
+ 
 
 
        
