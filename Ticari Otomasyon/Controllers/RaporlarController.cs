@@ -31,7 +31,7 @@ namespace Ticari_Otomasyon.Controllers
  
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
  
-                 
+              
  
             }
             else
