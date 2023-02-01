@@ -26,13 +26,18 @@ namespace Ticari_Otomasyon.Controllers
         public ActionResult SiparisPdf(string id)
         {
 
-            if (id==null)
+            if (id == null)
             {
- 
+
+
+
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
- 
-              
- 
+
+
+                return View();
+
+
+
             }
             else
             {
