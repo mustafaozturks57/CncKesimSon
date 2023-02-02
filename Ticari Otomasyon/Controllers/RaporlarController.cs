@@ -83,7 +83,7 @@ namespace Ticari_Otomasyon.Controllers
 
         }
 
-        public ActionResult KargoPdf(string id)
+        public ActionResult KargoPdf(string id, string sayı)
         {
 
             if (id == null)
@@ -101,8 +101,10 @@ namespace Ticari_Otomasyon.Controllers
                 orficheUpdateDto.Orfiche = a;
 
                 var Customers = db.Customers.Where(x => x.id == a.MusteriId).First();
+                
 
                 ViewBag.Custormer = Customers.Fırma_Adı;
+                ViewBag.Sayı = Convert.ToInt32 (sayı);
 
 
                 var b = db.Orflines.Where(x => x.OrficheNo == id);
@@ -114,11 +116,11 @@ namespace Ticari_Otomasyon.Controllers
             }
         }
 
-        public ActionResult getPdf(int? id, string fisno )
+        public ActionResult getPdf(int? id, string fisno    )
         {
             if (id==1 )//Müsteri
             {
-                var report = new ActionAsPdf("SiparisPdf", new { id = "1" })
+                var report = new ActionAsPdf("SiparisPdf", new { id = fisno })
                 {
 
 
@@ -129,7 +131,7 @@ namespace Ticari_Otomasyon.Controllers
             }
             else if (id==2)//fabrika
             {
-                var report = new ActionAsPdf("SiparisPdfFabrika", new { id = "1" })
+                var report = new ActionAsPdf("SiparisPdfFabrika", new { id = fisno })
                 {
 
 
@@ -141,7 +143,7 @@ namespace Ticari_Otomasyon.Controllers
             }
             else if (id==3)
             {
-                var report = new ActionAsPdf("KargoPdf", new { id = "1" })
+                var report = new ActionAsPdf("KargoPdf", new { id = fisno })
                 {
 
 
@@ -159,12 +161,11 @@ namespace Ticari_Otomasyon.Controllers
 
  
 
-        public ActionResult getPdf(int id )
+        public ActionResult getPdfKargo(string sipno,string sayı)
         {
-            var report = new ActionAsPdf("Index", new {id= id })
+            var report = new ActionAsPdf("KargoPdf", new {id= sipno, sayı = sayı })
             {
-                PageOrientation = Rotativa.Options.Orientation.Landscape,
-                PageSize = Rotativa.Options.Size.A4
+                
 
             };
 

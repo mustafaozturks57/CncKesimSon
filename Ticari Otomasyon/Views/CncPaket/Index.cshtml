@@ -73,11 +73,7 @@
 
 </script>
 
-
-<button class="btn btn-primary" id="btn-full-screen">
-    Full
-    screen
-</button>
+ 
 <script>
 
     function myFunction() {
@@ -109,6 +105,17 @@
 
             myFunction()
         }, 14000);
+    }
+
+
+    const PdfYazdır = e => {
+
+         var parametres = 3;
+        var UrlLink = $("#sipno").val()
+        var sayı = $("#paketsayı").val() 
+
+
+        $(window).attr('location', '@Url.Action("getPdfKargo", "Raporlar")?sipno=' + UrlLink + '&sayı=' + sayı + '');
     }
 
 
@@ -167,16 +174,17 @@
             <td colspan="8">
                 @using (Html.BeginForm("PaketYazdır", "CncPaket", FormMethod.Post))
                 {
-                    <input style="background-color:greenyellow" name="sipno"  type="text" placeholder="Sipariş No Giriniz Veya Okutunuz." class="form form-control" />
+                    <input style="background-color:greenyellow" name="sipno" id="sipno" type="text" placeholder="Sipariş No Giriniz Veya Okutunuz." class="form form-control" />
                     <br />
-                    <input type="text" name="pakeysayı" placeholder="Paket Sayısını Giriniz." class="form form-control" />
-                    <br />
-
-
+                    <input type="text" name="pakeysayı" id="paketsayı" placeholder="Paket Sayısını Giriniz." class="form form-control" />
                     <br />
 
-                    <button class="btn"><i class="fa fa-print"></i>Yazdır</button>
+
+                    <br />
+
+                    <button onclick="PdfYazdır()" class="btn"><i class="fa fa-print"></i>Yazdır</button>
                 }
+                <button onclick="PdfYazdır()" class="btn"><i class="fa fa-print"></i>Yazdır</button>
             </td>
 
 
@@ -355,13 +363,13 @@
                             @item.SipID
                         </td>
                         <td>
-                            @if (item.Palet_fl == false)
+                            @if (item.Paket_fl == false)
                             {
-                                <font style="color:red">Palete Yerleştirilmeyi Bekliyor</font>
+                                <font style="color:red">Paketlenmeyi Bekliyor</font>
                             }
                             else
                             {
-                                <font style="color:green">Palete Yerleştirildi</font>
+                                <font style="color:green">Paketlendi</font>
                             }
                         </td>
                         <td>

@@ -9,7 +9,7 @@ using Ticari_Otomasyon.Models.Classes.Views;
 using Ticari_Otomasyon.Models.CncModel;
 
 using DevExpress.XtraReports.UserDesigner;
-
+using System.Net;
 
 namespace Ticari_Otomasyon.Controllers
 {
@@ -20,10 +20,10 @@ namespace Ticari_Otomasyon.Controllers
         private CncTicariOtomasyonEntities db = new CncTicariOtomasyonEntities();
         public async Task<ActionResult> Index()
         {
-            var Views = await db.Database.SqlQuery<SiparişQliste>("select * from SıparısAppPoolView where kesim_fl=1 and palet_fl=1 and pres_fl=1 and PaletNo>0 and and Onay_fl=1 ").ToListAsync();
+            var Views = await db.Database.SqlQuery<SiparişQliste>("select * from SıparısAppPoolView where kesim_fl=1 and palet_fl=1 and pres_fl=1 and PaletNo>0  and Onay_fl=1 ").ToListAsync();
 
 
-            var Viewss = db.Database.SqlQuery<SiparişQliste>("select * from SıparısAppPoolView where  paket_fl=1 and  PaketSayı>0  and and Onay_fl=1 ").ToList();
+            var Viewss = db.Database.SqlQuery<SiparişQliste>("select * from SıparısAppPoolView where  paket_fl=1 and  PaketSayı>0    and Onay_fl=1 ").ToList();
 
             ViewBag.Yazdır = Viewss;
 
@@ -52,7 +52,7 @@ namespace Ticari_Otomasyon.Controllers
 
                 db.Database.ExecuteSqlCommand(query);
 
-                GetExcelDosyaYazdırma();
+                GetExcelDosyaYazdırma(sipno,pakeysayı);
 
                 string alert = "Sipariş Kesim İptal Edilmiştir , Sipariş Numarası  : " + sipno;
                 return RedirectToAction("Index");
@@ -65,10 +65,17 @@ namespace Ticari_Otomasyon.Controllers
 
         }
 
-        public void GetExcelDosyaYazdırma()
+        public ActionResult GetExcelDosyaYazdırma(string sipno,int paketsayı)
         {
-           
-            
+
+            if (sipno!=null && paketsayı>0 )
+            {
+                return RedirectToAction("getPdf", "Raporlar", new { id = 3, fisno = sipno });
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
     
         }
     }

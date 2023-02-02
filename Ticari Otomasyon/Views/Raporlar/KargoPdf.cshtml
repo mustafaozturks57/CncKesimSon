@@ -35,7 +35,7 @@
 <body>
     <div>
 
-       @for (int i = 1; i <= 9; i++)
+       @for (int i = 1; i <= ViewBag.Sayı; i++)
        {
 
 
@@ -65,7 +65,7 @@
                        </ul>
                     </div>
                     <div class="col-md-6">
-                        <h3>PAKET :  @i/9</h3>
+                        <h3>PAKET :  @i/@ViewBag.Sayı</h3>
                     </div>
                 </div>
             </div>
